@@ -118,35 +118,54 @@
   </div>
 </div>
 
-<script>
-  let currentSlide = 0;
-  const totalSlides = document.querySelectorAll('#carousel li').length;
+<div class="bg-white p-6">
+  <div class="container mx-auto mt-8 p-4">
+    <h2 class="text-3xl font-bold mb-4">Popular Right Now</h2>
 
-  function nextSlide() {
-    currentSlide = (currentSlide + 1) % totalSlides;
-    updateSlideVisibility();
+    <div class="relative overflow-hidden">
+      <ul id="carousel" class="flex transition-transform duration-300 ease-in-out">
+        <!-- Product 1 -->
+        <li class="w-1/3 px-2">
+          <div class="bg-white w-96 shadow p-4 rounded-lg">
+            <img src="/storage/images/featured-img/nike-air-force1-lv8.png" alt="Product 1" class="w-full h-96 object-cover mb-4">
+            <figcaption class="text-center font-semibold text-gray-800">Product 1</figcaption>
+          </div>
+        </li>
 
-    // Kiểm tra xem đã đến slide cuối cùng chưa
-    if (currentSlide === 0) {
-      // Nếu đã đến slide cuối cùng, quay lại slide đầu tiên
-      setTimeout(() => {
-        currentSlide = 0;
-        updateSlideVisibility();
-      }, 300); // Thời gian chờ để hoạt động transition
-    }
-  }
 
-  function prevSlide() {
-    currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
-    updateSlideVisibility();
-  }
+        <!-- Product 2 -->
+        <li class="w-1/3 px-2">
+          <div class="bg-white w-96 shadow p-4 rounded-lg">
+            <img src="/storage/images/featured-img/nike-p6000-premium.png" alt="Product 2" class="w-full h-96 object-cover mb-4">
+            <figcaption class="text-center font-semibold text-gray-800">Product 2</figcaption>
+          </div>
+        </li>
 
-  function updateSlideVisibility() {
-    const carousel = document.getElementById('carousel');
-    const slideWidth = document.querySelector('#carousel li').offsetWidth;
-    carousel.style.transform = `translateX(-${currentSlide * slideWidth}px)`;
-  }
-</script>
+        <!-- Product 3 -->
+        <li class="w-1/3 px-2">
+          <div class="bg-white w-96 shadow p-4 rounded-lg">
+            <img src="/storage/images/featured-img/nike-air-max-90.png" alt="Product 3" class="w-full h-96 object-cover mb-4">
+            <figcaption class="text-center font-semibold text-gray-800">Product 3</figcaption>
+          </div>
+        </li>
+
+        <!-- Sản phẩm 4 -->
+        <li class="w-1/3 px-2">
+          <div class="bg-white w-96 shadow p-4 rounded-lg">
+            <img src="/storage/images/featured-img/air-jordan-1-low.png" alt="Product 3" class="w-full h-96 object-cover mb-4">
+            <figcaption class="text-center font-semibold text-gray-800">Accessories</figcaption>
+          </div>
+        </li>
+        
+      </ul>
+
+      <!-- Navigation buttons -->
+      <button class="absolute left-0 top-1/2 transform -translate-y-1/2 px-5 py-3 bg-gray-400 text-white rounded-full focus:outline-none" onclick="prevSlide()">&#8249;</button>
+      <button class="absolute right-0 top-1/2 transform -translate-y-1/2 px-5 py-3 bg-gray-400 text-white rounded-full focus:outline-none" onclick="nextSlide()">&#8250;</button>
+
+    </div>
+  </div>
+</div>
 
 
 <footer class="bg-white dark:bg-gray-900">
@@ -234,6 +253,35 @@
   </div>
 </footer>
 
+<script>
+  let currentSlide = 0;
+  const totalSlides = document.querySelectorAll('#carousel li').length;
+
+  function nextSlide() {
+    currentSlide = (currentSlide + 1) % totalSlides;
+    updateSlideVisibility();
+
+    // Kiểm tra xem đã đến slide cuối cùng chưa
+    if (currentSlide === 0) {
+      // Nếu đã đến slide cuối cùng, quay lại slide đầu tiên
+      setTimeout(() => {
+        currentSlide = 0;
+        updateSlideVisibility();
+      }, 300); // Thời gian chờ để hoạt động transition
+    }
+  }
+
+  function prevSlide() {
+    currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+    updateSlideVisibility();
+  }
+
+  function updateSlideVisibility() {
+    const carousel = document.getElementById('carousel');
+    const slideWidth = document.querySelector('#carousel li').offsetWidth;
+    carousel.style.transform = `translateX(-${currentSlide * slideWidth}px)`;
+  }
+</script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/flowbite.min.js"></script>
 </body>
