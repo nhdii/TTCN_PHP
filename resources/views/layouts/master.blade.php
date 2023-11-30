@@ -84,7 +84,20 @@
                                             d="M15.4689 9.92822H11.8971C10.9408 9.92822 10.1533 10.7157 10.1533 11.672V15.2438C10.1533 16.2001 10.9408 16.9876 11.8971 16.9876H15.4689C16.4252 16.9876 17.2127 16.2001 17.2127 15.2438V11.7001C17.2127 10.7157 16.4252 9.92822 15.4689 9.92822ZM15.9752 15.272C15.9752 15.5532 15.7502 15.7782 15.4689 15.7782H11.8971C11.6158 15.7782 11.3908 15.5532 11.3908 15.272V11.7001C11.3908 11.4188 11.6158 11.1938 11.8971 11.1938H15.4689C15.7502 11.1938 15.9752 11.4188 15.9752 11.7001V15.272Z"
                                             fill=""></path>
                                     </svg>
-                                    Trang Chủ
+                                    Home
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href=""
+                                    class="group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark">
+                                    <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" height="19px"
+                                        viewBox="0 0 576 512">
+                                        <!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                                        <path
+                                            d="M64 64C28.7 64 0 92.7 0 128v64c0 8.8 7.4 15.7 15.7 18.6C34.5 217.1 48 235 48 256s-13.5 38.9-32.3 45.4C7.4 304.3 0 311.2 0 320v64c0 35.3 28.7 64 64 64H512c35.3 0 64-28.7 64-64V320c0-8.8-7.4-15.7-15.7-18.6C541.5 294.9 528 277 528 256s13.5-38.9 32.3-45.4c8.3-2.9 15.7-9.8 15.7-18.6V128c0-35.3-28.7-64-64-64H64zm64 112l0 160c0 8.8 7.2 16 16 16H432c8.8 0 16-7.2 16-16V176c0-8.8-7.2-16-16-16H144c-8.8 0-16 7.2-16 16zM96 160c0-17.7 14.3-32 32-32H448c17.7 0 32 14.3 32 32V352c0 17.7-14.3 32-32 32H128c-17.7 0-32-14.3-32-32V160z" />
+                                    </svg>
+                                    Brand
                                 </a>
                             </li>
 
@@ -100,7 +113,7 @@
                                             d="M10.8283 9.05627H7.17207C4.16269 9.05627 1.71582 11.5313 1.71582 14.5406V16.875C1.71582 17.2125 1.99707 17.5219 2.3627 17.5219C2.72832 17.5219 3.00957 17.2407 3.00957 16.875V14.5406C3.00957 12.2344 4.89394 10.3219 7.22832 10.3219H10.8564C13.1627 10.3219 15.0752 12.2063 15.0752 14.5406V16.875C15.0752 17.2125 15.3564 17.5219 15.7221 17.5219C16.0877 17.5219 16.3689 17.2407 16.3689 16.875V14.5406C16.2846 11.5313 13.8377 9.05627 10.8283 9.05627Z"
                                             fill=""></path>
                                     </svg>
-                                    Khách Hàng
+                                    Customer
                                 </a>
                             </li>
 
@@ -135,7 +148,7 @@
                                             </clipPath>
                                         </defs>
                                     </svg>
-                                    Sản phẩm
+                                    Products
                                     <svg class="arrow duration-300 ease-in-out absolute right-4 top-1/2 -translate-y-1/2 fill-current"
                                         width="20" height="20" viewBox="0 0 20 20" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
@@ -148,27 +161,14 @@
                                     <ul class="mt-4 mb-5.5 flex flex-col gap-2.5 pl-6">
                                         <li>
                                             <a class="group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white"
-                                                href="">Xem sản phẩm </a>
+                                                href="">Shoes</a>
                                         </li>
                                         <li>
                                             <a class="group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white"
-                                                href="">Loại sản phẩm</a>
+                                                href="">Category</a>
                                         </li>
                                     </ul>
                                 </div>
-                            </li>
-
-                            <li>
-                                <a href=""
-                                    class="group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark">
-                                    <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" height="19px"
-                                        viewBox="0 0 576 512">
-                                        <!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
-                                        <path
-                                            d="M64 64C28.7 64 0 92.7 0 128v64c0 8.8 7.4 15.7 15.7 18.6C34.5 217.1 48 235 48 256s-13.5 38.9-32.3 45.4C7.4 304.3 0 311.2 0 320v64c0 35.3 28.7 64 64 64H512c35.3 0 64-28.7 64-64V320c0-8.8-7.4-15.7-15.7-18.6C541.5 294.9 528 277 528 256s13.5-38.9 32.3-45.4c8.3-2.9 15.7-9.8 15.7-18.6V128c0-35.3-28.7-64-64-64H64zm64 112l0 160c0 8.8 7.2 16 16 16H432c8.8 0 16-7.2 16-16V176c0-8.8-7.2-16-16-16H144c-8.8 0-16 7.2-16 16zM96 160c0-17.7 14.3-32 32-32H448c17.7 0 32 14.3 32 32V352c0 17.7-14.3 32-32 32H128c-17.7 0-32-14.3-32-32V160z" />
-                                    </svg>
-                                    Thương hiệu
-                                </a>
                             </li>
 
                             <li>
@@ -206,7 +206,7 @@
                                             </clipPath>
                                         </defs>
                                     </svg>
-                                    Hoá Đơn
+                                    Order
                                     <svg class="arrow duration-300 ease-in-out absolute right-4 top-1/2 -translate-y-1/2 fill-current"
                                         width="20" height="20" viewBox="0 0 20 20" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
@@ -219,7 +219,7 @@
                                     <ul class="mt-4 mb-5.5 flex flex-col gap-2.5 pl-6">
                                         <li>
                                             <a class="group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white"
-                                                href="">Chi Tiết Hoá Đơn</a>
+                                                href="">Detail Order</a>
                                         </li>
                                     </ul>
                                 </div>

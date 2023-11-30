@@ -5,31 +5,55 @@ namespace App\Http\Controllers;
 use App\Models\Brand;
 use App\Http\Requests\Brand\StoreBrandRequest;
 use App\Http\Requests\Brand\UpdateBrandRequest;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class BrandController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $searchColumns = [
+            'brand_name' => 'like',
+            'brand_id' => 'like',
+        ];
+        $column = $request->get('search_by');
+        $keywords = $request->get('keywords');
+        $lastKeyword = $keywords;
+        $query = Brand::query();
+        if (array_key_exists($column, $searchColumns)) {
+            $operator = $searchColumns[$column];
+            if (!empty($keywords)) {
+                if ($operator === 'like') {
+                    $keywords = '%' . $keywords . '%';
+                }
+                $query->where($column, $operator, $keywords);
+            }
+        }
+        $data = $query->paginate(5);
+        return view('admin.brands.index' , [
+            'brands' => $data,
+            'keywords' => $lastKeyword,
+            'column' => $column,
+        ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        return view('admin.brands.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(StoreBrandRequest $request)
     {
-        //
+        $data = $request->validated();
+
+        $result = Brand::query()->create($data);
+        if ($result) {
+            return redirect()->route('brands.index')->with('success', 'Create Successfull!');
+        }
+        return redirect()->route('brands.index')->with('error', 'Create Error!');
     }
 
     /**

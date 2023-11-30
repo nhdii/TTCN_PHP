@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\BrandController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,6 +17,9 @@ Route::prefix('admin')->group(function () {
     Route::get('/', function () {
         return view('admin.index');
     });
+
+    Route::resource('brands', BrandController::class);
+
 });
 
 Route::get('/', function () {

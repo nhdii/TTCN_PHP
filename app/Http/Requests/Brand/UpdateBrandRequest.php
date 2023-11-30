@@ -11,7 +11,7 @@ class UpdateBrandRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,32 @@ class UpdateBrandRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'brand_name' => [
+                'bail',
+                'required',
+                'string',
+                'min:3',
+                'max:255',
+                Rule::unique(Brand::class)->ignore($this->brands),
+            ],
+                        
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'required' => ':attribute bắt buộc phải điền.',
+            'min' => ':attribute phải có ít nhất :min ký tự.',
+            'max' => ':attribute không được vượt quá :max ký tự.',
+            'unique' => ':attribute đã được sử dụng.',
+        ];
+    }
+
+    public function attributes(): array
+    {
+        return [
+            'brand_name' => 'Brand Name',
         ];
     }
 }
