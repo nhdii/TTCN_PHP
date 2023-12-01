@@ -69,7 +69,9 @@ class BrandController extends Controller
      */
     public function edit(Brand $brand)
     {
-        //
+        return view('admin.brands.edit', [
+            'brand' => $brand,
+        ]);
     }
 
     /**
@@ -77,14 +79,22 @@ class BrandController extends Controller
      */
     public function update(UpdateBrandRequest $request, Brand $brand)
     {
-        //
+        $brand->fill($request->validated());
+        if ($brand->save()) {
+            return redirect()->route('brands.index')->with('success', 'Update Brand Successfull!');
+        }
+        return redirect()->route('brands.index')->with('error', 'Update Brand Error!');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Brand $brand)
+    public function destroy($brand_id)
     {
-        //
+        $result = Brand::query()->where('brand_id', $brand_id)->delete();
+        if ($result) {
+            return redirect()->route('brands.index')->with('success', 'Delete Brand Successfull!');
+        }
+        return redirect()->route('brands.index')->with('error', 'Delete Brand Error!');
     }
 }

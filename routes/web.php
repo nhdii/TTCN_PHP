@@ -16,7 +16,7 @@ use App\Http\Controllers\BrandController;
 Route::prefix('admin')->group(function () {
     Route::get('/', function () {
         return view('admin.index');
-    });
+    })->name('index');
 
     Route::resource('brands', BrandController::class);
 

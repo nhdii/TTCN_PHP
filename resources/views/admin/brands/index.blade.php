@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @section('content')
-    {{-- @include('layouts.notifySuccess') --}}
+    @include('layouts.notifySuccess')
     <div class="mb-2 flex">
         <a href="{{route('brands.create')}}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded cursor-pointer duration-300 ease-in-out">
             Create
@@ -52,12 +52,12 @@
                             <p class="mb-0 font-semibold leading-tight text-x1">{{ $br->brand_name }}</p>
                         </td>
                         <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                            <form class="inline-block mr-1" action="{{ route('brands.destroy', $br->brand_name) }}" method="post" id="deleteForm{{$br->brand_name}}">
+                            <form class="inline-block mr-1" action="{{ route('brands.destroy', $br->brand_id ) }}" method="post" id="deleteForm{{$br->brand_id }}">
                                 @csrf
                                 @method('DELETE')
-                                <button type="button" class="font-semibold leading-tight text-x1 text-slate-400 delete-btn" data-type-employee-id="{{ $br->brand_name }}">Delete</button>
+                                <button type="button" class="font-semibold leading-tight text-x1 text-slate-400 delete-btn" data-type-brand-id="{{ $br->brand_id }}">Delete</button>
                             </form>|
-                            <a href="{{ route('brands.edit', $br->brand_name) }}" class="font-semibold leading-tight text-x1 text-slate-400"> Edit </a>
+                            <a href="{{ route('brands.edit', $br->brand_id) }}" class="font-semibold leading-tight text-x1 text-slate-400"> Edit </a>
 
                         </td>
                     </tr>
@@ -70,6 +70,34 @@
             </div>
         </div>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            //xử lý nút xóa
+            const deleteButtons = document.querySelectorAll('.delete-btn');
+            deleteButtons.forEach(button => {
+                button.addEventListener('click', function () {
+                    const brand_id = this.getAttribute('data-type-brand-id');
+
+                    Swal.fire({
+                        title: 'Confirm Delete',
+                        html: `Are you sure you want to remove this Brand?`,
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Xóa',
+                        cancelButtonText: 'Hủy',
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            const deleteForm = document.getElementById('deleteForm' + brand_id);
+                            deleteForm.submit();
+                        }
+                    });
+                });
+            });   
+        });
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 @endsection
