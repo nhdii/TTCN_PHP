@@ -15,7 +15,7 @@
                     Edit Category
                 </h3>
             </div>
-            <form action="{{ route('categories.update', $categories) }}" method="post" enctype="multipart/form-data">
+            <form action="{{ route('categories.update', $category) }}" method="post" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <div class="p-6">
@@ -24,7 +24,7 @@
                             <label class="mb-2.5 block text-black font-bold">
                                 Category Name <span class="text-meta-1">*</span>
                             </label>
-                            <input name="category_name" value="{{ old('category_name', $categories->category_name) }}" type="text" placeholder="Enter new category name" class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter">
+                            <input name="category_name" value="{{ old('category_name', $category->category_name) }}" type="text" placeholder="Enter new category name" class="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter">
                             @if($errors->has('category_name'))
                                 <span class="text-red-500">{{ $errors->first('category_name') }}</span>
                             @endif

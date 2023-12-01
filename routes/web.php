@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BrandController;
-use App\Http\Controllers\CategoriesController;
+use App\Http\Controllers\CategoryController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,7 +20,7 @@ Route::prefix('admin')->group(function () {
     })->name('index');
 
     Route::resource('brands', BrandController::class);
-    Route::resource('categories', CategoriesController::class);
+    Route::resource('categories', CategoryController::class);
 
 });
 
