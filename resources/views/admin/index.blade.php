@@ -15,7 +15,7 @@
 
                         <div class="mx-5">
                             <h4 class="text-2xl font-semibold text-gray-700">4</h4>
-                            <div class="text-gray-500"><b>KHÁCH HÀNG</b></div>
+                            <div class="text-gray-500"><b>CUSTOMER</b></div>
                         </div>
                     </div>
                     </a>
@@ -30,7 +30,7 @@
 
                         <div class="mx-5">
                             <h4 class="text-2xl font-semibold text-gray-700">4</h4>
-                            <div class="text-gray-500"><b>SẢN PHẨM</b></div>
+                            <div class="text-gray-500"><b>SHOES</b></div>
                         </div>
                     </div>
                     </a>
@@ -45,7 +45,7 @@
 
                         <div class="mx-5">
                             <h4 class="text-2xl font-semibold text-gray-700">6</h4>
-                            <div class="text-gray-500"><b>ĐƠN HÀNG</b></div>
+                            <div class="text-gray-500"><b>ORDER</b></div>
                         </div>
                     </div>
                     </a>

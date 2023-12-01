@@ -115,7 +115,7 @@
         <li class="w-1/3 px-2">
           <div class="bg-white w-96 shadow p-4 rounded-lg border border-gray-200">
             <figure>
-              <a href="#">
+              <a href="/">
                 <img src="/storage/images/featured-img/air-jordan-1-low.png" alt="Product 4" class="w-full h-96 object-cover mb-4">
                 <figcaption class="text-center font-semibold text-gray-800">Accessories</figcaption>
               </a>

@@ -21,7 +21,7 @@ class Brand extends Model
     {
         parent::boot();
         static::creating(function ($brands) {
-            // Tạo mã loại nhân viên mới dựa trên mã loại nhân viên cuối cùng
+            // Tạo brand_id mới dựa trên brand_id cuối cùng
             $lastBrand = Brand::query()->orderBy('brand_id', 'desc')->first();
             if ($lastBrand) {
                 $lastCode = $lastBrand->brand_id;
@@ -29,7 +29,7 @@ class Brand extends Model
             } else {
                 $codeNumber = 1;
             }
-            // Format mã loại nhân viên và gán vào model
+            // Format brand_id và gán vào model
             $brands->brand_id = 'BR' . str_pad($codeNumber, 4, '0', STR_PAD_LEFT);
         });
     }

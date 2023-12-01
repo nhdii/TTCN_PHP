@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Categories;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateCategoriesRequest extends FormRequest
 {
@@ -11,7 +12,7 @@ class UpdateCategoriesRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +23,31 @@ class UpdateCategoriesRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'category_name' => [
+                'bail',
+                'required',
+                'string',
+                'min:3',
+                'max:255',
+                Rule::unique(Categories::class)->ignore($this->categories),
+            ],
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'required' => ':attribute bắt buộc phải điền.',
+            'min' => ':attribute phải có ít nhất :min ký tự.',
+            'max' => ':attribute không được vượt quá :max ký tự.',
+            'unique' => ':attribute đã được sử dụng.',
+        ];
+    }
+
+    public function attributes(): array
+    {
+        return [
+            'category_name' => 'Category Name',
         ];
     }
 }
