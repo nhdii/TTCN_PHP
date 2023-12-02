@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CustomerController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -21,6 +22,7 @@ Route::prefix('admin')->group(function () {
 
     Route::resource('brands', BrandController::class);
     Route::resource('categories', CategoryController::class);
+    Route::resource('customers', CustomerController::class);
 
 });
 

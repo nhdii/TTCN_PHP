@@ -28,7 +28,6 @@ class UpdateCategoryRequest extends FormRequest
                 'string',
                 'min:3',
                 'max:255',
-                Rule::unique(Category::class)->ignore($this->categories),
             ],
         ];
     }
@@ -39,7 +38,6 @@ class UpdateCategoryRequest extends FormRequest
             'required' => ':attribute bắt buộc phải điền.',
             'min' => ':attribute phải có ít nhất :min ký tự.',
             'max' => ':attribute không được vượt quá :max ký tự.',
-            'unique' => ':attribute đã được sử dụng.',
         ];
     }
 

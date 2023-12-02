@@ -28,7 +28,6 @@ class StoreBrandRequest extends FormRequest
                 'string',
                 'min:3',
                 'max:255',
-                'brand_name' => 'unique:App\Models\Brand,brand_name',
             ],
                         
         ];
@@ -40,7 +39,6 @@ class StoreBrandRequest extends FormRequest
             'required' => ':attribute bắt buộc phải điền.',
             'min' => ':attribute phải có ít nhất :min ký tự.',
             'max' => ':attribute không được vượt quá :max ký tự.',
-            'unique' => ':attribute đã được sử dụng.',
         ];
     }
 

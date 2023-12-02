@@ -69,7 +69,6 @@ class BrandController extends Controller
      */
     public function edit(Brand $brand)
     {
-        dd($brand);
         return view('admin.brands.edit', [
             'brand' => $brand,
         ]);

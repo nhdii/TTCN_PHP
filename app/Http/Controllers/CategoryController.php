@@ -85,14 +85,22 @@ class CategoryController extends Controller
      */
     public function update(UpdateCategoryRequest $request, Category $category)
     {
-        //
+        $category->fill($request->validated());
+        if ($category->save()) {
+            return redirect()->route('categories.index')->with('success', 'Update category Successfull!');
+        }
+        return redirect()->route('categories.index')->with('error', 'Update category Error!');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Category $category)
+    public function destroy($category_id)
     {
-        //
+        $result = Category::query()->where('category_id', $category_id)->delete();
+        if ($result) {
+            return redirect()->route('categories.index')->with('success', 'Delete Category Successfull!');
+        }
+        return redirect()->route('categories.index')->with('error', 'Delete Category Error!');
     }
 }
