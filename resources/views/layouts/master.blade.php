@@ -8,6 +8,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
     <script>
         tailwind.config = {
             theme: {
@@ -17,17 +19,13 @@
                         transparent: 'transparent',
                         white: '#FFFFFF',
                         'black-2': '#010101',
-                        body: '#64748B',
                         bodydark: '#AEB7C0',
                         bodydark1: '#DEE4EE',
                         bodydark2: '#8A99AF',
                         primary: '#3C50E0',
                         secondary: '#80CAEE',
                         stroke: '#E2E8F0',
-                        gray: '#EFF4FB',
                         graydark: '#333A48',
-                        'gray-2': '#F7F9FC',
-                        'gray-3': '#FAFAFA',
                         whiten: '#F1F5F9',
                         whiter: '#F5F7FD',
                         boxdark: '#24303F',
@@ -56,8 +54,8 @@
 </head>
 
 <body>
-    <div class="w-screen h-screen flex">
-        <div class="w-[290px] h-full bg-[#1C2434]">
+    <div class="w-screen h-screen flex overflow-x-hidden bg-[#F1F5F9] ">
+        <div class="w-[290px] h-full bg-[#1C2434]  sticky top-0 z-999">
 
             <div class="flex items-center justify-center mt-8">
                 <div class="flex items-center">
@@ -173,7 +171,7 @@
                                     <ul class="mt-4 mb-5.5 flex flex-col gap-2.5 pl-6">
                                         <li>
                                             <a class="group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white"
-                                                href="">Shoes</a>
+                                                href="{{ route('products.index')}}">Product</a>
                                         </li>
                                         <li>
                                             <a class="group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white"
@@ -231,7 +229,7 @@
                                     <ul class="mt-4 mb-5.5 flex flex-col gap-2.5 pl-6">
                                         <li>
                                             <a class="group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white"
-                                                href="">Detail Order</a>
+                                                href="{{ route('orders.index')}}">Detail Order</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -289,5 +287,7 @@
         </div>
     </div>
 <script src="{{ asset("/js/script.js") }}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/datepicker.min.js"></script>
+
 </body>
 </html>

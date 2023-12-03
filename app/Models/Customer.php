@@ -5,26 +5,53 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
-use App\Traits\Uuid;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Support\Str;
 
 class Customer extends Model
 {
-    use HasFactory, Uuid;
+    use HasFactory;
 
     protected $table = 'customers';
 
     protected $primaryKey = 'customer_id';
+    public $keyType = 'string';
+    public $incrementing = false;
     
     protected $fillable = [
-        'fullname',
+        'fullName',
         'phone',
-        'adress',
+        'address',
         'birthDay',
         'gender',
         'email',
         'password',
-        'avata'
+        'avatar'
     ];
+
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($model) {
+            $model->{$model->getKeyName()} = Str::uuid()->toString();
+
+            $userId = $model->customer_id;
+
+            if (request()->hasFile('avatar')) {
+                $image = request()->file('avatar');
+                $image->storeAs("public/images/user_avt/$userId", $model->avatar);
+            } else {
+                $sourcePath = 'public/images/user_avt/defaultavt.png';
+                $destinationDirectory = "public/images/user_avt/$userId";
+                $destinationPath = "$destinationDirectory/defaultavt.png";
+                Storage::copy($sourcePath, $destinationPath);
+            }
+        });
+
+    }
 
     public function setBirthDayAttribute($value)
     {

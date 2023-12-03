@@ -2,24 +2,33 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Order;
-use App\Http\Requests\Order\StoreOrderRequest;
-use App\Http\Requests\Order\UpdateOrderRequest;
+use App\Models\Product;
+use App\Models\Brand;
+use App\Models\Category;
+use App\Http\Requests\Product\StoreProductRequest;
+use App\Http\Requests\Product\UpdateProductRequest;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 
-class OrderController extends Controller
+class ProductController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     */
     public function index(Request $request)
     {
         $searchColumns = [
-            'order_id' => 'like',
+            'product_name' => 'like',
+            'gender' => 'like',
+            'size' => 'like',
         ];
         $column = $request->get('search_by');
         $keywords = $request->get('keywords');
         $lastKeyword = $keywords;
-        $query = Order::query();
-
+        $query = Product::query();
+        
         if (array_key_exists($column, $searchColumns)) {
             $operator = $searchColumns[$column];
             if (!empty($keywords)) {
@@ -29,67 +38,58 @@ class OrderController extends Controller
                 $query->where($column, $operator, $keywords);
             }
         }
+
         $data = $query->paginate(5);
-        return view('admin.orders.index' , [
-            'orders' => $data,
+
+        return view('admin.products.index' , [
+            'products' => $data,
             'keywords' => $lastKeyword,
             'column' => $column,
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        return view('admin.orders.create');
+        //
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreOrderRequest $request)
+    public function store(StoreProductRequest $request)
     {
-        $data = $request->validated();
-        Order::create($data);
-
-        return redirect()->route('orders.index')->with('success', 'Order created successfully!');
+        //
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Order $order)
+    public function show(Product $product)
     {
-        return view('orders.show', compact('order'));
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Order $order)
+    public function edit(Product $product)
     {
-        return view('orders.edit', compact('order'));
+        //
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateOrderRequest $request, Order $order)
+    public function update(UpdateProductRequest $request, Product $product)
     {
-        $data = $request->validated();
-        $order->update($data);
-
-        return redirect()->route('orders.index')->with('success', 'Order updated successfully!');
+        //
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Order $order)
+    public function destroy(Product $product)
     {
-        $order->delete();
-
-        return redirect()->route('orders.index')->with('success', 'Order deleted successfully!');
+        //
     }
 }

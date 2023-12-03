@@ -11,15 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('shoes', function (Blueprint $table) {
-            $table->string('shoe_id', 10)->primary();
-            $table->string('shoe_name', 255);
+        Schema::create('products', function (Blueprint $table) {
+            $table->uuid('product_id')->primary();
+            $table->string('product_name', 255);
             $table->text('desciption');
             $table->decimal('default_price',  $precision = 13, $scale = 0);
             $table->integer('default_stock_quantity');
             $table->string('image');
-            $table->string('brand_id', 10);
-            $table->string('category_id', 10);
+            $table->uuid('brand_id');
+            $table->uuid('category_id');
             $table->string('gender', 20);
             $table->string('size', 10);
             $table->foreign('brand_id')->references('brand_id')->on('brands');
@@ -33,6 +33,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('shoes');
+        Schema::dropIfExists('products');
     }
 };

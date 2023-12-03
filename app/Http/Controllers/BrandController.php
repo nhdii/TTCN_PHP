@@ -23,6 +23,7 @@ class BrandController extends Controller
         $keywords = $request->get('keywords');
         $lastKeyword = $keywords;
         $query = Brand::query();
+        dd($query);
         if (array_key_exists($column, $searchColumns)) {
             $operator = $searchColumns[$column];
             if (!empty($keywords)) {

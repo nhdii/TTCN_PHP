@@ -16,15 +16,18 @@ return new class extends Migration
             $table->string('fullName', 255);
             $table->string('phone',20);
             $table->text('address', 255);
-            $table->date('birthDate')->nullable();
+            $table->date('birthDay')->nullable();
             $table->string('gender', 10);
-            $table->string('avata', 255)->default('defaultavt.png');
+            $table->string('avatar', 255)->default('defaultavt.png');
             $table->string('email', 255)->unique();
             $table->string('password', 255);
             $table->timestamps();
         });
     }
 
+    /**
+     * Reverse the migrations.
+     */
     public function down(): void
     {
         Schema::dropIfExists('customers');

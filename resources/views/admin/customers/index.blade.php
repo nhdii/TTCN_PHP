@@ -37,7 +37,7 @@
                         <th class="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">NAME & EMAIL</th>
                         <th class="px-6 py-3 pl-2 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">PHONE</th>
                         <th class="px-6 py-3 pl-2 font-bold text-left uppercase align-middle bg-transparent border-b
-                        border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">ADRESS</th>
+                        border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">ADDRESS</th>
                         <th class="px-6 py-3 pl-2 font-bold text-left uppercase align-middle bg-transparent border-b
                         border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">BIRTH DAY</th>
                         <th class="px-6 py-3 pl-2 font-bold text-left uppercase align-middle bg-transparent border-b
@@ -54,10 +54,10 @@
                         <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
                             <div class="flex px-2 py-1">
                                 <div>
-                                    <img src="/storage/images/user_avt/{{ $c->customer_id }}/{{ $c->avata }}" class="inline-flex items-center justify-center mr-4 text-white transition-all duration-200 ease-soft-in-out text-sm h-9 w-9 rounded-xl" alt="user1" />
+                                    <img src="{{ asset('storage/images/user_avt/' . $c->customer_id . '/' . $c->avatar) }}" class="inline-flex items-center justify-center mr-4 text-white transition-all duration-200 ease-soft-in-out text-sm h-9 w-9 rounded-xl" alt="user1" />
                                 </div>
                                 <div class="flex flex-col justify-center">
-                                    <h6 class="mb-0 leading-normal text-sm">{{ $c->fullname }}</h6>
+                                    <h6 class="mb-0 leading-normal text-sm">{{$c->fullName }}</h6>
                                     <p class="mb-0 leading-tight text-xs text-slate-400">{{ $c->email }}</p>
                                 </div>
                             </div>
@@ -66,7 +66,7 @@
                             <p class="mb-0 font-semibold leading-tight text-xs">{{ $c->phone }}</p>
                         </td>
                         <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                            <p class="mb-0 font-semibold leading-tight text-xs">{{ $c->adress }}</p>
+                            <p class="mb-0 font-semibold leading-tight text-xs">{{ $c->address }}</p>
                         </td>
                         <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
                             <p class="mb-0 font-semibold leading-tight text-xs">{{ $c->getBirthDay }}</p>
@@ -80,8 +80,8 @@
                                 @method('DELETE')
                                 <button type="button" class="font-semibold leading-tight text-x1 text-slate-400 delete-btn" data-cus-id="{{ $c->customer_id }}">Delete</button>
                             </form>|
-                            <a href="{{ route('customers.edit', $c->customer_id) }}" class="font-semibold leading-tight text-xs text-slate-400"> Edit </a> |
-                            <a href="{{ route('customers.show', $c->customer_id) }}" class="font-semibold leading-tight text-xs text-slate-400"> Detail</a>
+                            <a href="{{ route('customers.edit', $c->customer_id) }}" class="font-semibold leading-tight text-x1 text-slate-400"> Edit </a> |
+                            <a href="{{ route('customers.show', $c->customer_id) }}" class="font-semibold leading-tight text-x1 text-slate-400"> Detail</a>
                         </td>
                     </tr>
                     @endforeach

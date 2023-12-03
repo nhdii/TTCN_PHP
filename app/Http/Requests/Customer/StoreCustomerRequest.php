@@ -22,7 +22,7 @@ class StoreCustomerRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'fullname' => [
+            'fullName' => [
                 'bail',
                 'required',
                 'string',
@@ -38,7 +38,7 @@ class StoreCustomerRequest extends FormRequest
                 'max:20',
                 'regex:/^[0-9]+$/',
             ],
-            'adress' => [
+            'address' => [
                 'bail',
                 'required',
                 'string',
@@ -52,7 +52,7 @@ class StoreCustomerRequest extends FormRequest
             'gender' => [
                 'bail',
                 'required',
-                'in:0,1,2',
+                'in:Male,Female,None',
             ],
             'email' => [
                 'bail',
@@ -68,7 +68,7 @@ class StoreCustomerRequest extends FormRequest
                 'min:8',
                 'regex:/^(?=.*[A-Za-z])(?=.*\d).+$/',
             ],
-            'avata' => [
+            'avatar' => [
                 'bail',
                 'file',
                 'mimes:jpg,png',
@@ -90,7 +90,7 @@ class StoreCustomerRequest extends FormRequest
             'address.regex' => 'The :attribute contains invalid characters.',
             'phone.regex' => 'The :attribute must not contain alphabetic characters.',
             'password.regex' => 'The :attribute must contain both letters and numbers.',
-            'fullname.regex' => 'The :attribute must not contain numbers.',
+            'fullName.regex' => 'The :attribute must not contain numbers.',
             'mimes' => 'The :attribute must be a file of type: jpg, png.',
             'file' => 'The :attribute must be a file.',
         ];
@@ -98,14 +98,14 @@ class StoreCustomerRequest extends FormRequest
     public function attributes(): array
     {
         return [
-            'fullname' => 'Full Name',
+            'fullName' => 'Full Name',
             'phone' => 'Phone Number',
-            'adress' => 'Adress',
+            'address' => 'Address',
             'birthDay' => 'Birth Day',
             'gender' => 'Gender',
             'email' => 'Địa chỉ email',
             'password' => 'Password',
-            'avata' => 'File Image',
+            'avatar' => 'File Image',
         ];
     }
 }
