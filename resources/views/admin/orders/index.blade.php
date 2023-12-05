@@ -1,53 +1,55 @@
 @extends('layouts.master')
-
 @section('content')
-    @include('layouts.notifySuccess')
-    <div class="container mx-auto my-8">
-        <h2 class="text-2xl font-semibold mb-4">Orders</h2>
-        
-        <a href="{{ route('orders.create') }}" class="bg-blue-500 text-white px-4 py-2 rounded mb-4">Create New Order</a>
-
-        @if(session('success'))
-            <div class="bg-green-200 text-green-800 p-4 mb-4 rounded">
-                {{ session('success') }}
-            </div>
-        @endif
-
-        <table class="min-w-full bg-white border border-gray-300">
-            <thead>
-                <tr>
-                    <th class="py-2 px-4 border-b">Order ID</th>
-                    <th class="py-2 px-4 border-b">Customer ID</th>
-                    <th class="py-2 px-4 border-b">Order Date</th>
-                    <th class="py-2 px-4 border-b">Delivery Date</th>
-                    <th class="py-2 px-4 border-b">Status</th>
-                    <th class="py-2 px-4 border-b">Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                @forelse($orders as $order)
+@include('layouts.notifySuccess')
+<div class="relative flex flex-col w-full min-w-0 mb-0 break-words bg-white border-0 border-transparent border-solid shadow-soft-xl rounded-2xl bg-clip-border">
+    <div class="p-6 pb-0 mb-0 bg-white rounded-t-2xl">
+        <h6 class="font-bold text-xl">ORDER</h6>
+    </div>
+    <div class="flex-auto px-0 pt-0 pb-2">
+        <div class="p-0 overflow-x-auto">
+            <table class="items-center w-full mb-0 align-top border-gray-200 text-slate-500">
+                <thead class="align-bottom">
                     <tr>
-                        <td class="py-2 px-4 border-b">{{ $order->order_id }}</td>
-                        <td class="py-2 px-4 border-b">{{ $order->customer_id }}</td>
-                        <td class="py-2 px-4 border-b">{{ $order->order_date }}</td>
-                        <td class="py-2 px-4 border-b">{{ $order->delivery_date }}</td>
-                        <td class="py-2 px-4 border-b">{{ $order->status }}</td>
-                        <td class="py-2 px-4 border-b">
-                            <a href="{{ route('orders.show', $order->order_id) }}" class="text-blue-500">View</a>
-                            <a href="{{ route('orders.edit', $order->order_id) }}" class="text-yellow-500">Edit</a>
-                            <form action="{{ route('orders.destroy', $order->order_id) }}" method="POST" class="inline">
+                        <th class="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Order ID</th>
+                        <th class="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Customer ID</th>
+                        <th class="px-6 py-3 pl-2 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Order Date</th>
+                        <th class="px-6 py-3 pl-2 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Delivery Date</th>
+                        <th class="px-6 py-3 pl-2 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Status</th>
+                    </tr>
+                    </thead>
+                <tbody>
+                    @foreach ($orders as $item)
+                    <tr>
+                        <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
+                            <p class="mb-0 font-semibold leading-tight text-xss">{{ $item->order_id }}</p>
+                        </td>
+                        <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
+                            <p class="mb-0 font-semibold leading-tight text-xss">{{ $item->customer_id }}</p>
+                        </td>
+                        <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
+                            <p class="mb-0 font-semibold leading-tight text-xss">{{ $item->order_date }}</p>
+                        </td>
+                        <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
+                            <p class="mb-0 font-semibold leading-tight text-xss">{{ $item->delivery_date }}</p>
+                        </td>
+                        <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
+                            <p class="mb-0 font-semibold leading-tight text-xss">{{ $item->status }}</p>
+                        </td>
+                        <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
+                            <form class="inline-block mr-1" action="{{ route('orders.destroy', $item->order_id) }}" method="post">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="text-red-500" onclick="return confirm('Are you sure?')">Delete</button>
-                            </form>
+                                <button class="font-semibold leading-tight text-xss text-slate-400">Delete</button>
+                            </form>|
+                            <a href="{{ route('orders.show', $item->order_id) }}" class="font-semibold leading-tight text-xss text-slate-400"> Chi Tiết </a>
                         </td>
                     </tr>
-                @empty
-                    <tr>
-                        <td colspan="6" class="py-4 px-4 border-b text-center">No orders found.</td>
-                    </tr>
-                @endforelse
-            </tbody>
-        </table>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
     </div>
+</div>
+
 @endsection
+

@@ -12,10 +12,10 @@
     <div class="bg-white overflow-hidden shadow rounded-lg border">
         <div class="px-4 py-5 sm:px-6">
             <h3 class="text-lg leading-6 font-medium text-gray-900">
-                Info Customer
+                Customer Details
             </h3>
             <p class="mt-1 max-w-2xl text-sm text-gray-500">
-                Một số thông tin về khách hàng này:
+                Details about the customer:
             </p>
         </div>
         <div class="border-t border-gray-200 px-4 py-5 sm:p-0">

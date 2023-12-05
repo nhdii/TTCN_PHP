@@ -51,14 +51,19 @@
                         <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
                             <p class="mb-0 font-semibold leading-tight text-x1">{{ $br->brand_name }}</p>
                         </td>
+
                         <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                            <form class="inline-block mr-1" action="{{ route('brands.destroy', $br->brand_id ) }}" method="post" id="deleteForm{{$br->brand_id }}">
+                            <form class="inline-block mr-1" action="{{ route('brands.destroy', $br->brand_id) }}" method="post" id="deleteForm{{$br->brand_id}}">
                                 @csrf
                                 @method('DELETE')
-                                <button type="button" class="font-semibold leading-tight text-x1 text-slate-400 delete-btn" data-type-brand-id="{{ $br->brand_id }}">Delete</button>
-                            </form>|
-                            <a href="{{ route('brands.edit', $br->brand_id) }}" class="font-semibold leading-tight text-x1 text-slate-400"> Edit </a>
-
+                                <button type="button" class="font-semibold leading-tight text-xss text-slate-400 delete-btn" data-type-brand-id="{{ $br->brand_id }}">
+                                    <i class="fas fa-trash-alt"></i> 
+                                </button>
+                            </form>
+                            |
+                            <a href="{{ route('brands.edit', $br->brand_id) }}" class="font-semibold leading-tight text-xss text-slate-400">
+                                <i class="fas fa-edit"></i>
+                            </a>
                         </td>
                     </tr>
                     @endforeach

@@ -13,7 +13,7 @@ class Product extends Model
 {
     use HasFactory;
 
-    protected $table = 'customers';
+    protected $table = 'products';
 
     protected $primaryKey = 'product_id';
     public $keyType = 'string';
@@ -43,14 +43,22 @@ class Product extends Model
 
             if (request()->hasFile('image')) {
                 $image = request()->file('image');
-                $image->storeAs("public/images/product_images/$proId", $model->image);
+                $image->storeAs("public/images/product-images/$proId", $model->image);
             } else {
-                $sourcePath = 'public/images/product_images/defaultavt.png';
-                $destinationDirectory = "public/images/product_images/$proId";
+                $sourcePath = 'public/images/product-images/defaultavt.png';
+                $destinationDirectory = "public/images/product-images/$proId";
                 $destinationPath = "$destinationDirectory/defaultavt.png";
                 Storage::copy($sourcePath, $destinationPath);
             }
         });
-
     }
+
+    public function getBrandName(){
+        return $this->belongsTo(Brand::class, 'brand_id');
+    }
+
+    public function getCategoryName(){
+        return $this->belongsTo(Category::class, 'category_id');
+    }
+
 }

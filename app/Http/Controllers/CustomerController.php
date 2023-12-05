@@ -66,7 +66,7 @@ class CustomerController extends Controller
         if ($result) {
             return redirect()->route('customers.index')->with('success', 'Create Successfull!');
         }
-        return redirect()->route('customers.index')->with('error', 'Không thêm được khách hàng!');
+        return redirect()->route('customers.index')->with('error', 'Create Error!');
     }
 
     /**

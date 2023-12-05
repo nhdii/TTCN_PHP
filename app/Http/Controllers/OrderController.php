@@ -51,9 +51,11 @@ class OrderController extends Controller
     public function store(StoreOrderRequest $request)
     {
         $data = $request->validated();
-        Order::create($data);
-
-        return redirect()->route('orders.index')->with('success', 'Order created successfully!');
+        $result = Order::query()->create($data);
+        if ($result) {
+            return redirect()->route('orders.index')->with('success', 'Order Created Successfull!');
+        }
+        return redirect()->route('orders.index')->with('error', 'Create Error!');
     }
 
     /**
@@ -77,19 +79,23 @@ class OrderController extends Controller
      */
     public function update(UpdateOrderRequest $request, Order $order)
     {
-        $data = $request->validated();
-        $order->update($data);
+        $order->fill($request->validated());
 
-        return redirect()->route('orders.index')->with('success', 'Order updated successfully!');
+        if ($order->save()) {
+            return redirect()->route('orders.index')->with('success', 'Order Edited Successful!');
+        }
+        return redirect()->route('orders.index')->with('error', 'Edit Error!');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Order $order)
+    public function destroy($order_id)
     {
-        $order->delete();
-
-        return redirect()->route('orders.index')->with('success', 'Order deleted successfully!');
+        $result = Order::query()->where('order_id', $order_id)->delete();
+        if ($result) {
+            return redirect()->route('orders.index')->with('success', 'Order deleted Successfull!');
+        }
+        return redirect()->route('orders.index')->with('error', 'Deleted Error!');
     }
 }

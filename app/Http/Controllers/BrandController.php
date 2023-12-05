@@ -23,7 +23,6 @@ class BrandController extends Controller
         $keywords = $request->get('keywords');
         $lastKeyword = $keywords;
         $query = Brand::query();
-        dd($query);
         if (array_key_exists($column, $searchColumns)) {
             $operator = $searchColumns[$column];
             if (!empty($keywords)) {
@@ -52,7 +51,7 @@ class BrandController extends Controller
 
         $result = Brand::query()->create($data);
         if ($result) {
-            return redirect()->route('brands.index')->with('success', 'Create Successfull!');
+            return redirect()->route('brands.index')->with('success', 'Brand Created Successfull!');
         }
         return redirect()->route('brands.index')->with('error', 'Create Error!');
     }
@@ -94,7 +93,7 @@ class BrandController extends Controller
     {
         $result = Brand::query()->where('brand_id', $brand_id)->delete();
         if ($result) {
-            return redirect()->route('brands.index')->with('success', 'Delete Brand Successfull!');
+            return redirect()->route('brands.index')->with('success', 'Brand Deleted Successfull!');
         }
         return redirect()->route('brands.index')->with('error', 'Delete Brand Error!');
     }

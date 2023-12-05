@@ -5,21 +5,21 @@
         <a href="{{ route('products.create') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded cursor-pointer duration-300 ease-in-out">
             Create
         </a>        
-        {{-- <div class="ml-4 mr-2">
+        <div class="ml-4 mr-2">
             <form action="" method="GET" class="flex items-center space-x-4">
-                <label for="search_by" class="font-bold">Tìm kiếm theo:</label>
+                <label for="search_by" class="font-bold">Search by:</label>
                 <select name="search_by" id="search_by" class="p-2 border rounded">
-                    <option value="product_name" @if($column == 'product_name') selected @endif>Tên dịch vụ</option>
-                    <option value="gender" @if($column == 'gender') selected @endif>Số điện thoại</option>
-                    <option value="default_stock_quantity" @if($column == 'default_stock_quantity') selected @endif>Xếp loại</option>
-                    <option value="default_price" @if($column == 'default_price') selected @endif>Địa chỉ</option>
+                    <option value="product_name" @if($column == 'product_name') selected @endif>Product Name</option>
+                    <option value="gender" @if($column == 'gender') selected @endif>Gender</option>
+                    <option value="size" @if($column == 'size') selected @endif>Size</option>
+                    <option value="default_price" @if($column == 'default_price') selected @endif>Price</option>
                 </select>
                 <input type="text" name="keywords" value="{{ $keywords }}" placeholder="Nhập từ khóa" class="p-2 border rounded">
                 <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded duration-300 ease-in-out cursor-pointer">
                     Tìm kiếm
                 </button>
             </form>
-        </div> --}}
+        </div>
         <a href="{{ route('products.index') }}" class="mr-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded cursor-pointer duration-300 ease-in-out">
             Reset
         </a>
@@ -33,65 +33,65 @@
                 <table class="items-center w-full mb-0 align-top border-gray-200 text-slate-500">
                     <thead class="align-bottom">
                     <tr>
-                        <th data-column="product_id" class="sortable-column cursor-pointer px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Mã DV </th>
-                        <th data-column="product_name" class="sortable-column cursor-pointer px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Tên Dịch Vụ</th>
-                        <th data-column="gender" class="sortable-column cursor-pointer px-6 py-3 pl-2 font-bold text-left uppercase align-middle bg-transparent border-b
-                        border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">SDT</th>
+                        <th data-column="product_id" class="sortable-column cursor-pointer px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Product ID</th>
+                        <th data-column="product_name" class="sortable-column cursor-pointer px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Product Name</th>
                         <th data-column="default_price" class="sortable-column cursor-pointer px-6 py-3 pl-2 font-bold text-left uppercase align-middle bg-transparent border-b
-                        border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Địa Chỉ</th>
-                        <th data-column="default_stock_quantity" class="sortable-column cursor-pointer px-6 py-3 pl-2 font-bold text-left uppercase align-middle bg-transparent border-b
-                        border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Xếp Loại </th>
-                        <th class="px-6 py-3 pl-2 font-bold text-left uppercase align-middle bg-transparent border-b
-                        border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Mô tả</th>
+                        border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Category</th>
                         <th data-column="brand_id" class="sortable-column cursor-pointer px-6 py-3 pl-2 font-bold text-left uppercase align-middle bg-transparent border-b
-                        border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Loại dịch vụ</th>
+                        border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Brand</th>
+                        <th data-column="brand_id" class="sortable-column cursor-pointer px-6 py-3 pl-2 font-bold text-left uppercase align-middle bg-transparent border-b
+                        border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Size</th>
+                        <th data-column="brand_id" class="sortable-column cursor-pointer px-6 py-3 pl-2 font-bold text-left uppercase align-middle bg-transparent border-b
+                        border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Gender</th>
                         <th data-column="category_id" class="sortable-column cursor-pointer px-6 py-3 pl-2 font-bold text-left uppercase align-middle bg-transparent border-b
-                        border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Loại dịch vụ</th>
-                        <th data-column="size" class="sortable-column cursor-pointer px-6 py-3 pl-2 font-bold text-left uppercase align-middle bg-transparent border-b
-                        border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Loại dịch vụ</th>
+                        border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Price</th>
+
                         <th class="px-6 py-3 font-semibold capitalize align-middle bg-transparent border-b border-gray-200 border-solid shadow-none tracking-none whitespace-nowrap text-slate-400 opacity-70"></th>
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($products as $dv)
+                    @foreach($products as $pd)
                     <tr>
                         <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                            <p class="mb-0 ml-4 font-semibold leading-tight text-xs">{{ $dv->product_id }}</p>
+                            <p class="mb-0 ml-4 font-semibold leading-tight text-xss">{{ $pd->product_id }}</p>
                         </td>
                         <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                            <div class="flex px-2 py-1">
-                                <div>
-                                    <img src="{{ asset('storage/images/service_pic/' . $dv->product_id . '/' . $dv->image) }}" class="inline-flex items-center justify-center mr-4 text-white transition-all duration-200 ease-soft-in-out text-sm h-9 w-9 rounded-xl" alt="user1" />
-                                </div>
-                                <div class="flex flex-col justify-center">
-                                    <h6 class="mb-0 leading-normal text-sm">{{ $dv->product_name }}</h6>
-                                </div>
-                            </div>
+                            <p class="mb-0 ml-4 font-semibold leading-tight text-xss">{{ $pd->product_name }}</p>
+                        </td>
+
+                        <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
+                            <p class="w-[100px] text-ellipsis overflow-hidden mb-0 font-semibold leading-tight text-xss">{{ $pd->getCategoryName->category_name }}</p>
                         </td>
                         <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                            <p class="mb-0 font-semibold leading-tight text-xs">{{ $dv->gender }}</p>
+                            <p class="mb-0 font-semibold leading-tight text-xss">{{ $pd->getBrandName->brand_name }}</p>
                         </td>
                         <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                            <p class="w-[100px] text-ellipsis overflow-hidden mb-0 font-semibold leading-tight text-xs">{{ $dv->default_price }}</p>
+                            <p class="mb-0 font-semibold leading-tight text-xss">{{ $pd->size }}</p>
                         </td>
                         <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                            <p class="mb-0 font-semibold leading-tight text-xs">{{ $dv->default_stock_quantity }}</p>
+                            <p class="mb-0 font-semibold leading-tight text-xss">{{ $pd->gender }}</p>
                         </td>
                         <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                            <p class="w-[100px] text-ellipsis overflow-hidden mb-0 font-semibold leading-tight text-xs">{{ $dv->moTa }}</p>
+                            <p class="mb-0 font-semibold leading-tight text-xss">{{ $pd->default_price  }}</p>
                         </td>
                         <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                            <p class="mb-0 font-semibold leading-tight text-xs">{{ $dv->getproduct_name->brand_id }}</p>
-                        </td>
-                        <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                            <form class="inline-block mr-1" action="{{ route('products.destroy', $dv->product_id) }}" method="post" id="deleteForm{{$dv->product_id}}">
+                            <form class="inline-block mr-1" action="{{ route('products.destroy', $pd->product_id) }}" method="post" id="deleteForm{{$pd->product_id}}">
                                 @csrf
                                 @method('DELETE')
-                                <button type="button" class="font-semibold leading-tight text-x1 text-slate-400 delete-btn" data-service-id="{{ $dv->product_id }}">Xoá</button>
-                            </form>|
-                            <a href="{{ route('products.edit', $dv->product_id) }}" class="font-semibold leading-tight text-xs text-slate-400"> Sửa </a> |
-                            <a href="{{ route('products.show', $dv->product_id) }}" class="font-semibold leading-tight text-xs text-slate-400"> Chi Tiết </a>
+                                <button type="button" class="font-semibold leading-tight text-xss text-slate-400 delete-btn" data-product-id="{{ $pd->product_id }}">
+                                    <i class="fas fa-trash-alt"></i> 
+                                </button>
+                            </form>
+                            |
+                            <a href="{{ route('products.edit', $pd->product_id) }}" class="font-semibold leading-tight text-xss text-slate-400">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                            |
+                            <a href="{{ route('products.show', $pd->product_id) }}" class="font-semibold leading-tight text-xss text-slate-400">
+                                <i class="fas fa-info-circle"></i> 
+                            </a> 
                         </td>
+                        
                     </tr>
                     @endforeach
                     </tbody>
@@ -105,36 +105,22 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            // Lấy dimage sách các cột có thể sắp xếp
-            const sortableColumns = document.querySelectorAll('.sortable-column');
-
-            // Đặt sự kiện click cho mỗi cột
-            sortableColumns.forEach(column => {
-                column.addEventListener('click', function () {
-                    const columnType = this.dataset.column;
-                    const currentOrder = this.dataset.order;
-                    const newOrder = currentOrder === 'asc' ? 'desc' : 'asc';
-
-                    // Chuyển đến trang index với tham số sắp xếp
-                    window.location.href = `{{ route('products.index') }}?sort_by=${columnType}&order=${newOrder}`;
-                });
-            });
-
+        
             //xử lý nút xóa
             const deleteButtons = document.querySelectorAll('.delete-btn');
             deleteButtons.forEach(button => {
                 button.addEventListener('click', function () {
-                    const product_id = this.getAttribute('data-service-id');
+                    const product_id = this.getAttribute('data-product-id');
 
                     Swal.fire({
-                        title: 'Xác nhận xóa dịch vụ',
+                        title: 'Confirm Delete',
                         html: `Bạn có chắc chắn muốn xóa dịch vụ này không?`,
                         icon: 'warning',
                         showCancelButton: true,
                         confirmButtonColor: '#3085d6',
                         cancelButtonColor: '#d33',
-                        confirmButtonText: 'Xóa',
-                        cancelButtonText: 'Hủy',
+                        confirmButtonText: 'Delete',
+                        cancelButtonText: 'Cancel',
                     }).then((result) => {
                         if (result.isConfirmed) {
                             const deleteForm = document.getElementById('deleteForm' + product_id);

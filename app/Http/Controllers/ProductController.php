@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Http\Requests\Product\StoreProductRequest;
 use App\Http\Requests\Product\UpdateProductRequest;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
@@ -28,7 +29,11 @@ class ProductController extends Controller
         $keywords = $request->get('keywords');
         $lastKeyword = $keywords;
         $query = Product::query();
-        
+
+        $query->leftJoin('brands', 'products.brand_id', '=', 'brands.brand_id')
+            ->leftJoin('categories', 'products.category_id', '=', 'categories.category_id')
+            ->select('products.*', 'brands.brand_name', 'categories.category_name');
+
         if (array_key_exists($column, $searchColumns)) {
             $operator = $searchColumns[$column];
             if (!empty($keywords)) {
@@ -50,7 +55,14 @@ class ProductController extends Controller
 
     public function create()
     {
-        //
+        $brands = Brand::all(); 
+        $categories = Category::all(); 
+
+        //list size product
+        $sizes = ['EU 35.5', 'EU 36', 'EU 36.5', 'EU 37', 'EU 37.5', 'EU 38', 'EU 38.5', 
+        'EU 39', 'EU 39.5', 'EU 40', 'EU 40.5', 'EU 41', 'EU 41.5', 'EU 42', 'EU 42.5', 'EU 43'];
+
+        return view('admin.products.create', compact('brands', 'categories', 'sizes'));
     }
 
     /**
@@ -58,7 +70,17 @@ class ProductController extends Controller
      */
     public function store(StoreProductRequest $request)
     {
-        //
+        $data = $request->validated();
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = 'image' . '.' . $image->getClientOriginalExtension();
+            $data['image'] = $imageName;
+        }
+        $result = Product::query()->create($data);
+        if ($result) {
+            return redirect()->route('products.index')->with('success', 'Product Created Successfull!');
+        }
+        return redirect()->route('products.index')->with('error', 'Create Error!');
     }
 
     /**
@@ -66,7 +88,7 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        //
+        return view('admin.products.detail', compact('product'));
     }
 
     /**
@@ -74,7 +96,14 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        //
+        $brands = Brand::all(); 
+        $categories = Category::all(); 
+        
+        //list size product
+        $sizes = ['EU 35.5', 'EU 36', 'EU 36.5', 'EU 37', 'EU 37.5', 'EU 38', 'EU 38.5', 
+        'EU 39', 'EU 39.5', 'EU 40', 'EU 40.5', 'EU 41', 'EU 41.5', 'EU 42', 'EU 42.5', 'EU 43'];
+
+        return view('admin.products.update', compact('product', 'sizes', 'brands', 'categories'));
     }
 
     /**
@@ -82,14 +111,30 @@ class ProductController extends Controller
      */
     public function update(UpdateProductRequest $request, Product $product)
     {
-        //
+        $product->fill($request->validated());
+
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $proId = $product['product_id'];
+            $imageName = 'image' . '.' . $image->getClientOriginalExtension();
+            $image->storeAs("public/images/product-images/$proId", $imageName);
+            $product['image'] = $imageName;
+        }
+        if ($product->save()) {
+            return redirect()->route('products.index')->with('success', 'Edit Product Successful!');
+        }
+        return redirect()->route('products.index')->with('error', 'Edit Error!');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Product $product)
+    public function destroy($product_id)
     {
-        //
+        $result = Product::query()->where('product_id', $product_id)->delete();
+        if ($result) {
+            return redirect()->route('products.index')->with('success', 'Product Deleted Successfull!');
+        }
+        return redirect()->route('products.index')->with('error', 'Deleted Error!');
     }
 }

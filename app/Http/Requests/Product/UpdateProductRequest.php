@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Product\Requests;
+namespace App\Http\Requests\Product;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
@@ -28,45 +28,48 @@ class UpdateProductRequest extends FormRequest
                 'string',
                 'max:255',
             ],
-            'description' => [
+            'desciption' => [
                 'required',
                 'string',
             ],
             'default_price' => [
+                'bail',
                 'required',
                 'numeric',
                 'min:0',
             ],
             'default_stock_quantity' => [
+                'bail',
                 'required',
                 'integer',
                 'min:0',
             ],
             'image' => [
+                'bail',
                 'nullable',
                 'image',
-                'mimes:jpeg,png,jpg,gif',
-                'max:2048', // 2MB
+                // 'mimes:png,jpg',
             ],
             'brand_id' => [
+                'bail',
                 'required',
                 'uuid',
                 Rule::exists('brands', 'brand_id'),
             ],
             'category_id' => [
+                'bail',
                 'required',
                 'uuid',
                 Rule::exists('categories', 'category_id'),
             ],
             'gender' => [
                 'required',
-                'string',
-                'max:20',
+                'in:Men,Women,Kid',
             ],
             'size' => [
+                'bail',
                 'required',
-                'string',
-                'max:10',
+                'in:EU 35.5,EU 36,EU 36.5,EU 37,EU 37.5,EU 38,EU 38.5,EU 39,EU 39.5,EU 40,EU 40.5,EU 41,EU 41.5,EU 42,EU 42.5,EU 43',          
             ],
         ];
     }
@@ -75,8 +78,12 @@ class UpdateProductRequest extends FormRequest
     {
         return [
             'uuid' => 'The :attribute must be a valid UUID.',
+            'min' => 'The :attribute must be at least :min characters.',
+            'max' => 'The :attribute may not be greater than :max characters.',
             'exists' => 'The selected :attribute is invalid.',
-            'image' => 'The :attribute must be an image (jpeg, png, jpg, gif) with a maximum size of 2MB.',
+            'gender.in' => 'The :attribute must be one of Men, Women, or Kid.',
+            'mimes' => 'The :attribute must be an image png, jpg',
+            'image' => 'The :attribute must be an image png, jpg',
         ];
     }
 
