@@ -36,12 +36,9 @@
                             <p class="mb-0 font-semibold leading-tight text-xss">{{ $item->status }}</p>
                         </td>
                         <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                            <form class="inline-block mr-1" action="{{ route('orders.destroy', $item->order_id) }}" method="post">
-                                @csrf
-                                @method('DELETE')
-                                <button class="font-semibold leading-tight text-xss text-slate-400">Delete</button>
-                            </form>|
-                            <a href="{{ route('orders.show', $item->order_id) }}" class="font-semibold leading-tight text-xss text-slate-400"> Chi Tiết </a>
+                            <a href="{{ route('detail_orders.show', $item->order_id) }}" class="font-semibold leading-tight text-xss text-slate-400">
+                                <i class="fas fa-info-circle"></i> 
+                            </a> 
                         </td>
                     </tr>
                     @endforeach

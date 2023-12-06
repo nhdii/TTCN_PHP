@@ -23,45 +23,45 @@ class StoreOrderRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'customer_id' => [
-                'required',
-                'uuid',
-                Rule::exists('customers', 'customer_id'),
-            ],
-            'order_date' => [
-                'required',
-                'date',
-            ],
-            'delivery_date' => [
-                'required',
-                'date',
-                'after_or_equal:order_date',
-            ],
-            'status' => [
-                'required',
-                'string',
-                Rule::in(['pending', 'processing', 'completed']),
-            ],
+            // 'customer_id' => [
+            //     'required',
+            //     'uuid',
+            //     Rule::exists('customers', 'customer_id'),
+            // ],
+            // 'order_date' => [
+            //     'required',
+            //     'date',
+            // ],
+            // 'delivery_date' => [
+            //     'required',
+            //     'date',
+            //     'after_or_equal:order_date',
+            // ],
+            // 'status' => [
+            //     'required',
+            //     'string',
+            //     Rule::in(['pending', 'processing', 'completed']),
+            // ],
         ];
         
     }
-    public function messages(): array
-    {
-        return [
-            'uuid' => 'The :attribute must be a valid UUID.',
-            'exists' => 'The selected :attribute is invalid.',
-            'after_or_equal' => 'The :attribute must be a date after or equal to the order date.',
-            'in' => 'The selected :attribute is invalid.',
-        ];
-    }
+    // public function messages(): array
+    // {
+    //     return [
+    //         'uuid' => 'The :attribute must be a valid UUID.',
+    //         'exists' => 'The selected :attribute is invalid.',
+    //         'after_or_equal' => 'The :attribute must be a date after or equal to the order date.',
+    //         'in' => 'The selected :attribute is invalid.',
+    //     ];
+    // }
 
-    public function attributes(): array
-    {
-        return [
-            'customer_id' => 'Customer ID',
-            'order_date' => 'Order Date',
-            'delivery_date' => 'Delivery Date',
-            'status' => 'Status',
-        ];
-    }
+    // public function attributes(): array
+    // {
+    //     return [
+    //         'customer_id' => 'Customer ID',
+    //         'order_date' => 'Order Date',
+    //         'delivery_date' => 'Delivery Date',
+    //         'status' => 'Status',
+    //     ];
+    // }
 }

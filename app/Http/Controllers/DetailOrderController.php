@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\DetailOrder;
+use App\Models\Order;
 use App\Http\Requests\DetailOrder\StoreDetailOrderRequest;
 use App\Http\Requests\DetailOrder\UpdateDetailOrderRequest;
 
@@ -35,9 +36,15 @@ class DetailOrderController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(DetailOrder $detailOrder)
+    public function show($order_id)
     {
-        //
+        $orders = Order::where('order_id', $order_id)->first();
+        $detail_orders = DetailOrder::where('order_id', $order_id)->first();
+        if ($orders) {
+            return view('admin.orders.detail', ['order' => $orders, 'detail_order' => $detail_orders]);
+        } else {
+            return redirect()->route('detail_orders.index')->with('error', 'Order not exists');
+        }
     }
 
     /**

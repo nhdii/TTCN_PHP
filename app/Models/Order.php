@@ -21,4 +21,8 @@ class Order extends Model
         'delivery_date',
         'status'
     ];
+
+    public function getCustomerName(){
+        return $this->belongsTo(Customer::class, 'customer_id');
+    }
 }
