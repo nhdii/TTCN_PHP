@@ -1,6 +1,8 @@
 @extends('layouts.master')
 @section('content')
-    @include('layouts.notifySuccess')
+@include('layouts.notifySuccess')
+@include('layouts.notifyError')
+
     <div class="mb-2 flex">
         <a href="{{ route('products.create') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded cursor-pointer duration-300 ease-in-out">
             Create
@@ -33,7 +35,7 @@
                 <table class="items-center w-full mb-0 align-top border-gray-200 text-slate-500">
                     <thead class="align-bottom">
                     <tr>
-                        <th data-column="product_id" class="sortable-column cursor-pointer px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Product ID</th>
+                        <th data-column="product_id" class="sortable-column cursor-pointer px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">No</th>
                         <th data-column="product_name" class="sortable-column cursor-pointer px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Product Name</th>
                         <th data-column="default_price" class="sortable-column cursor-pointer px-6 py-3 pl-2 font-bold text-left uppercase align-middle bg-transparent border-b
                         border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Category</th>
@@ -50,10 +52,10 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($products as $pd)
+                    @foreach($products as $index => $pd)
                     <tr>
                         <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                            <p class="mb-0 ml-4 font-semibold leading-tight text-xss">{{ $pd->product_id }}</p>
+                            <p class="mb-0 ml-4 font-semibold leading-tight text-xss">{{ $index + 1 }}</p>
                         </td>
                         <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
                             <p class="mb-0 ml-4 font-semibold leading-tight text-xss">{{ $pd->product_name }}</p>
@@ -63,7 +65,7 @@
                             <p class="w-[100px] text-ellipsis overflow-hidden mb-0 font-semibold leading-tight text-xss">{{ $pd->getCategoryName->category_name }}</p>
                         </td>
                         <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                            <p class="mb-0 font-semibold leading-tight text-xss">{{ $pd->getBrandName->brand_name }}</p>
+                            <p class="mb-0 font-semibold leading-tight text-xss">{{ $pd->getBrand->brand_name }}</p>
                         </td>
                         <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
                             <p class="mb-0 font-semibold leading-tight text-xss">{{ $pd->size }}</p>

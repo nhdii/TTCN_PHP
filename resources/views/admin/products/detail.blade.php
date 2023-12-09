@@ -22,7 +22,7 @@
             <dl class="sm:divide-y sm:divide-gray-200">
                 <div class="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                     <dt class="text-xss font-medium text-gray-500">
-                        Avatar
+                        Image
                     </dt>
                     <dd class="mt-1 text-xss text-gray-900 sm:mt-0 sm:col-span-2">
                         <div class="relative">
@@ -51,7 +51,7 @@
                         Brand
                     </dt>
                     <dd class="mt-1 text-xss text-gray-900 sm:mt-0 sm:col-span-2">
-                        {{ $product->getBrandName->brand_name }}
+                        {{ $product->getBrand->brand_name }}
                     </dd>
                 </div>
                 <div class="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">

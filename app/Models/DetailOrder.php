@@ -22,7 +22,7 @@ class DetailOrder extends Model
         'notes',
     ];
 
-    public function getProductName(){
+    public function getProduct(){
         return $this->belongsTo(Product::class, 'product_id');
     }
 }

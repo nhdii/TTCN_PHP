@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use App\Traits\Uuid;
 use App\Models\Brand;
+use App\Models\Product;
 
 class Brand extends Model
 {
@@ -20,5 +21,8 @@ class Brand extends Model
         'brand_name',
     ];
 
-    
+    public function products()
+    {
+        return $this->hasMany(Product::class, 'brand_id');
+    }
 }

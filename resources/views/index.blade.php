@@ -11,7 +11,6 @@
   <title>Trang Chủ</title>
 
   <style>
-    /* Thêm CSS tùy chỉnh dưới đây */
     .image-wrapper {
       display: flex;
       justify-content: center;
@@ -19,8 +18,8 @@
     }
 
     .image-media-img {
-      width: 100%; /* Rộng 100% của phần tử chứa */
-      height: auto; /* Chiều cao tự động để giữ tỷ lệ khung hình */
+      width: 100%; 
+      height: auto; 
     }
 
     .featured-products {
@@ -30,231 +29,286 @@
     }
 
     .featured-products .bg-white {
-      width: 300px; /* Điều chỉnh kích thước sản phẩm theo ý muốn */
-      margin: 10px; /* Khoảng cách giữa các sản phẩm */
+      width: 300px; 
+      margin: 10px;
     }
+
+    /* css brand-logo */
+    .brand-logo img {
+      width: 100px; 
+      height: 100px;
+      opacity: 0.6; /* Đặt mức độ mờ cho các logo */
+      transition: opacity 0.3s ease-in-out; /* Áp dụng hiệu ứng chuyển động cho opacity */
+    }
+
+    .max-w-screen-xl {
+      margin: 0 auto; 
+    }
+
+    .brand-list {
+      display: flex;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      justify-content: center; 
+      align-items: center; 
+    }
+
+    .brand-logo {
+      margin-right: 10px;
+    }
+
+    .brand-logo:last-child {
+      margin-right: 0; 
+    }
+
+    .brand-logo:hover img {
+      opacity: 1; 
+    }
+
+    /* carousel */
+    #default-carousel {
+      z-index: 1; 
+    }
+
+    .bg-gray-100 {
+      position: relative;
+      z-index: 2; 
+    }
+
+    .bg-white {
+      position: relative;
+      z-index: 2; 
+    }
+
+    #brands {
+      position: relative;
+      z-index: 2;
+    }
+
+    .bg-white.p-6 {
+      position: relative;
+      z-index: 2; 
+    }
+
+    /*border */
+    .brand-item {
+      border: 1px solid #ddd; 
+      border-radius: 25px; 
+      overflow: hidden; 
+    }
+
+    .brand-link {
+      display: block;
+      height: 100%;
+    }
+
+    .brand-image img {
+      object-fit: auto;
+      height: 100%;
+      width: 100%;
+    }
+
   </style>
 
 </head>
 <body>
 @include('layouts.nav')
 
-<div class="bg-gray-100 p-6 text-center">
+
+<div id="default-carousel" class="relative w-full overflow-hidden" data-carousel="slide">
+  <!-- Carousel wrapper -->
+  <div class="relative h-96 md:h-64 lg:h-[400px] xl:h-[500px] 2xl:h-[600px]">
+    <!-- Item 1 -->
+    <div class="hidden duration-700 ease-in-out" data-carousel-item>
+        <img src="storage/images/carousel/carousel-1.jpg" class="absolute block w-full h-full object-cover" alt="...">
+    </div>
+    <!-- Item 2 -->
+    <div class="hidden duration-700 ease-in-out" data-carousel-item>
+        <img src="storage/images/carousel/carousel-2.jpg" class="absolute block w-full h-full object-cover" alt="...">
+    </div>
+    <!-- Item 3 -->
+    <div class="hidden duration-700 ease-in-out" data-carousel-item>
+        <img src="storage/images/carousel/carousel-3.jpg" class="absolute block w-full h-full object-cover" alt="...">
+    </div>
+    <!-- Item 4 -->
+    <div class="hidden duration-700 ease-in-out" data-carousel-item>
+        <img src="storage/images/carousel/carousel-5.jpg" class="absolute block w-full h-full object-cover" alt="...">
+    </div>
+    <!-- Item 5 -->
+    <div class="hidden duration-700 ease-in-out" data-carousel-item>
+        <img src="storage/images/carousel/carousel-6.jpg" class="absolute block w-full h-full object-cover" alt="...">
+    </div>
+  </div>
+  
+  <!-- Slider indicators -->
+  <div class="absolute z-30 flex -translate-x-1/2 bottom-5 left-1/2 space-x-3 rtl:space-x-reverse">
+      <button type="button" class="w-3 h-3 rounded-full" aria-current="true" aria-label="Slide 1" data-carousel-slide-to="0"></button>
+      <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 2" data-carousel-slide-to="1"></button>
+      <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 3" data-carousel-slide-to="2"></button>
+      <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 4" data-carousel-slide-to="3"></button>
+      <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 5" data-carousel-slide-to="4"></button>
+  </div>
+  <!-- Slider controls -->
+  <button type="button" class="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-prev>
+      <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+          <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4"/>
+          </svg>
+          <span class="sr-only">Previous</span>
+      </span>
+  </button>
+  <button type="button" class="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-next>
+      <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+          <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
+          </svg>
+          <span class="sr-only">Next</span>
+      </span>
+  </button>
+</div>
+
+
+<div class="bg-gray-100 p-6 text-center md:flex md:flex-col md:items-center">
   <h2 class="text-3xl font-bold text-gray-800">Move, Shop, Customize & Celebrate With Us.</h2>
-  <p class="text-lg text-gray-600">No matter what you feel like doing today, It’s better as a Member.</p>
+  <p class="text-lg text-gray-600">No matter what you feel like doing today, It's better as a Member.</p>
   {{-- <a href="#" class="bg-blue-500 text-white px-4 py-2 rounded-full inline-block mt-4">Shop Now</a> --}}
 </div>
 
-
-<figure class="relative image-card">
-  <div class="absolute inset-0 overflow-hidden">
-    <div class="absolute inset-0 opacity-50"></div>
-    <div class="absolute inset-0 flex items-center justify-center">
-      <div class="text-center text-white z-10">
-        <p class="text-lg font-semibold">Order Deadline</p>
-        <h2 class="text-6xl font-bold">MARK YOUR CALENDAR</h2>
-        <p class="text-base">Order online by 6 Dec, 11:59PM to get your gifts in time.</p>
-        <div class="mt-4">
+<div class="bg-cover h-[200px] md:h-[250px] lg:h-[300px] bg-[url('/storage/images/carousel/bg.jpg')] flex items-center justify-center">
+  <div class="md:ml-8 text-white text-center">
+      <p class="text-xl md:text-3xl lg:text-4xl font-bold">Order Deadline</p>
+      <h2 class="text-lg md:text-2xl lg:text-3xl">MARK YOUR CALENDAR</h2>
+      <p class="text-l md:text-l lg:text-xl">
+          Order online by 6 Dec, 11:59PM to get your gifts in time.
+      </p>
+      <div class="mt-4">
           <a href="#" class="bg-white text-black px-6 py-2 rounded-full inline-block">Shop</a>
+      </div>
+  </div>
+</div>
+
+
+<div id="brands" class="mt-6 p-12">
+  <div class="pl-6">
+      <h6 class="font-bold text-[20px]">BRANDS</h6>
+  </div>
+
+  <div class="flex flex-wrap gap-x-2 gap-y-8 mt-4 justify-center">
+    <div class="brand-item w-full sm:w-1/2 md:w-1/3 lg:w-1/4">
+      <a href="#" class="brand-link">
+        <div class="h-[350px] brand-image">
+          <img class="h-[350px] w-full" src="/storage/images/brands/jordan.jpg" alt="">
+        </div>
+        <div class="text-center">
+            <p class="font-bold text-lg mt-2">Jordan</p>
+        </div>
+      </a>
+    </div>
+
+    <div class="brand-item w-full sm:w-1/2 md:w-1/3 lg:w-1/4">
+      <a href="#" class="brand-link">
+        <div class="h-[350px] brand-image">
+          <img class="h-[350px] w-full" src="/storage/images/brands/nike-image.jpg" alt="">
+        </div>
+        <div class="text-center">
+            <p class="font-bold text-lg mt-2">Nike</p>
+        </div>
+      </a>
+    </div>
+
+    <div class="brand-item w-full sm:w-1/2 md:w-1/3 lg:w-1/4">
+      <a href="#" class="brand-link">
+        <div class="h-[350px] brand-image">
+          <img class="h-[350px] w-full" src="/storage/images/brands/new-balance-logo.jpg" alt="">
+        </div>
+        <div class="text-center">
+            <p class="font-bold text-lg mt-2">New Balance</p>
+        </div>
+      </a>
+    </div>
+
+    <div class="brand-item w-full sm:w-1/2 md:w-1/3 lg:w-1/4">
+      <a href="#" class="brand-link">
+        <div class="h-[350px] brand-image">
+          <img class="h-[350px] w-full" src="/storage/images/brands/adidas-logo.jpg" alt="">
+        </div>
+        <div class="text-center">
+            <p class="font-bold text-lg mt-2">Adidas</p>
+        </div>
+      </a>
+    </div>
+
+    <div class="brand-item w-full sm:w-1/2 md:w-1/3 lg:w-1/4">
+      <a href="#" class="brand-link">
+        <div class="h-[350px] brand-image">
+          <img class="h-[350px] w-full" src="/storage/images/brands/mlb-logo.jpg" alt="">
+        </div>
+        <div class="text-center">
+            <p class="font-bold text-lg mt-2">MLB</p>
+        </div>
+      </a>
+    </div>
+
+    <div class="brand-item w-full sm:w-1/2 md:w-1/3 lg:w-1/4">
+      <a href="#" class="brand-link">
+        <div class="h-[350px] brand-image">
+          <img class="h-[350px] w-full" src="/storage/images/brands/converse-logo.jpg" alt="">
+        </div>
+        <div class="text-center">
+            <p class="font-bold text-lg mt-2">Converse</p>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<div class="max-w-screen-xl mx-auto">
+  <div class="brand-container">
+    <ul class="brand-list">
+      <li class="brand-logo"><a href="#"><img src="storage/images/brands/logo-nike.jpg" alt="Logo 1"></a></li>
+      <li class="brand-logo"><a href="#"><img src="storage/images/brands/logo-adidas.jpg" alt="Logo 2"></a></li>
+      <li class="brand-logo"><a href="#"><img src="storage/images/brands/logo-jordan.jpg" alt="Logo 3"></a></li>
+      <li class="brand-logo"><a href="#"><img src="storage/images/brands/logo-mlb.jpg" alt="Logo 4"></a></li>
+      <li class="brand-logo"><a href="#"><img src="storage/images/brands/logo-converse.jpg" alt="Logo 5"></a></li>
+      <li class="brand-logo"><a href="#"><img src="storage/images/brands/logo-nb.jpg" alt="Logo 6"></a></li>
+    </ul>
+  </div>
+</div>
+
+<div id="product" class="mt-6 p-4 md:p-12">
+  <div class="pl-6 grid place-items-center">
+    <h6 class="font-bold text-[25px]">NIKE FOR YOU</h6>
+  </div>
+
+  <div class="flex flex-wrap gap-x-2 gap-y-8 mt-4 justify-center p-4 md:p-12">
+    @foreach($products as $product)
+      <div class="w-[250px]">
+        <figure class="shadow-md rounded-lg overflow-hidden hover:shadow-lg transition-transform transform hover:scale-105">
+          <a href="#">
+            <div class="h-[250px]">
+              <img class="h-[250px] w-full" src="/storage/images/product-images/{{$product->product_id}}/{{$product->image}}" alt="">
+            </div>
+          </a>
+        </figure>
+        <div class="text-left p-4">
+          <a href="#">
+            <p class="font-bold text-lg mt-2">{{ $product->product_name }}</p>
+          </a>
+          <p class="text-lg mt-2">{{ $product->gender }}</p>
+          <p class="text-lg mt-2">{{ number_format($product->default_price, 0, ',', '.') }} VNĐ</p>
         </div>
       </div>
-    </div>
+    @endforeach
   </div>
-  <div class="media-container">
-    <div class="image-wrapper">
-      <img src="https://static.nike.com/a/images/f_auto/dpr_1.3,cs_srgb/w_1473,c_limit/94a6fc3f-22e0-4afe-b2c2-4b1921a87689/nike-just-do-it.jpg" alt="Nike. Just Do It" class="image-media-img">
-    </div>
-  </div>
-</figure>
-
-
-
-<div class="bg-white p-6">
-  <div class="container mx-auto mt-8 p-4">
-    <h2 class="text-3xl font-bold mb-4">Featured</h2>
-
-    <div class="relative overflow-hidden">
-      <ul id="carousel" class="flex transition-transform duration-300 ease-in-out">
-        <!-- Product 1 -->
-        <li class="w-1/3 px-2">
-          <div class="bg-white w-96 shadow p-4 rounded-lg border border-gray-200">
-            <figure>
-              <a href="#">
-                <img src="/storage/images/featured-img/nike-air-force1-lv8.png" alt="Product 1" class="w-full h-96 object-cover mb-4">
-                <figcaption class="text-center font-semibold text-gray-800">Never Out of Style</figcaption>
-              </a>
-            </figure>
-          </div>
-        </li>
-
-        <!-- Product 2 -->
-        <li class="w-1/3 px-2">
-          <div class="bg-white w-96 shadow p-4 rounded-lg border border-gray-200">
-            <figure>
-              <a href="#">
-                <img src="/storage/images/featured-img/nike-p6000-premium.png" alt="Product 2" class="w-full h-96 object-cover mb-4">
-                <figcaption class="text-center font-semibold text-gray-800">Retro Edit</figcaption>
-              </a>
-            </figure>
-          </div>
-        </li>
-
-        <!-- Product 3 -->
-        <li class="w-1/3 px-2">
-          <div class="bg-white w-96 shadow p-4 rounded-lg border border-gray-200">
-            <figure>
-              <a href="#">
-                <img src="/storage/images/featured-img/nike-air-max-90.png" alt="Product 3" class="w-full h-96 object-cover mb-4">
-                <figcaption class="text-center font-semibold text-gray-800">Trending Kicks</figcaption>
-              </a>
-            </figure>
-          </div>
-        </li>
-
-        <!-- Sản phẩm 4 -->
-        <li class="w-1/3 px-2">
-          <div class="bg-white w-96 shadow p-4 rounded-lg border border-gray-200">
-            <figure>
-              <a href="/">
-                <img src="/storage/images/featured-img/air-jordan-1-low.png" alt="Product 4" class="w-full h-96 object-cover mb-4">
-                <figcaption class="text-center font-semibold text-gray-800">Accessories</figcaption>
-              </a>
-            </figure>
-          </div>
-        </li>
-      </ul>
-
-      <!-- Navigation buttons -->
-      <button class="absolute left-0 top-1/2 transform -translate-y-1/2 px-5 py-3 bg-gray-400 text-white rounded-full focus:outline-none" onclick="prevSlide()">&#8249;</button>
-      <button class="absolute right-0 top-1/2 transform -translate-y-1/2 px-5 py-3 bg-gray-400 text-white rounded-full focus:outline-none" onclick="nextSlide()">&#8250;</button>
-    </div>
+  <div class="mt-6 px-2 flex justify-center items-center">
+    {!! $products->links('layouts.pagination') !!}
   </div>
 </div>
 
-<!-- Thêm sau khối Featured Products -->
-<div class="bg-white p-6">
-  <div class="container mx-auto mt-8 p-4">
-    <h2 class="text-3xl font-bold mb-4">Popular Right Now</h2>
 
-    <div class="relative overflow-hidden">
-      <ul id="popularCarousel" class="flex transition-transform duration-300 ease-in-out">
-        <!-- Popular Product 1 -->
-        <li class="w-1/3 px-2">
-          <div class="bg-white w-96 shadow p-4 rounded-lg border border-gray-200">
-            <figure>
-              <a href="#">
-                <img src="/storage/images/popular-img/product1.png" alt="Popular Product 1" class="w-full h-96 object-cover mb-4">
-                <figcaption class="text-center font-semibold text-gray-800">Popular Product 1</figcaption>
-              </a>
-            </figure>
-          </div>
-        </li>
-
-        <!-- Popular Product 2 -->
-        <li class="w-1/3 px-2">
-          <div class="bg-white w-96 shadow p-4 rounded-lg border border-gray-200">
-            <figure>
-              <a href="#">
-                <img src="/storage/images/popular-img/product2.png" alt="Popular Product 2" class="w-full h-96 object-cover mb-4">
-                <figcaption class="text-center font-semibold text-gray-800">Popular Product 2</figcaption>
-              </a>
-            </figure>
-          </div>
-        </li>
-
-        <!-- Popular Product 3 -->
-        <li class="w-1/3 px-2">
-          <div class="bg-white w-96 shadow p-4 rounded-lg border border-gray-200">
-            <figure>
-              <a href="#">
-                <img src="/storage/images/popular-img/product3.png" alt="Popular Product 3" class="w-full h-96 object-cover mb-4">
-                <figcaption class="text-center font-semibold text-gray-800">Popular Product 3</figcaption>
-              </a>
-            </figure>
-          </div>
-        </li>
-
-        <!-- Popular Product 4 -->
-        <li class="w-1/3 px-2">
-          <div class="bg-white w-96 shadow p-4 rounded-lg border border-gray-200">
-            <figure>
-              <a href="#">
-                <img src="/storage/images/popular-img/product4.png" alt="Popular Product 4" class="w-full h-96 object-cover mb-4">
-                <figcaption class="text-center font-semibold text-gray-800">Popular Product 4</figcaption>
-              </a>
-            </figure>
-          </div>
-        </li>
-      </ul>
-
-      <!-- Navigation buttons -->
-      <button class="absolute left-0 top-1/2 transform -translate-y-1/2 px-5 py-3 bg-gray-400 text-white rounded-full focus:outline-none" onclick="prevPopularSlide()">&#8249;</button>
-      <button class="absolute right-0 top-1/2 transform -translate-y-1/2 px-5 py-3 bg-gray-400 text-white rounded-full focus:outline-none" onclick="nextPopularSlide()">&#8250;</button>
-    </div>
-  </div>
-</div>
 
 @include('layouts.footer')
-
-<script>
-  let currentSlide = 0;
-  const totalSlides = document.querySelectorAll('#carousel li').length;
-
-  function nextSlide() {
-    currentSlide = (currentSlide + 1) % totalSlides;
-    updateSlideVisibility();
-
-    // Kiểm tra xem đã đến slide cuối cùng chưa
-    if (currentSlide === 0) {
-      // Nếu đã đến slide cuối cùng, quay lại slide đầu tiên
-      setTimeout(() => {
-        currentSlide = 0;
-        updateSlideVisibility();
-      }, 300); // Thời gian chờ để hoạt động transition
-    }
-  }
-
-  function prevSlide() {
-    currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
-    updateSlideVisibility();
-  }
-
-  function updateSlideVisibility() {
-    const carousel = document.getElementById('carousel');
-    const slideWidth = document.querySelector('#carousel li').offsetWidth;
-    carousel.style.transform = `translateX(-${currentSlide * slideWidth}px)`;
-  }
-</script>
-
-<script>
-  let currentPopularSlide = 0;
-  const totalPopularSlides = document.querySelectorAll('#popularCarousel li').length;
-
-  function nextPopularSlide() {
-    currentPopularSlide = (currentPopularSlide + 1) % totalPopularSlides;
-    updatePopularSlideVisibility();
-
-    // Kiểm tra xem đã đến slide cuối cùng chưa
-    if (currentPopularSlide === 0) {
-      // Nếu đã đến slide cuối cùng, quay lại slide đầu tiên
-      setTimeout(() => {
-        currentPopularSlide = 0;
-        updatePopularSlideVisibility();
-      }, 300); // Thời gian chờ để hoạt động transition
-    }
-  }
-
-  function prevPopularSlide() {
-    currentPopularSlide = (currentPopularSlide - 1 + totalPopularSlides) % totalPopularSlides;
-    updatePopularSlideVisibility();
-  }
-
-  function updatePopularSlideVisibility() {
-    const popularCarousel = document.getElementById('popularCarousel');
-    const slideWidth = document.querySelector('#popularCarousel li').offsetWidth;
-    popularCarousel.style.transform = `translateX(-${currentPopularSlide * slideWidth}px)`;
-  }
-</script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/flowbite.min.js"></script>
 </body>

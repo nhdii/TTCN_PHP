@@ -21,6 +21,14 @@
         <div class="border-t border-gray-200 px-4 py-5 sm:p-0">
             <dl class="sm:divide-y sm:divide-gray-200">
                 <div class="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                    <dt class="text-xss font-medium text-gray-500">
+                        Image
+                    </dt>
+                    <dd class="mt-1 text-xss text-gray-900 sm:mt-0 sm:col-span-2">
+                        <div class="relative">
+                            <img class="w-[100px] bg-contain" src="/storage/images/product-images/{{ $detail_order->getProduct->product_id }}/{{ $detail_order->getProduct->image }}" alt="profile">
+                        </div>
+                    </dd>
                     <dt class="text-sm font-medium text-gray-500">
                         Order ID
                     </dt>
@@ -31,7 +39,7 @@
                         Product ID
                     </dt>
                     <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                        {{$detail_order->getProductName->product_name }}
+                        {{$detail_order->getProduct->product_name }}
                     </dd>
                     <dt class="text-sm font-medium text-gray-500">
                         Customer ID

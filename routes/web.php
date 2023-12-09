@@ -34,6 +34,4 @@ Route::prefix('admin')->group(function () {
 
 });
 
-Route::get('/', function () {
-    return view('index');
-});
+Route::get('/', [ProductController::class, 'homeIndex'])->name('index');

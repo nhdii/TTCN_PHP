@@ -53,7 +53,7 @@ class Product extends Model
         });
     }
 
-    public function getBrandName(){
+    public function getBrand(){
         return $this->belongsTo(Brand::class, 'brand_id');
     }
 

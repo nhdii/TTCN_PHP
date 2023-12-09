@@ -53,6 +53,19 @@ class ProductController extends Controller
         ]);
     }
 
+    public function homeIndex() {
+        $brandName = 'Nike';
+
+        $data = Product::query()
+        ->whereHas('getBrand', function ($query) use ($brandName) {
+            $query->where('brand_name', $brandName);
+        })->paginate(9);
+        
+        return view('index', [
+            'products' => $data,
+        ]);
+    }
+
     public function create()
     {
         $brands = Brand::all(); 
@@ -90,6 +103,22 @@ class ProductController extends Controller
     {
         return view('admin.products.detail', compact('product'));
     }
+
+    // //Display Detail Product in homePage
+    // public function showHome($product_id)
+    // {
+    //     $product = DB::table('products')
+    //         ->join('ves', 'products.product_id', '=', 'ves.product_id')
+    //         ->where('products.product_id', $product_id)
+    //         ->get();
+    //     if ($product) {
+    //         return view('show', [
+    //             'dich_vu' => $product,
+    //         ]);
+    //     } else {
+    //         abort(404);
+    //     }
+    // }
 
     /**
      * Show the form for editing the specified resource.
