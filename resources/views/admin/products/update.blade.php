@@ -54,7 +54,7 @@
                         </div>
                     </div>
 
-                    <div class="w-full xl:w-1/2">
+                    {{-- <div class="w-full xl:w-1/2">
                         <label class="mb-2.5 block text-black font-bold">
                             Size
                         </label>
@@ -75,7 +75,7 @@
                         @if($errors->has('size'))
                             <span class="text-red-500">{{ $errors->first('size') }}</span>
                         @endif
-                    </div>
+                    </div> --}}
 
                     <div class="mb-5">
                         <label class="mb-2.5 block text-black font-bold">

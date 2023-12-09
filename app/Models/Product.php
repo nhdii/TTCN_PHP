@@ -28,7 +28,6 @@ class Product extends Model
         'brand_id',
         'category_id',
         'gender',
-        'size'
     ];
 
 

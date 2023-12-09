@@ -21,7 +21,6 @@ return new class extends Migration
             $table->uuid('brand_id');
             $table->uuid('category_id');
             $table->string('gender', 20);
-            $table->string('size', 10);
             $table->foreign('brand_id')->references('brand_id')->on('brands');
             $table->foreign('category_id')->references('category_id')->on('categories');
             $table->timestamps();

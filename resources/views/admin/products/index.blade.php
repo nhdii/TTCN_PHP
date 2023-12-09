@@ -13,7 +13,7 @@
                 <select name="search_by" id="search_by" class="p-2 border rounded">
                     <option value="product_name" @if($column == 'product_name') selected @endif>Product Name</option>
                     <option value="gender" @if($column == 'gender') selected @endif>Gender</option>
-                    <option value="size" @if($column == 'size') selected @endif>Size</option>
+                    {{-- <option value="size" @if($column == 'size') selected @endif>Size</option> --}}
                     <option value="default_price" @if($column == 'default_price') selected @endif>Price</option>
                 </select>
                 <input type="text" name="keywords" value="{{ $keywords }}" placeholder="Nhập từ khóa" class="p-2 border rounded">
@@ -41,8 +41,8 @@
                         border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Category</th>
                         <th data-column="brand_id" class="sortable-column cursor-pointer px-6 py-3 pl-2 font-bold text-left uppercase align-middle bg-transparent border-b
                         border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Brand</th>
-                        <th data-column="brand_id" class="sortable-column cursor-pointer px-6 py-3 pl-2 font-bold text-left uppercase align-middle bg-transparent border-b
-                        border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Size</th>
+                        {{-- <th data-column="brand_id" class="sortable-column cursor-pointer px-6 py-3 pl-2 font-bold text-left uppercase align-middle bg-transparent border-b
+                        border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Size</th> --}}
                         <th data-column="brand_id" class="sortable-column cursor-pointer px-6 py-3 pl-2 font-bold text-left uppercase align-middle bg-transparent border-b
                         border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Gender</th>
                         <th data-column="category_id" class="sortable-column cursor-pointer px-6 py-3 pl-2 font-bold text-left uppercase align-middle bg-transparent border-b
@@ -67,9 +67,9 @@
                         <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
                             <p class="mb-0 font-semibold leading-tight text-xss">{{ $pd->getBrand->brand_name }}</p>
                         </td>
-                        <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
+                        {{-- <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
                             <p class="mb-0 font-semibold leading-tight text-xss">{{ $pd->size }}</p>
-                        </td>
+                        </td> --}}
                         <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
                             <p class="mb-0 font-semibold leading-tight text-xss">{{ $pd->gender }}</p>
                         </td>

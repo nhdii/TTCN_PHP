@@ -65,11 +65,7 @@ class StoreProductRequest extends FormRequest
                 'required',
                 'in:Men,Women,Kid',
             ],
-            'size' => [
-                'bail',
-                'required',
-                'in:EU 35.5,EU 36,EU 36.5,EU 37,EU 37.5,EU 38,EU 38.5,EU 39,EU 39.5,EU 40,EU 40.5,EU 41,EU 41.5,EU 42,EU 42.5,EU 43',
-            ],
+
         ];
     }
 
@@ -97,7 +93,6 @@ class StoreProductRequest extends FormRequest
             'brand_id' => 'Brand ID',
             'category_id' => 'Category ID',
             'gender' => 'Gender',
-            'size' => 'Size',
         ];
     }
 }

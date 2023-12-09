@@ -23,7 +23,7 @@ class ProductController extends Controller
         $searchColumns = [
             'product_name' => 'like',
             'gender' => 'like',
-            'size' => 'like',
+            // 'size' => 'like',
         ];
         $column = $request->get('search_by');
         $keywords = $request->get('keywords');
@@ -70,12 +70,7 @@ class ProductController extends Controller
     {
         $brands = Brand::all(); 
         $categories = Category::all(); 
-
-        //list size product
-        $sizes = ['EU 35.5', 'EU 36', 'EU 36.5', 'EU 37', 'EU 37.5', 'EU 38', 'EU 38.5', 
-        'EU 39', 'EU 39.5', 'EU 40', 'EU 40.5', 'EU 41', 'EU 41.5', 'EU 42', 'EU 42.5', 'EU 43'];
-
-        return view('admin.products.create', compact('brands', 'categories', 'sizes'));
+        return view('admin.products.create', compact('brands', 'categories'));
     }
 
     /**
@@ -127,12 +122,8 @@ class ProductController extends Controller
     {
         $brands = Brand::all(); 
         $categories = Category::all(); 
-        
-        //list size product
-        $sizes = ['EU 35.5', 'EU 36', 'EU 36.5', 'EU 37', 'EU 37.5', 'EU 38', 'EU 38.5', 
-        'EU 39', 'EU 39.5', 'EU 40', 'EU 40.5', 'EU 41', 'EU 41.5', 'EU 42', 'EU 42.5', 'EU 43'];
-
-        return view('admin.products.update', compact('product', 'sizes', 'brands', 'categories'));
+    
+        return view('admin.products.update', compact('product', 'brands', 'categories'));
     }
 
     /**
