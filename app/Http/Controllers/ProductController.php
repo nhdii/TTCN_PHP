@@ -55,16 +55,31 @@ class ProductController extends Controller
 
     public function homeIndex() {
         $brandName = 'Nike';
-
+    
         $data = Product::query()
-        ->whereHas('getBrand', function ($query) use ($brandName) {
-            $query->where('brand_name', $brandName);
-        })->paginate(9);
-        
+            ->whereHas('getBrand', function ($query) use ($brandName) {
+                $query->where('brand_name', $brandName);
+            })->paginate(8); // Chia thành các trang nếu cần
+            
         return view('index', [
             'products' => $data,
         ]);
     }
+
+    //Function hiển thị tất cả các product trong trang Feature
+    public function showFeature()
+    {
+        $brands = Brand::all();
+        $categories = Category::all();
+        $data = Product::query()->paginate(8); // Lấy tất cả sản phẩm
+
+        return view('home.feature', [
+            'products' => $data,
+            'brands' => $brands,
+            'categories' => $categories,
+        ]);
+    }
+    
 
     public function create()
     {
@@ -99,21 +114,19 @@ class ProductController extends Controller
         return view('admin.products.detail', compact('product'));
     }
 
-    // //Display Detail Product in homePage
-    // public function showHome($product_id)
-    // {
-    //     $product = DB::table('products')
-    //         ->join('ves', 'products.product_id', '=', 'ves.product_id')
-    //         ->where('products.product_id', $product_id)
-    //         ->get();
-    //     if ($product) {
-    //         return view('show', [
-    //             'dich_vu' => $product,
-    //         ]);
-    //     } else {
-    //         abort(404);
-    //     }
-    // }
+    // Display Detail Product in homePage
+    public function showHome($product_id)
+    {
+        $product = Product::with('getBrand', 'getCategory', 'getProductAttributes')->find($product_id);
+
+        // Load related attributes (sizes)
+        $sizes = $product->getProductAttributes;
+
+        return view('home.show', [
+            'product' => $product,
+            'sizes' => $sizes,
+        ]);
+    }
 
     /**
      * Show the form for editing the specified resource.

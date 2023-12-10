@@ -56,8 +56,14 @@ class Product extends Model
         return $this->belongsTo(Brand::class, 'brand_id');
     }
 
-    public function getCategoryName(){
+    public function getCategory(){
         return $this->belongsTo(Category::class, 'category_id');
     }
+
+    public function getProductAttributes()
+    {
+        return $this->hasMany(ProductAttribute::class, 'product_id');
+    }
+
 
 }

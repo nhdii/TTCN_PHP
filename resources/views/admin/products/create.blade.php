@@ -44,7 +44,9 @@
                             <select name="gender" class="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent py-3 px-5 outline-none transition focus:border-primary active:border-primary">
                                 <option value="Men" @if(old('gender') == 'Men') selected @endif>Men</option>
                                 <option value="Women" @if(old('gender') == 'Women') selected @endif>Women</option>
-                                <option value="Kid" @if(old('gender') == 'Kid') selected @endif>Kid</option>
+                                <option value="Kid Boy" @if(old('gender') == 'Kid Boy') selected @endif>Kid Boy</option>
+                                <option value="Kid Girl" @if(old('gender') == 'Kid Girl') selected @endif>Kid Girl</option>
+
                             </select>
                             <span class="absolute top-1/2 right-4 z-30 -translate-y-1/2">
                                 <svg class="fill-current" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

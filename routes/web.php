@@ -23,7 +23,7 @@ use App\Http\Controllers\ProductAttributeController;
 Route::prefix('admin')->group(function () {
     Route::get('/', function () {
         return view('admin.index');
-    })->name('index');
+    })->name('adminIndex');
 
     Route::resource('brands', BrandController::class);
     Route::resource('categories', CategoryController::class);
@@ -36,3 +36,6 @@ Route::prefix('admin')->group(function () {
 });
 
 Route::get('/', [ProductController::class, 'homeIndex'])->name('index');
+Route::get('/show/{product_id}', [ProductController::class, 'showHome'])->name('show');
+Route::get('/feature', [ProductController::class, 'showFeature'])->name('feature');
+

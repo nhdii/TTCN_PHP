@@ -63,7 +63,7 @@ class StoreProductRequest extends FormRequest
             ],
             'gender' => [
                 'required',
-                'in:Men,Women,Kid',
+                'in:Men,Women,Kid Boy, Kid Girl',
             ],
 
         ];
@@ -77,7 +77,7 @@ class StoreProductRequest extends FormRequest
             'max' => 'The :attribute may not be greater than :max characters.',
             'exists' => 'The selected :attribute is invalid.',
             'mimes' => 'The :attribute must be an image png, jpg',
-            'gender.in' => 'The :attribute must be one of Men, Women, or Kid.',
+            'gender.in' => 'The :attribute must be one of Men, Women, Kid Boy, Kid Girl',
             'file' => ':attribute must be one of file.',
         ];
     }

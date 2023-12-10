@@ -62,7 +62,7 @@
                         </td>
 
                         <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                            <p class="w-[100px] text-ellipsis overflow-hidden mb-0 font-semibold leading-tight text-xss">{{ $pd->getCategoryName->category_name }}</p>
+                            <p class="w-[100px] text-ellipsis overflow-hidden mb-0 font-semibold leading-tight text-xss">{{ $pd->getCategory->category_name }}</p>
                         </td>
                         <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
                             <p class="mb-0 font-semibold leading-tight text-xss">{{ $pd->getBrand->brand_name }}</p>

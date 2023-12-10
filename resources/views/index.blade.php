@@ -285,14 +285,14 @@
     @foreach($products as $product)
       <div class="w-[250px]">
         <figure class="shadow-md rounded-lg overflow-hidden hover:shadow-lg transition-transform transform hover:scale-105">
-          <a href="#">
+          <a href="{{ route('show', $product->product_id)}}">
             <div class="h-[250px]">
               <img class="h-[250px] w-full" src="/storage/images/product-images/{{$product->product_id}}/{{$product->image}}" alt="">
             </div>
           </a>
         </figure>
         <div class="text-left p-4">
-          <a href="#">
+          <a href="{{ route('show', $product->product_id)}}">
             <p class="font-bold text-lg mt-2">{{ $product->product_name }}</p>
           </a>
           <p class="text-lg mt-2">{{ $product->gender }}</p>
@@ -301,14 +301,25 @@
       </div>
     @endforeach
   </div>
-  <div class="mt-6 px-2 flex justify-center items-center">
+  {{-- <div class="mt-6 px-2 flex justify-center items-center">
     {!! $products->links('layouts.pagination') !!}
-  </div>
+  </div> --}}
 </div>
 
 
 
 @include('layouts.footer')
+
+{{-- <script>
+  document.addEventListener('DOMContentLoaded', function() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const pageParam = urlParams.get('page');
+      if (pageParam && parseInt(pageParam) >= 1) {
+          window.location.hash = 'product';
+          document.getElementById('product').scrollIntoView();
+      }
+  });
+</script> --}}
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/flowbite.min.js"></script>
 </body>

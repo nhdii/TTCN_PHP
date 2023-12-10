@@ -64,7 +64,7 @@ class UpdateProductRequest extends FormRequest
             ],
             'gender' => [
                 'required',
-                'in:Men,Women,Kid',
+                'in:Men,Women,Kid Boy, Kid Girl',
             ],
         ];
     }
@@ -76,7 +76,7 @@ class UpdateProductRequest extends FormRequest
             'min' => 'The :attribute must be at least :min characters.',
             'max' => 'The :attribute may not be greater than :max characters.',
             'exists' => 'The selected :attribute is invalid.',
-            'gender.in' => 'The :attribute must be one of Men, Women, or Kid.',
+            'gender.in' => 'The :attribute must be one of Men, Women, Kid Boy, Kid Girl',
             'mimes' => 'The :attribute must be an image png, jpg',
             'image' => 'The :attribute must be an image png, jpg',
         ];
