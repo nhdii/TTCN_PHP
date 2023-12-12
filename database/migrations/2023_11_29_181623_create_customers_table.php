@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('customers', function (Blueprint $table) {
             $table->uuid('customer_id')->primary();
             $table->string('fullName', 255);
-            $table->string('phone',20);
-            $table->text('address', 255);
+            $table->string('phone',20)->nullable();
+            $table->text('address', 255)->nullable();
             $table->date('birthDay')->nullable();
-            $table->string('gender', 10);
+            $table->string('gender', 10)->nullable();
             $table->string('avatar', 255)->default('defaultavt.png');
             $table->string('email', 255)->unique();
             $table->string('password', 255);

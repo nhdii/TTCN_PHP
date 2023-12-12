@@ -8,7 +8,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\DetailOrderController;
 use App\Http\Controllers\ProductAttributeController;
-
+use App\Http\Controllers\AuthManagerController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,7 +20,7 @@ use App\Http\Controllers\ProductAttributeController;
 |
 */
 
-Route::prefix('admin')->group(function () {
+Route::prefix('admin')->middleware('admin')->group(function () {
     Route::get('/', function () {
         return view('admin.index');
     })->name('adminIndex');
@@ -39,3 +39,11 @@ Route::get('/', [ProductController::class, 'homeIndex'])->name('index');
 Route::get('/show/{product_id}', [ProductController::class, 'showHome'])->name('show');
 Route::get('/feature', [ProductController::class, 'showFeature'])->name('feature');
 
+//Check login -> true: vào, false: thoát về home
+Route::middleware('checkLogin')->group(function(){
+    Route::get('logout', [AuthManagerController::class, 'logout'])->name('logout');
+});
+Route::get('register', [AuthManagerController::class, 'showRegistration'])->name('show-registration');
+Route::post('register', [AuthManagerController::class, 'register'])->name('register');
+Route::get('login', [AuthManagerController::class, 'showLogin'])->name('show-login');
+Route::post('login', [AuthManagerController::class, 'login'])->name('login');
