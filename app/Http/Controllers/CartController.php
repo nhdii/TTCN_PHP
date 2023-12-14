@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Invoice;
+use Illuminate\Support\Facades\Redirect;
 use Mail;
 
 class CartController extends Controller
@@ -26,60 +27,51 @@ class CartController extends Controller
 
     public function addToCart(Request $request)
     {
-        // Lấy dữ liệu từ request
+        // Lấy thông tin sản phẩm từ request
         $product_id = $request->input('product_id');
-        $attribute_id = $request->input('attribute_id');
-        $size = $request->input('size');
+        $selectedSize = $request->input('selectedSize', ''); // Lấy giá trị size từ input ẩn
 
-        // Kiểm tra xem sản phẩm và thuộc tính có tồn tại không
+        // Kiểm tra xem sản phẩm có tồn tại không
         $product = Product::find($product_id);
-        $attribute = ProductAttribute::where('product_id', $product_id)
-            ->where('attribute_id', $attribute_id)
-            ->first();
 
-        if (!$product || !$attribute) {
-            abort(404);
+        if (!$product) {
+            return abort(404);
         }
 
-        // Kiểm tra giỏ hàng đã được tạo chưa
-        if (!Session::has('cart')) {
+        $product_id = $product->product_id;
+        if(!Session::has('cart')) {
             Session::put('cart', []);
         }
-
-        // Lấy giỏ hàng từ Session
         $cart = Session::get('cart');
 
-        // Kiểm tra sản phẩm đã có trong giỏ hàng chưa
         if (isset($cart[$product_id])) {
-            // Nếu đã có, tăng số lượng lên 1
             $cart[$product_id]['quantity']++;
+            if ($cart[$product_id]['quantity'] < 1) {
+                $cart[$product_id]['quantity'] = 1;
+            }
         } else {
-            // Nếu chưa có, thêm sản phẩm mới vào giỏ hàng
             $cart[$product_id] = [
                 'product_id' => $product_id,
                 'name' => $product->product_name,
+                'image' => $product->image,
+                'gender' => $product->gender,
                 'price' => $product->default_price,
-                'size' => $size,
-                'quantity' => 1,
-            ];
+                'size' => $selectedSize,
+                'quantity' => 1,       
+            ];     
         }
 
-        // Lưu giỏ hàng mới vào Session
+        // Save cart information to the session
         Session::put('cart', $cart);
 
-        // Trả về kết quả cho Ajax
-        return response()->json([
-            'message' => 'Sản phẩm đã được thêm vào giỏ hàng',
-            'cartCount' => count($cart),
-        ]);
+        return redirect()->route('cartIndex');
     }
 
 
-
-
-    public function increaseQuantity(Request $request, $product_id)
+    public function increaseQuantity(Request $request)
     {
-        $cart = Session::get('cart', []);
+        $cart = Session::get('cart');
+        $product_id = $request->input('product_id');
 
         if (isset($cart[$product_id])) {
             $cart[$product_id]['quantity']++;
@@ -87,12 +79,13 @@ class CartController extends Controller
 
         Session::put('cart', $cart);
 
-        return redirect()->route('cart.index');
+        return redirect()->route('cartIndex');
     }
 
-    public function decreaseQuantity(Request $request, $product_id)
+    public function decreaseQuantity(Request $request)
     {
-        $cart = Session::get('cart', []);
+        $cart = Session::get('cart');
+        $product_id = $request->input('product_id');
 
         if (isset($cart[$product_id]) && $cart[$product_id]['quantity'] > 1) {
             $cart[$product_id]['quantity']--;
@@ -100,12 +93,13 @@ class CartController extends Controller
 
         Session::put('cart', $cart);
 
-        return redirect()->route('cart.index');
+        return redirect()->route('cartIndex');
     }
 
-    public function removeItemFromCart(Request $request, $product_id)
+    public function removeItemFromCart(Request $request)
     {
-        $cart = Session::get('cart', []);
+        $cart = Session::get('cart');
+        $product_id = $request->input('product_id');
 
         if (isset($cart[$product_id])) {
             unset($cart[$product_id]);
@@ -116,7 +110,7 @@ class CartController extends Controller
             session()->forget('cart');
         }
 
-        return redirect()->route('cart.index');
+        return redirect()->route('cartIndex');
     }
     
 }
