@@ -31,26 +31,33 @@ class CartController extends Controller
         $product_id = $request->input('product_id');
         $selectedSize = $request->input('selectedSize', ''); // Lấy giá trị size từ input ẩn
 
+        //kiểm tra đã chọn size chưa
+        if (empty($selectedSize)) {
+            return redirect()->route('show', $product_id)->with('error', 'Please select a size before adding to cart.');
+        }
+
         // Kiểm tra xem sản phẩm có tồn tại không
         $product = Product::find($product_id);
 
         if (!$product) {
             return abort(404);
         }
-
-        $product_id = $product->product_id;
+        
+        // Kiểm tra xem giỏ hàng đã tồn tại chưa, nếu chưa thì tạo mới
         if(!Session::has('cart')) {
             Session::put('cart', []);
         }
-        $cart = Session::get('cart');
+        $cart = Session::get('cart', []);
 
-        if (isset($cart[$product_id])) {
-            $cart[$product_id]['quantity']++;
-            if ($cart[$product_id]['quantity'] < 1) {
-                $cart[$product_id]['quantity'] = 1;
+        $cartKey = $product_id . '-' . $selectedSize;
+
+        if (isset($cart[$cartKey])) {
+            $cart[$cartKey]['quantity']++;
+            if ($cart[$cartKey]['quantity'] < 1) {
+                $cart[$cartKey]['quantity'] = 1;
             }
         } else {
-            $cart[$product_id] = [
+            $cart[$cartKey] = [
                 'product_id' => $product_id,
                 'name' => $product->product_name,
                 'image' => $product->image,
@@ -61,10 +68,10 @@ class CartController extends Controller
             ];     
         }
 
-        // Save cart information to the session
+        //Lưu thông tin giỏ hàng vào session
         Session::put('cart', $cart);
 
-        return redirect()->route('cartIndex');
+        return redirect()->route('show', $product_id)->with('success', 'Add to cart success');
     }
 
 
@@ -110,7 +117,7 @@ class CartController extends Controller
             session()->forget('cart');
         }
 
-        return redirect()->route('cartIndex');
+        return redirect()->route('cartIndex')->with('success', 'Remove products from cart successfully');
     }
     
 }

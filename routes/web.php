@@ -36,11 +36,13 @@ Route::prefix('admin')->middleware('admin')->group(function () {
 
 });
 
+//Route của trang Home
 Route::get('/', [ProductController::class, 'homeIndex'])->name('index');
 Route::get('/show/{product_id}', [ProductController::class, 'showHome'])->name('show');
 Route::get('/feature', [ProductController::class, 'showFeature'])->name('feature');
+// Route::get('/byBrand/{brand_id}', [ProductController::class, 'showByBrand'])->name('byBrand');
 
-//Check login -> true: vào, false: thoát về home
+//Kiểm tra login nếu true: vào, false: thoát về home
 Route::middleware('checkLogin')->group(function(){
     Route::get('logout', [AuthManagerController::class, 'logout'])->name('logout');
 
@@ -53,6 +55,8 @@ Route::middleware('checkLogin')->group(function(){
     Route::get('/cart/callback', [CartController::class, 'handlePaymentCallback'])->name('handlePaymentCallback');
 
 });
+
+//Route đăng ký đăng nhập
 Route::get('register', [AuthManagerController::class, 'showRegistration'])->name('show-registration');
 Route::post('register', [AuthManagerController::class, 'register'])->name('register');
 Route::get('login', [AuthManagerController::class, 'showLogin'])->name('show-login');

@@ -79,7 +79,24 @@ class ProductController extends Controller
             'categories' => $categories,
         ]);
     }
-    
+
+    // public function showByBrand($brand_id)
+    // {
+    //     $brand = Brand::find($brand_id);
+
+    //     $data = Product::query();
+    //     if (!$brand) {
+    //         abort(404); // Or redirect to a 404 page if the brand doesn't exist
+    //     }
+
+    //     $products = $brand->getProducts;
+
+    //     return view('home.by_brand', [
+    //         'brand' => $brand,  // Make sure to pass the $brand variable to the view
+    //         'products' => $products,
+    //     ]);
+    // }
+
 
     public function create()
     {

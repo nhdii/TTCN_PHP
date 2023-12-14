@@ -12,6 +12,8 @@
 </head>
 <body>
 @include('layouts.nav')
+@include('layouts.notifyError')
+@include('layouts.notifySuccess')
 <section class="overflow-hidden bg-white py-11 font-poppins">
     <div class="max-w-6xl px-4 py-4 mx-auto lg:py-8 md:px-6">
         <div class="flex flex-wrap -mx-4">
