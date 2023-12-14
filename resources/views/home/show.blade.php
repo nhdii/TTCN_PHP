@@ -43,19 +43,18 @@
                     <form method="post" action="">
                         @csrf
                         <input type="hidden" name="product_id" value="{{ $product->product_id }}">
-                    
+                        <input type="hidden" name="attribute_id" id="selectedAttributeId" value=""> <!-- Thêm input này để lưu attribute_id -->
+                        <input type="hidden" name="selected_size" id="selectedSize" value="">
                         <h6 class="text-lg font-bold mb-2">Select Size</h6>
-                    
                         <div class="flex flex-wrap -mx-2">
                             @foreach ($sizes as $size)
                                 <div class="w-1/4 px-2 mb-4">
-                                    <button type="button" class="w-full h-14 flex items-center justify-center border border-blue-400 rounded-lg px-3 py-1 focus:outline-none focus:border-blue-500">
+                                    <button type="button" class="w-full h-14 flex items-center justify-center border rounded-lg px-3 py-1 focus:outline-none size-button hover:bg-blue-600 hover:border-blue-600 hover:text-gray-100" data-size="{{ $size->attribute_value }}">
                                         {{ $size->attribute_value }}
                                     </button>
                                 </div>
                             @endforeach
-                        </div>
-                    
+                        </div>                        
                         <div class="flex flex-wrap items-center -mx-4 mt-4">
                             <div class="w-full px-4 mb-4 lg:w-1/2 lg:mb-0">
                                 <a href="{{ route('index') }}#product" class="flex items-center justify-center w-full p-4 text-blue-500 border border-blue-500 rounded-md hover:bg-blue-600 hover:border-blue-600 hover:text-gray-100">
@@ -63,14 +62,13 @@
                                 </a>
                             </div>
                             <div class="w-full px-4 mb-4 lg:mb-0 lg:w-1/2">
-                                <button type="submit" class="flex items-center justify-center w-full p-4 text-blue-500 border border-blue-500 rounded-md hover:bg-blue-600 hover:border-blue-600 hover:text-gray-100">
+                                <button type="button" id="addToCartBtn" class="flex items-center justify-center w-full p-4 text-blue-500 border border-blue-500 rounded-md hover:bg-blue-600 hover:border-blue-600 hover:text-gray-100">
                                     Add to Cart
                                 </button>
                             </div>
                         </div>
-                    </form>
-                    
-
+                    </form>         
+  
                     <div class="mt-10 h-20 overflow-hidden">
                         <p class="max-w-md mb-2 text-gray-700 text-lg">
                             {{ $product->desciption }}
@@ -94,7 +92,45 @@
             div.classList.add('h-20');
         }
     });
-
 </script>
+
+<script>
+    $(document).ready(function () {
+        $('.size-button').on('click', function () {
+            var selectedSize = $(this).text();
+            $('#selectedSize').val(selectedSize); // Lưu giá trị size vào input ẩn
+        });
+
+        $('#addToCartBtn').on('click', function () {
+            var selectedSize = $('#selectedSize').val(); // Lấy giá trị size từ input ẩn
+
+            $.ajax({
+                type: 'POST',
+                url: '/cart/addToCart',
+                data: {
+                    _token: '{{ csrf_token() }}',
+                    product_id: '{{ $product->product_id }}',
+                    attribute_id: '{{ $size->attribute_id }}',
+                    size: selectedSize
+                },
+                success: function (response) {
+                    // Xử lý kết quả từ hàm addToCart
+                    console.log(response);
+
+                    // Hiển thị thông báo hoặc thực hiện các xử lý khác tùy ý
+                    alert(response.message);
+                },
+                error: function (error) {
+                    // Xử lý khi có lỗi xảy ra
+                    console.log(error);
+
+                    // Hiển thị thông báo lỗi hoặc thực hiện các xử lý khác tùy ý
+                    alert('An error occurred.');
+                }
+            });
+        });
+    });
+</script>
+
 </body>
 </html>

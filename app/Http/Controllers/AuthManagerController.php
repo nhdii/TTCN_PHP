@@ -56,15 +56,10 @@ class AuthManagerController extends Controller
         return view('authenticate.login');
     }
 
-    
     function login(Request $request){
-        $credentials = $request->validate([
-            'email' => ['required', 'email'],
-            'password' => ['required'],
-        ]);
-        if(Auth::attempt($credentials)){
+        if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){
             $request->session()->put('email', $request->email);
-            return redirect()->route('index')->with('login-checked', 'Login Successfull!');
+            return redirect()->route('index')->with('login-checked', 'Sign in successfull!');
         }
         return redirect()->route('show-login')->with('login-failed', 'Email or password invalid!');
     }

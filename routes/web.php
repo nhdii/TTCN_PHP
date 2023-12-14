@@ -9,6 +9,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\DetailOrderController;
 use App\Http\Controllers\ProductAttributeController;
 use App\Http\Controllers\AuthManagerController;
+use App\Http\Controllers\CartController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -42,6 +43,15 @@ Route::get('/feature', [ProductController::class, 'showFeature'])->name('feature
 //Check login -> true: vào, false: thoát về home
 Route::middleware('checkLogin')->group(function(){
     Route::get('logout', [AuthManagerController::class, 'logout'])->name('logout');
+
+    // cart route
+    Route::get('/cart', [CartController::class, 'index'])->name('cartIndex');
+    Route::post('/cart/addToCart', [CartController::class, 'addToCart'])->name('addToCart');
+    Route::post('/cart/increase', [CartController::class, 'increaseQuantity'])->name('increaseQuantity');
+    Route::post('/cart/decrease', [CartController::class, 'decreaseQuantity'])->name('decreaseQuantity');
+    Route::post('/cart/remove', [CartController::class, 'removeItemFromCart'])->name('removeItemFromCart');
+    Route::get('/cart/callback', [CartController::class, 'handlePaymentCallback'])->name('handlePaymentCallback');
+
 });
 Route::get('register', [AuthManagerController::class, 'showRegistration'])->name('show-registration');
 Route::post('register', [AuthManagerController::class, 'register'])->name('register');

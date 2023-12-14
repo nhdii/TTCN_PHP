@@ -11,7 +11,7 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-5-5m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                     </svg>
                 </div>
-                <a href="#" type="button" class="hidden md:flex custom-btn cursor-pointer duration-300 text-black hover:bg-gray-300 border border-gray-400 font-medium rounded-full focus:outline-none focus:ring focus:border-blue-300 text-sm px-4 py-2 text-center">
+                <a href="{{ route('cartIndex')}}" type="button" class="hidden md:flex custom-btn cursor-pointer duration-300 text-black hover:bg-gray-300 border border-gray-400 font-medium rounded-full focus:outline-none focus:ring focus:border-blue-300 text-sm px-4 py-2 text-center">
                     <svg fill="none" class="mx-3" xmlns="http://www.w3.org/2000/svg" height="1.5em" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke="currentColor" stroke-width="1.5" d="M8.25 8.25V6a2.25 2.25 0 012.25-2.25h3a2.25 2.25 0 110 4.5H3.75v8.25a3.75 3.75 0 003.75 3.75h9a3.75 3.75 0 003.75-3.75V8.25H17.5"></path>
                     </svg>
@@ -38,9 +38,19 @@
                     <li>
                         <a href="#" class="block text-lg py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0">Kids</a>
                     </li>
-                    <li>
-                        <a href="{{ route('login')}}" class="block text-lg py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0">Sign in</a>
-                    </li>
+                    @if (Auth::check())
+                        {{-- <li>
+                            <a href="{{route('show-profile')}}" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0">Hello, {{auth()->user()->name}}</a>
+                        </li> --}}
+                        <li>
+                            <a href="{{route('logout')}}" class="block text-lg py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0">Sign Out</a>
+                        </li>
+                    @else
+                        <li>
+                            <a href="{{route('show-login')}}" class="block text-lg py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0">Sign In</a>
+                        </li>
+                    @endif
+                    
                 </ul>
             </div>
         </div>
