@@ -40,6 +40,10 @@ Route::prefix('admin')->middleware('admin')->group(function () {
 Route::get('/', [ProductController::class, 'homeIndex'])->name('index');
 Route::get('/show/{product_id}', [ProductController::class, 'showHome'])->name('show');
 Route::get('/feature', [ProductController::class, 'showFeature'])->name('feature');
+Route::get('/men_products', [ProductController::class, 'showMenProducts'])->name('men_products');
+Route::get('/women_products', [ProductController::class, 'showWoMenProducts'])->name('women_products');
+Route::get('/kid_products', [ProductController::class, 'showKidProducts'])->name('kid_products');
+
 // Route::get('/byBrand/{brand_id}', [ProductController::class, 'showByBrand'])->name('byBrand');
 
 //Kiểm tra login nếu true: vào, false: thoát về home

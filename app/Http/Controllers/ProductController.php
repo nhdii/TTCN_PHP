@@ -80,6 +80,56 @@ class ProductController extends Controller
         ]);
     }
 
+    public function showMenProducts()
+    {
+        $gender = 'Men';
+        $brands = Brand::all();
+        $categories = Category::all();
+        $data = Product::query()
+            ->where('gender', $gender)
+            ->paginate(8);
+
+        return view('home.men_products', [
+            'products' => $data,
+            'brands' => $brands,
+            'categories' => $categories,
+        ]);
+    }
+
+    public function showWomenProducts()
+    {
+        $gender = 'Women';
+        $brands = Brand::all();
+        $categories = Category::all();
+        $data = Product::query()
+            ->where('gender', $gender)
+            ->paginate(8);
+
+        return view('home.women_products', [
+            'products' => $data,
+            'brands' => $brands,
+            'categories' => $categories,
+        ]);
+    }
+
+    public function showKidProducts()
+    {
+        $genders = ['Kid Boy', 'Kid', 'Kid Girl'];
+        $brands = Brand::all();
+        $categories = Category::all();
+        $data = Product::query()
+            ->whereIn('gender', $genders)
+            ->paginate(8);
+
+        return view('home.kid_products', [
+            'products' => $data,
+            'brands' => $brands,
+            'categories' => $categories,
+        ]);
+    }
+
+
+
     // public function showByBrand($brand_id)
     // {
     //     $brand = Brand::find($brand_id);

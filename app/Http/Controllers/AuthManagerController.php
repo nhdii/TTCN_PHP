@@ -20,18 +20,23 @@ class AuthManagerController extends Controller
     // Kiểm tra email đã có trong database chưa
         if (Customer::where('email', $email)->exists()) {
             // Email đã tồn tại
-            return redirect()->back()->with('exist-email', 'Email này đã tồn tài! Hãy sử dụng email khác.');
+            return redirect()->back()->with('exist-email', 'This email already exists! Use a different email.');
         }
         else{
             $user = new User();
             $customer = new Customer();
+            
             $request->validate([
                 'password' => 'min:8',
                 'confirm' => 'same:password',
             ], [
-                'password.min' => 'Mật khẩu phải có ít nhất 8 ký tự.',
-                'confirm.same' => 'Mật khẩu xác nhận không đúng. Vui lòng thử lại',
+                'password.min' => 'The password must be at least 8 characters long.',
+                'confirm.same' => 'The confirmation password is incorrect. Please try again',
             ]);
+
+            if (!filter_var($request->email, FILTER_VALIDATE_EMAIL)) {
+                return redirect()->back()->with('invalid-email', 'The email is invalid');
+            }
 
             $password = bcrypt($request->password);
             

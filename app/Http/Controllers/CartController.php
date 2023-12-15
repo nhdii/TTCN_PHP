@@ -29,7 +29,7 @@ class CartController extends Controller
     {
         // Lấy thông tin sản phẩm từ request
         $product_id = $request->input('product_id');
-        $selectedSize = $request->input('selectedSize', ''); // Lấy giá trị size từ input ẩn
+        $selectedSize = $request->input('selectedSize', ''); 
 
         //kiểm tra đã chọn size chưa
         if (empty($selectedSize)) {

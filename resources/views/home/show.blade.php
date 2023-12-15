@@ -50,7 +50,7 @@
                         <div class="flex flex-wrap -mx-2">
                             @foreach ($sizes as $size)
                                 <div class="w-1/4 px-2 mb-4">
-                                    <button type="button" class="w-full h-14 flex items-center justify-center border rounded-lg px-3 py-1 focus:outline-none size-button hover:bg-blue-600 hover:border-blue-600 hover:text-gray-100" data-size="{{ $size->attribute_value }}" onclick="selectSize('{{ $size->attribute_value }}')">
+                                    <button type="button" class="size-button w-full h-14 flex items-center justify-center border rounded-lg px-3 py-1 focus:outline-none hover:bg-blue-600 hover:border-blue-600 hover:text-gray-100" data-size="{{ $size->attribute_value }}" onclick="selectSize('{{ $size->attribute_value }}')">
                                         {{ $size->attribute_value }}
                                     </button>
                                 </div>
@@ -96,7 +96,7 @@
 
     function selectSize(size) {
         // Xóa tất cả các class 'selected' khỏi các nút size
-        console.log('Selected Size:', size);
+        // console.log('Selected Size:', size);
         var buttons = document.querySelectorAll('.size-button');
         buttons.forEach(function(button) {
             button.classList.remove('selected');
@@ -104,6 +104,7 @@
 
         // Đặt class 'selected' cho nút size được chọn
         var selectedButton = document.querySelector('[data-size="' + size + '"]');
+        console.log(selectedButton)
         if (selectedButton) {
             selectedButton.classList.add('selected');
         }
@@ -118,6 +119,6 @@
 </script>
 
 
-
+@include('layouts.footer')
 </body>
 </html>

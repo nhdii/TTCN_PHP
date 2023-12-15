@@ -6,71 +6,112 @@
     $totalCustomer = \App\Models\Customer::count();
     $totalOrder = \App\Models\Order::count();
 @endphp
-<div class="container px-6 py-2 mx-auto">
-    <div class="container px-6 py-8 mx-auto">
-        <h3 class="text-3xl font-medium text-gray-700">THÔNG TIN NHANH</h3>
-        <div class="mt-4 flex flex-wrap -mx-6">
-            <!-- Hiển thị số liệu cho Brands -->
-            <div class="w-full sm:w-1/2 xl:w-1/4 px-2 mb-6">
-                <a href="{{ route('brands.index')}}">
-                <div class="flex items-center px-5 py-6 bg-white rounded-md shadow-md">
-                    <div class="p-3 bg-pink-600 bg-opacity-75 rounded-full my-4">
-                        <i class="fas fa-heart text-white"></i>
-                    </div>
 
-                    <div class="mx-5">
-                        <h4 class="text-2xl font-semibold text-gray-700">{{ $totalBrand }}</h4>
-                        <div class="text-gray-500"><b>BRANDS</b></div>
+<div class="grid grid-cols-12 gap-6">
+    <div class="grid grid-cols-12 col-span-12 gap-6 xxl:col-span-9">
+        <div class="col-span-12 mt-8">
+            <div class="flex items-center h-10 intro-y">
+                <h2 class="mr-5 text-lg font-medium truncate">DASHBOARD</h2>
+            </div>
+            <div class="grid grid-cols-12 gap-6 mt-5">
+                <a class="transform  hover:scale-105 transition duration-300 shadow-xl rounded-lg col-span-12 sm:col-span-6 xl:col-span-3 intro-y bg-white"
+                    href="{{ route('orders.index')}}">
+                    <div class="p-5">
+                        <div class="flex justify-between">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-blue-400"
+                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                            </svg>
+                            <div
+                                class="bg-green-500 rounded-full h-6 px-2 flex justify-items-center text-white font-semibold text-sm">
+                                <span class="flex items-center">30%</span>
+                            </div>
+                        </div>
+                        <div class="ml-2 w-full flex-1">
+                            <div>
+                                <div class="mt-3 text-3xl font-bold leading-8">{{ $totalOrder }}</div>
+
+                                <div class="mt-1 text-base text-gray-600"><b>ORDERS</b></div>
+                            </div>
+                        </div>
                     </div>
-                </div>
+                </a>
+                <a class="transform  hover:scale-105 transition duration-300 shadow-xl rounded-lg col-span-12 sm:col-span-6 xl:col-span-3 intro-y bg-white"
+                    href="{{ route('customers.index')}}">
+                    <div class="p-5">
+                        <div class="flex justify-between">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-yellow-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-6 h-6">
+                                <path strokeLinecap="round" strokeLinejoin="round" stroke-width="2" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+                              </svg>
+                              
+                            <div
+                                class="bg-red-500 rounded-full h-6 px-2 flex justify-items-center text-white font-semibold text-sm">
+                                <span class="flex items-center">30%</span>
+                            </div>
+                        </div>
+                        <div class="ml-2 w-full flex-1">
+                            <div>
+                                <div class="mt-3 text-3xl font-bold leading-8">{{ $totalCustomer }}</div>
+
+                                <div class="mt-1 text-base text-gray-600"><b>CUSTOMERS</b></div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                <a class="transform  hover:scale-105 transition duration-300 shadow-xl rounded-lg col-span-12 sm:col-span-6 xl:col-span-3 intro-y bg-white"
+                    href="{{ route('products.index')}}">
+                    <div class="p-5">
+                        <div class="flex justify-between">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-pink-600"
+                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z" />
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z" />
+                            </svg>
+                            <div
+                                class="bg-yellow-500 rounded-full h-6 px-2 flex justify-items-center text-white font-semibold text-sm">
+                                <span class="flex items-center">30%</span>
+                            </div>
+                        </div>
+                        <div class="ml-2 w-full flex-1">
+                            <div>
+                                <div class="mt-3 text-3xl font-bold leading-8">{{ $totalProduct }}</div>
+
+                                <div class="mt-1 text-base text-gray-600"><b>PRODUCTS</b></div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                <a class="transform  hover:scale-105 transition duration-300 shadow-xl rounded-lg col-span-12 sm:col-span-6 xl:col-span-3 intro-y bg-white"
+                    href="{{ route('brands.index')}}">
+                    <div class="p-5">
+                        <div class="flex justify-between">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-green-400"
+                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" />
+                            </svg>
+                            <div
+                                class="bg-blue-500 rounded-full h-6 px-2 flex justify-items-center text-white font-semibold text-sm">
+                                <span class="flex items-center">30%</span>
+                            </div>
+                        </div>
+                        <div class="ml-2 w-full flex-1">
+                            <div>
+                                <div class="mt-3 text-3xl font-bold leading-8">{{ $totalBrand }}</div>
+
+                                <div class="mt-1 text-base text-gray-600"><b>BRANDS</b></div>
+                            </div>
+                        </div>
+                    </div>
                 </a>
             </div>
-            <!-- Hiển thị số liệu cho User -->
-                <div class="w-full sm:w-1/2 xl:w-1/4 px-2 mb-6">
-                    <a href="{{ route('customers.index')}}">
-                    <div class="flex items-center px-5 py-6 bg-white rounded-md shadow-md">
-                        <div class="p-3 bg-indigo-600 bg-opacity-75 rounded-full my-4">
-                            <i class="fas fa-user text-white"></i>
-                        </div>
-
-                        <div class="mx-5">
-                            <h4 class="text-2xl font-semibold text-gray-700">{{ $totalCustomer }}</h4>
-                            <div class="text-gray-500"><b>CUSTOMERS</b></div>
-                        </div>
-                    </div>
-                    </a>
-                </div>
-            <!-- Hiển thị số liệu cho Product -->
-                <div class="w-full sm:w-1/2 xl:w-1/4 px-2 mb-6">
-                    <a href="{{ route('products.index')}}">
-                    <div class="flex items-center px-5 py-6 bg-white rounded-md shadow-md">
-                        <div class="p-3 bg-orange-600 bg-opacity-75 rounded-full my-4">
-                            <i class="fas fa-star text-white"></i>
-                        </div>
-
-                        <div class="mx-5">
-                            <h4 class="text-2xl font-semibold text-gray-700">{{ $totalProduct }}</h4>
-                            <div class="text-gray-500"><b>PRODUCTS</b></div>
-                        </div>
-                    </div>
-                    </a>
-                </div>
-            <!-- Hiển thị số liệu cho Order -->
-                <div class="w-full sm:w-1/2 xl:w-1/4 px-2 mb-6">
-                    <a href="{{ route('orders.index')}}">
-                    <div class="flex items-center px-5 py-6 bg-white rounded-md shadow-md">
-                        <div class="p-3 bg-pink-600 bg-opacity-75 rounded-full my-4">
-                            <i class="fas fa-shopping-cart text-white"></i>
-                        </div>
-
-                        <div class="mx-5">
-                            <h4 class="text-2xl font-semibold text-gray-700">{{ $totalOrder }}</h4>
-                            <div class="text-gray-500"><b>ORDERS</b></div>
-                        </div>
-                    </div>
-                    </a>
-                </div>
-                
         </div>
     </div>
 </div>
