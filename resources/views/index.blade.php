@@ -183,7 +183,7 @@
           Order online by 6 Dec, 11:59PM to get your gifts in time.
       </p>
       <div class="mt-4">
-          <a href="#" class="bg-white text-black px-6 py-2 rounded-full inline-block">Shop</a>
+          <a href="{{ route('feature')}}" class="bg-white text-black px-6 py-2 rounded-full inline-block">Shop</a>
       </div>
   </div>
 </div>
@@ -209,90 +209,16 @@
   </div>
 </div>
 
-{{-- 
-<div id="brands" class="mt-6 p-12">
-  <div class="pl-6">
-      <h6 class="font-bold text-[20px]">BRANDS</h6>
-  </div>
-
-  <div class="flex flex-wrap gap-x-2 gap-y-8 mt-4 justify-center">
-    <div class="brand-item w-full sm:w-1/2 md:w-1/3 lg:w-1/4">
-      <a href="#" class="brand-link">
-        <div class="h-[350px] brand-image">
-          <img class="h-[350px] w-full" src="/storage/images/brands/jordan.jpg" alt="">
-        </div>
-        <div class="text-center">
-            <p class="font-bold text-lg mt-2">Jordan</p>
-        </div>
-      </a>
-    </div>
-
-    <div class="brand-item w-full sm:w-1/2 md:w-1/3 lg:w-1/4">
-      <a href="#" class="brand-link">
-        <div class="h-[350px] brand-image">
-          <img class="h-[350px] w-full" src="/storage/images/brands/nike-image.jpg" alt="">
-        </div>
-        <div class="text-center">
-            <p class="font-bold text-lg mt-2">Nike</p>
-        </div>
-      </a>
-    </div>
-
-    <div class="brand-item w-full sm:w-1/2 md:w-1/3 lg:w-1/4">
-      <a href="#" class="brand-link">
-        <div class="h-[350px] brand-image">
-          <img class="h-[350px] w-full" src="/storage/images/brands/new-balance-logo.jpg" alt="">
-        </div>
-        <div class="text-center">
-            <p class="font-bold text-lg mt-2">New Balance</p>
-        </div>
-      </a>
-    </div>
-
-    <div class="brand-item w-full sm:w-1/2 md:w-1/3 lg:w-1/4">
-      <a href="#" class="brand-link">
-        <div class="h-[350px] brand-image">
-          <img class="h-[350px] w-full" src="/storage/images/brands/adidas-logo.jpg" alt="">
-        </div>
-        <div class="text-center">
-            <p class="font-bold text-lg mt-2">Adidas</p>
-        </div>
-      </a>
-    </div>
-
-    <div class="brand-item w-full sm:w-1/2 md:w-1/3 lg:w-1/4">
-      <a href="#" class="brand-link">
-        <div class="h-[350px] brand-image">
-          <img class="h-[350px] w-full" src="/storage/images/brands/mlb-logo.jpg" alt="">
-        </div>
-        <div class="text-center">
-            <p class="font-bold text-lg mt-2">MLB</p>
-        </div>
-      </a>
-    </div>
-
-    <div class="brand-item w-full sm:w-1/2 md:w-1/3 lg:w-1/4">
-      <a href="#" class="brand-link">
-        <div class="h-[350px] brand-image">
-          <img class="h-[350px] w-full" src="/storage/images/brands/converse-logo.jpg" alt="">
-        </div>
-        <div class="text-center">
-            <p class="font-bold text-lg mt-2">Converse</p>
-        </div>
-      </a>
-    </div>
-  </div>
-</div> --}}
-
 <div class="max-w-screen-xl mx-auto">
   <div class="brand-container">
     <ul class="brand-list">
-      <li class="brand-logo"><a href="#"><img src="storage/images/brands/logo-nike.jpg" alt="Logo 1"></a></li>
-      <li class="brand-logo"><a href="#"><img src="storage/images/brands/logo-adidas.jpg" alt="Logo 2"></a></li>
-      <li class="brand-logo"><a href="#"><img src="storage/images/brands/logo-jordan.jpg" alt="Logo 3"></a></li>
-      <li class="brand-logo"><a href="#"><img src="storage/images/brands/logo-mlb.jpg" alt="Logo 4"></a></li>
-      <li class="brand-logo"><a href="#"><img src="storage/images/brands/logo-converse.jpg" alt="Logo 5"></a></li>
-      <li class="brand-logo"><a href="#"><img src="storage/images/brands/logo-nb.jpg" alt="Logo 6"></a></li>
+      @foreach($brands as $brand)
+        <li class="brand-logo">
+          <a href="{{ route('home.by_brand', $brand->brand_id) }}">
+            <img src="storage/images/brands/{{$brand->brand_name}}.png" alt="{{$brand->brand_name}}">
+          </a>
+        </li>
+      @endforeach
     </ul>
   </div>
 </div>
