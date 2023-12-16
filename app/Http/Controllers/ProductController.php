@@ -53,6 +53,7 @@ class ProductController extends Controller
         ]);
     }
 
+    //Hiển thị sản phẩm thuộc Nike ra giao diện khách hàng
     public function homeIndex() {
         $brandName = 'Nike';
     
@@ -61,8 +62,11 @@ class ProductController extends Controller
                 $query->where('brand_name', $brandName);
             })->paginate(8); // Chia thành các trang nếu cần
             
+        $brands = Brand::all();  // Truy vấn tất cả các thương hiệu
+
         return view('index', [
             'products' => $data,
+            'brands' => $brands,  // Truyền biến $brands vào view
         ]);
     }
 
@@ -128,25 +132,24 @@ class ProductController extends Controller
         ]);
     }
 
+    public function showProductsByBrand($brand_id)
+    {
+        $brand = Brand::findOrFail($brand_id);
 
+        $categories = Category::all();
 
-    // public function showByBrand($brand_id)
-    // {
-    //     $brand = Brand::find($brand_id);
+        $data = Product::query()
+            ->whereHas('getBrand', function ($query) use ($brand) {
+                $query->where('brand_id', $brand->brand_id);
+            })->paginate(8);
 
-    //     $data = Product::query();
-    //     if (!$brand) {
-    //         abort(404); // Or redirect to a 404 page if the brand doesn't exist
-    //     }
+        return view('home.by_brand', [
+            'products' => $data,
+            'brand' => $brand,
+            'categories' => $categories,
 
-    //     $products = $brand->getProducts;
-
-    //     return view('home.by_brand', [
-    //         'brand' => $brand,  // Make sure to pass the $brand variable to the view
-    //         'products' => $products,
-    //     ]);
-    // }
-
+        ]);
+    }
 
     public function create()
     {

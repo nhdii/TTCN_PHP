@@ -188,7 +188,28 @@
   </div>
 </div>
 
+<div id="brands" class="mt-6 p-12">
+  <div class="pl-6">
+    <h6 class="font-bold text-[20px]">BRANDS</h6>
+  </div>
 
+  <div class="flex flex-wrap gap-x-2 gap-y-8 mt-4 justify-center">
+    @foreach($brands as $brand)
+      <div class="brand-item w-full sm:w-1/2 md:w-1/3 lg:w-1/4">
+        <a href="{{ route('home.by_brand', $brand->brand_id) }}" class="brand-link">
+          <div class="h-[350px] brand-image">
+            <img class="h-[350px] w-full" src="/storage/images/brands/{{$brand->brand_name}}.jpg" alt="{{$brand->brand_name}}">
+          </div>
+          <div class="text-center">
+            <p class="font-bold text-lg mt-2">{{ $brand->brand_name }}</p>
+          </div>
+        </a>
+      </div>
+    @endforeach
+  </div>
+</div>
+
+{{-- 
 <div id="brands" class="mt-6 p-12">
   <div class="pl-6">
       <h6 class="font-bold text-[20px]">BRANDS</h6>
@@ -261,7 +282,7 @@
       </a>
     </div>
   </div>
-</div>
+</div> --}}
 
 <div class="max-w-screen-xl mx-auto">
   <div class="brand-container">
