@@ -10,13 +10,14 @@ class DetailOrder extends Model
     use HasFactory;
 
     protected $table = 'detail_orders';
-    protected $primaryKey = ['order_id', 'product_id'];
+    protected $primaryKey = ['order_id', 'product_id', 'attribute_id'];
     public $keyType = 'string';
     public $incrementing = false;
 
     protected $fillable = [
         'order_id',
         'product_id',
+        'attribute_id',
         'quantity',
         'price',
         'notes',

@@ -45,12 +45,12 @@
                     <form method="post" action="{{ route('addToCart') }}">
                         @csrf
                         <input type="hidden" name="product_id" value="{{ $product->product_id }}">
-                        <input type="hidden" name="selectedSize" id="selectedSize" value="">
+                        <input type="hidden" name="selectedAttributeId" id="selectedAttributeId" value="">
                         <h6 class="text-lg font-bold mb-2">Select Size</h6>
                         <div class="flex flex-wrap -mx-2">
                             @foreach ($sizes as $size)
                                 <div class="w-1/4 px-2 mb-4">
-                                    <button type="button" class="size-button w-full h-14 flex items-center justify-center border rounded-lg px-3 py-1 focus:outline-none hover:bg-blue-600 hover:border-blue-600 hover:text-gray-100" data-size="{{ $size->attribute_value }}" onclick="selectSize('{{ $size->attribute_value }}')">
+                                    <button type="button" class="size-button w-full h-14 flex items-center justify-center border rounded-lg px-3 py-1 focus:outline-none focus:ring focus:border-blue-500 focus:bg-blue-300 focus:text-black hover:bg-blue-600 hover:border-blue-600 hover:text-gray-100" data-size="{{ $size->attribute_value }}" data-attribute-id="{{ $size->attribute_id }}" onclick="selectSize('{{ $size->attribute_value }}', '{{ $size->attribute_id }}')">
                                         {{ $size->attribute_value }}
                                     </button>
                                 </div>
@@ -94,26 +94,24 @@
         }
     });
 
-    function selectSize(size) {
-        // Xóa tất cả các class 'selected' khỏi các nút size
-        // console.log('Selected Size:', size);
+    function selectSize(size, attribute_id) {
         var buttons = document.querySelectorAll('.size-button');
         buttons.forEach(function(button) {
             button.classList.remove('selected');
         });
 
-        // Đặt class 'selected' cho nút size được chọn
         var selectedButton = document.querySelector('[data-size="' + size + '"]');
-        console.log(selectedButton)
         if (selectedButton) {
             selectedButton.classList.add('selected');
         }
 
-        // Lưu giá trị size vào một input ẩn để sau này có thể submit cùng với form
-        var sizeInput = document.getElementById('selectedSize');
+        var sizeInput = document.getElementById('selectedAttributeId');
         if (sizeInput) {
-            sizeInput.value = size;
+            sizeInput.value = attribute_id;
         }
+
+        console.log('Selected Size:', size);
+
     }
     
 </script>

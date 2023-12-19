@@ -98,9 +98,9 @@
                         <span>Total</span>
                         <span>{{ !empty($cart) ? number_format($totalAmount, 0, ',', '.') : '0'}} VNĐ</span>
                     </div>
-                    <form action="" method="POST">
+                    <form action="{{ url('/vnpay_payment') }}" method="POST">
                         @csrf
-                        <input type="hidden" name="total_vnpay" value="">
+                        <input type="hidden" name="total_vnpay" value="{{!empty($cart) ? $totalAmount : '0'}}">
                         <button name="redirect" class="bg-indigo-500 font-semibold hover:bg-indigo-600 py-3 text-sm text-white uppercase w-full" type="submit">Check out</button>
                     </form>                
                 </div>

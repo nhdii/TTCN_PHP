@@ -38,10 +38,11 @@ class DetailOrderController extends Controller
      */
     public function show($order_id)
     {
-        $orders = Order::where('order_id', $order_id)->first();
-        $detail_orders = DetailOrder::where('order_id', $order_id)->first();
-        if ($orders) {
-            return view('admin.orders.detail', ['order' => $orders, 'detail_order' => $detail_orders]);
+        $order = Order::where('order_id', $order_id)->first();
+        $detail_orders = DetailOrder::where('order_id', $order_id)->get(); // Use get() to retrieve multiple records
+
+        if ($order) {
+            return view('admin.orders.detail', ['order' => $order, 'detail_orders' => $detail_orders]);
         } else {
             return redirect()->route('detail_orders.index')->with('error', 'Order not exists');
         }

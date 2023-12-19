@@ -14,14 +14,16 @@ return new class extends Migration
         Schema::create('detail_orders', function (Blueprint $table) {
             $table->uuid('order_id');
             $table->uuid('product_id');
+            $table->uuid('attribute_id');
             $table->integer('quantity');
             $table->decimal('price',  $precision = 13, $scale = 0);
             $table->text('notes')->nullable();
 
             //add primaryKey
-            $table->primary(['order_id', 'product_id']);
+            $table->primary(['order_id', 'product_id', 'attribute_id']);
             $table->foreign('order_id')->references('order_id')->on('orders');
             $table->foreign('product_id')->references('product_id')->on('products');
+            $table->foreign('attribute_id')->references('attribute_id')->on('product_attributes');
             $table->timestamps();
         });
     }

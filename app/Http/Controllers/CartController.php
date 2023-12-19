@@ -29,15 +29,17 @@ class CartController extends Controller
     {
         // Lấy thông tin sản phẩm từ request
         $product_id = $request->input('product_id');
-        $selectedSize = $request->input('selectedSize', ''); 
+        // $selectedSize = $request->input('selectedSize', ''); 
+        $attribute_id = $request->input('selectedAttributeId', ''); 
 
         //kiểm tra đã chọn size chưa
-        if (empty($selectedSize)) {
+        if (empty($attribute_id)) {
             return redirect()->route('show', $product_id)->with('error', 'Please select a size before adding to cart.');
         }
 
         // Kiểm tra xem sản phẩm có tồn tại không
         $product = Product::find($product_id);
+        $product_attribute = ProductAttribute::find($attribute_id);
 
         if (!$product) {
             return abort(404);
@@ -49,7 +51,8 @@ class CartController extends Controller
         }
         $cart = Session::get('cart', []);
 
-        $cartKey = $product_id . '-' . $selectedSize;
+        // $cartKey = $product_id . '-' . $selectedSize;
+        $cartKey = $product_id . '-' . $attribute_id;
 
         if (isset($cart[$cartKey])) {
             $cart[$cartKey]['quantity']++;
@@ -57,14 +60,17 @@ class CartController extends Controller
                 $cart[$cartKey]['quantity'] = 1;
             }
         } else {
+
             $cart[$cartKey] = [
                 'product_id' => $product_id,
+                'attribute_id' => $attribute_id,
                 'name' => $product->product_name,
                 'image' => $product->image,
                 'gender' => $product->gender,
                 'price' => $product->default_price,
-                'size' => $selectedSize,
-                'quantity' => 1,       
+                // 'size' => $selectedSize,
+                'size' => $product_attribute->attribute_value,
+                'quantity' => 1, 
             ];     
         }
 
@@ -118,6 +124,57 @@ class CartController extends Controller
         }
 
         return redirect()->route('cartIndex')->with('success', 'Remove products from cart successfully');
+    }
+
+    public function handlePaymentCallback(Request $request)
+    {
+        $vnp_ResponseCode = $request->input('vnp_ResponseCode');
+        if ($vnp_ResponseCode === '00') {
+            $email = Session::get('email');
+            $customer = Customer::query()->where('email', $email)->first();
+            $cart = Session::get('cart');
+
+            $newOrder = new Order();
+            $newOrder->customer_id = $customer->customer_id;
+            $newOrder->order_date = Carbon::now();
+            $newOrder->delivery_date = Carbon::now();
+            $newOrder->status = 'Completely payment';
+            $newOrder->save();
+
+            $order_id = $newOrder->order_id;
+
+            foreach ($cart as $cartItem) {
+                $product_id = $cartItem['product_id'];
+                $attribute_id = $cartItem['attribute_id'];
+                $quantity = $cartItem['quantity'];
+                $price = $cartItem['price'];
+            
+                $newDetailOrder = new DetailOrder([
+                    'order_id' => $order_id, // Sử dụng order_id vừa tạo
+                    'product_id' => $product_id,
+                    'attribute_id' => $attribute_id,
+                    'quantity' => $quantity,
+                    'price' => $price,
+                    'notes' => '',
+                ]);
+                $newDetailOrder->save();
+            }
+
+            // Send email
+            // $email_user = $customer->email;
+            // $name_user = $customer->tenKH;
+            // Mail::send('emails.checkout', compact('newOrder', 'customer', 'newCTHD', 'cart'), function ($email) use ($email_user, $name_user) {
+            //     $email->subject('Vinpearl Booking Tour - Hóa đơn');
+            //     $email->to($email_user, $name_user);
+            // });
+
+            Session::forget('cart');
+
+
+            return view('cart.success');
+        } else {
+            return view('cart.failure');
+        }
     }
     
 }

@@ -17,8 +17,7 @@
 @include('layouts.nav')
  
 <div class="flex">
-    <!-- Thêm form bộ lọc -->
-  <div class="flex-none w-1/5 p-4 md:p-12 simplebar" data-simplebar>
+  {{-- <div class="flex-none w-1/5 p-4 md:p-12 simplebar" data-simplebar>
     <h6 class="font-bold text-[25px] mb-4">Filter</h6>
 
     <!-- Filter theo brands -->
@@ -55,8 +54,41 @@
 
     <!-- Nút để kích hoạt bộ lọc -->
     <button type="button" class="bg-blue-500 text-white px-4 py-2 rounded-md">Apply Filters</button>
-  </div>
+  </div>  --}}
 
+
+  <div class="w-1/5 p-4">
+    <!-- Bộ lọc -->
+    <form action="" method="get">
+        <div class="mb-4">
+            <label for="category">Category:</label>
+            <select name="category_id" id="category" class="w-full">
+              @foreach($categories as $category)
+                <option value="{{ $category->category_name }}">{{ $category->category_name }}</option>
+              @endforeach
+            </select>
+        </div>
+
+        <div class="mb-4">
+            <label for="gender">Gender:</label>
+            <select name="gender" id="gender" class="w-full">
+              @foreach($brands as $brand)
+                <option value="{{ $brand->brand_name }}">{{ $brand->brand_name }}</option>
+              @endforeach
+            </select>
+        </div>
+
+        <div class="mb-4">
+            <label for="brand">Brand:</label>
+            <select name="brand_id" id="brand" class="w-full">
+              <option value="Men">Men</option>
+              <option value="Women">Women</option>
+            </select>
+        </div>
+
+        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Filter</button>
+    </form>
+  </div>
 
   <div id="product" class="mt-6 p-4 md:p-12">
     <div class="flex-grow w-4/5 flex flex-wrap gap-x-2 gap-y-8 mt-4 justify-center p-4 md:p-12">
