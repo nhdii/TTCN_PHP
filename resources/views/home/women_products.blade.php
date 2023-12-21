@@ -16,21 +16,10 @@
 <body>
 @include('layouts.nav')
  
-<div class="flex">
-    <!-- Thêm form bộ lọc -->
-  <div class="flex-none w-1/5 p-4 md:p-12 simplebar" data-simplebar>
+<div class="flex flex-col lg:flex-row">
+  {{-- bộ lọc --}}
+  <div class="lg:w-1/4 p-4 md:p-12 simplebar lg:flex-shrink-0" data-simplebar>
     <h6 class="font-bold text-[25px] mb-4">Filter</h6>
-
-    <!-- Filter theo brands -->
-    <div class="mb-6">
-        <label for="brandFilter" class="block text-sm font-medium text-gray-600">Brand</label>
-        <select id="brandFilter" name="brandFilter" class="mt-1 p-2 border rounded-md w-full">
-            <!-- Populate brands dynamically from your database -->
-            @foreach($brands as $brand)
-                <option value="{{ $brand->brand_name }}">{{ $brand->brand_name }}</option>
-            @endforeach
-        </select>
-    </div>
 
     <!-- Filter theo categories -->
     <div class="mb-6">
@@ -48,62 +37,32 @@
   </div>
 
 
-  <div id="product" class="mt-6 p-4 md:p-12">
-    <div class="flex-grow w-4/5 flex flex-wrap gap-x-2 gap-y-8 mt-4 justify-center p-4 md:p-12">
-      @foreach($products as $product)
-        <div class="w-[250px]">
-          <figure class="shadow-md rounded-lg overflow-hidden hover:shadow-lg transition-transform transform hover:scale-105">
-            <a href="{{ route('show', $product->product_id)}}">
-              <div class="h-[250px]">
-                <img class="h-[250px] w-full" src="/storage/images/product-images/{{$product->product_id}}/{{$product->image}}" alt="">
-              </div>
-            </a>
-          </figure>
-          <div class="text-left p-4">
-            <a href="{{ route('show', $product->product_id)}}">
-              <p class="font-bold text-lg mt-2">{{ $product->product_name }}</p>
-            </a>
-            <p class="text-lg mt-2">{{ $product->gender }}'s Shoes</p>
-            <p class="text-lg mt-2">{{ number_format($product->default_price, 0, ',', '.') }} VNĐ</p>
-          </div>
+  <div id="product" class="lg:w-3/4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 mt-4 justify-center p-4 md:p-12 mx-auto">
+    @foreach($products as $product)
+      <div class="w-[250px]">
+        <figure class="shadow-md rounded-lg overflow-hidden hover:shadow-lg transition-transform transform hover:scale-105">
+          <a href="{{ route('show', $product->product_id)}}">
+            <div class="h-[250px]">
+              <img class="h-[250px] w-full" src="/storage/images/product-images/{{$product->product_id}}/{{$product->image}}" alt="">
+            </div>
+          </a>
+        </figure>
+        <div class="text-left p-4">
+          <a href="{{ route('show', $product->product_id)}}">
+            <p class="font-bold text-lg mt-2">{{ $product->product_name }}</p>
+          </a>
+          <p class="text-lg mt-2">{{ $product->gender }}</p>
+          <p class="text-lg mt-2">{{ number_format($product->default_price, 0, ',', '.') }} VNĐ</p>
         </div>
-      @endforeach
-    </div>
-    <div class="mt-6 mb-10 px-2 flex justify-center items-center">
-      {!! $products->links('layouts.pagination') !!}
-    </div>
+      </div>
+    @endforeach
   </div>
 </div>
 
-{{-- <div id="product" class="mt-6 p-4 md:p-12">
-    <div class="pl-6 grid place-items-center">
-      <h6 class="font-bold text-[25px]">New</h6>
-    </div>
-  
-    <div class="flex flex-wrap gap-x-2 gap-y-8 mt-4 justify-center p-4 md:p-12">
-      @foreach($products as $product)
-        <div class="w-[250px]">
-          <figure class="shadow-md rounded-lg overflow-hidden hover:shadow-lg transition-transform transform hover:scale-105">
-            <a href="{{ route('show', $product->product_id)}}">
-              <div class="h-[250px]">
-                <img class="h-[250px] w-full" src="/storage/images/product-images/{{$product->product_id}}/{{$product->image}}" alt="">
-              </div>
-            </a>
-          </figure>
-          <div class="text-left p-4">
-            <a href="{{ route('show', $product->product_id)}}">
-              <p class="font-bold text-lg mt-2">{{ $product->product_name }}</p>
-            </a>
-            <p class="text-lg mt-2">{{ $product->gender }}</p>
-            <p class="text-lg mt-2">{{ number_format($product->default_price, 0, ',', '.') }} VNĐ</p>
-          </div>
-        </div>
-      @endforeach
-    </div>
-    <div class="mt-6 px-2 flex justify-center items-center">
-      {!! $products->links('layouts.pagination') !!}
-    </div>
-</div> --}}
+
+<div class="mt-6 mb-10 px-2 flex justify-center items-center">
+  {!! $products->links('layouts.pagination') !!}
+</div>
 
 @include('layouts.footer')
 

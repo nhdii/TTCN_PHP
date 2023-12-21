@@ -10,6 +10,7 @@ use App\Http\Controllers\DetailOrderController;
 use App\Http\Controllers\ProductAttributeController;
 use App\Http\Controllers\AuthManagerController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\ProfileUserController;
 use App\Http\Controllers\PaymentController;
 
 /*
@@ -51,6 +52,9 @@ Route::post('/vnpay_payment', [PaymentController::class, 'vnpay_payment']);
 
 //Kiểm tra login nếu true: vào, false: thoát về home
 Route::middleware('checkLogin')->group(function(){
+    Route::get('profile', [ProfileUserController::class, 'showProfile'])->name('show-profile');
+    Route::get('profile/edit', [ProfileUserController::class, 'edit'])->name('edit-profile');
+    Route::post('profile/edit', [ProfileUserController::class, 'update'])->name('update-profile');
     Route::get('logout', [AuthManagerController::class, 'logout'])->name('logout');
 
     // cart route

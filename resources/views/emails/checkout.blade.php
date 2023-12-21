@@ -41,28 +41,28 @@
         <h3 class="text-2xl font-semibold mb-2 mt-4">Detail Order</h3>
         <table class="w-full table-auto">
             <tr>
-                <th class="bg-blue-500 text-white p-2">No</th>
-                <th class="bg-blue-500 text-white p-2">Product Name</th>
-                <th class="bg-blue-500 text-white p-2">Gender</th>
-                {{-- <th class="bg-blue-500 text-white p-2">Category</th> --}}
-                <th class="bg-blue-500 text-white p-2">Quantity</th>
-                <th class="bg-blue-500 text-white p-2">Price</th>
+                <th class="bg-blue-500 text-white p-3">No</th>
+                <th class="bg-blue-500 text-white p-3">Product Name</th>
+                <th class="bg-blue-500 text-white p-3">Gender</th>
+                {{-- <th class="bg-blue-500 text-white p-3">Category</th> --}}
+                <th class="bg-blue-500 text-white p-3">Quantity</th>
+                <th class="bg-blue-500 text-white p-3">Price</th>
             </tr>
             @php $no = 1; @endphp
             @foreach($cart as $cartItem => $each)
                 <tr>
-                    <td class="p-2">{{ $no++ }}</td>
-                    <td class="p-2">
+                    <td class="p-3">{{ $no++ }}</td>
+                    <td class="p-3">
                         @if(isset($each['product_name']))
                             {{ $each['product_name'] }}
                         @else
                             Product not Exsits
                         @endif
                     </td>
-                    <td class="p-2">{{ $each['gender'] }} </td>
+                    <td class="p-3">{{ $each['gender'] }}'s shoes' </td>
                     {{-- <td class="p-2">{{ $each['category'] }} </td> --}}
-                    <td class="p-2">{{ $each['quantity'] }} </td>
-                    <td class="p-2">{{ number_format($each['price'], 0, ',', '.')  . ' VNĐ'}}</td>
+                    <td class="p-3">{{ $each['quantity'] }} </td>
+                    <td class="p-3">{{ number_format($each['price'], 0, ',', '.')  . ' VNĐ'}}</td>
                 </tr>
             @endforeach
         </table>
