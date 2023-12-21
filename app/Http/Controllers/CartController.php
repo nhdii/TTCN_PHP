@@ -157,16 +157,17 @@ class CartController extends Controller
                     'price' => $price,
                     'notes' => '',
                 ]);
+
                 $newDetailOrder->save();
             }
 
             // Send email
-            // $email_user = $customer->email;
-            // $name_user = $customer->tenKH;
-            // Mail::send('emails.checkout', compact('newOrder', 'customer', 'newCTHD', 'cart'), function ($email) use ($email_user, $name_user) {
-            //     $email->subject('Vinpearl Booking Tour - Hóa đơn');
-            //     $email->to($email_user, $name_user);
-            // });
+            $email_user = $customer->email;
+            $name_user = $customer->fullName;
+            Mail::send('emails.checkout', compact('newOrder', 'customer', 'newDetailOrder', 'cart'), function ($email) use ($email_user, $name_user) {
+                $email->subject('Sneaker Shop - Order');
+                $email->to($email_user, $name_user);
+            });
 
             Session::forget('cart');
 

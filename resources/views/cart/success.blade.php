@@ -23,7 +23,7 @@
             <p class="text-gray-600 my-2">Cảm ơn bạn đã mua hàng.</p>
             <p>Sẽ tự động đưa bạn quay về trang để xem hoá đơn sau <span id="countdown">5</span> giây!</p>
             <div class="py-10 text-center">
-                <a href="" class="px-12 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold py-3">
+                <a href="{{route('cartIndex')}}" class="px-12 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold py-3">
                     Hoặc quay về nhanh!
                 </a>
             </div>

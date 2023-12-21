@@ -97,7 +97,6 @@
         @if(session('exist-email'))
           <div class="mt-3 bg-red-300 shadow-lg rounded-lg p-4">
             <div class="flex flex-col justify-center items-center">
-              <div class="text-xl font-bold">Message!</div>
               <div class="text-gray-600">{{session('exist-email')}}</div>
             </div>
           </div>
@@ -105,7 +104,6 @@
         @if(session('invalid-email'))
           <div class="mt-3 bg-red-300 shadow-lg rounded-lg p-4">
             <div class="flex flex-col justify-center items-center">
-              <div class="text-xl font-bold">Message!</div>
               <div class="text-gray-600">{{session('invalid-email')}}</div>
             </div>
           </div>
@@ -120,7 +118,6 @@
           @error ('confirm')
           <div class="mt-3 bg-red-300 shadow-lg rounded-lg p-4">
             <div class="flex flex-col justify-center items-center">
-              <div class="text-xl font-bold">Message!</div>
               <div class="text-gray-600">{{$message}}</div>
             </div>
           </div>
@@ -130,7 +127,6 @@
         @error('password')
           <div class="mt-3 bg-red-300 shadow-lg rounded-lg p-4">
             <div class="flex flex-col justify-center items-center">
-              <div class="text-xl font-bold">Message!</div>
               <div class="text-gray-600">{{$message}}</div>
             </div>
           </div>

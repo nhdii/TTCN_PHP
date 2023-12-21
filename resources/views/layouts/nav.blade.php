@@ -56,9 +56,10 @@
 						<svg fill="none" class="mx-3" xmlns="http://www.w3.org/2000/svg" height="1.5em" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
 							<path stroke="currentColor" stroke-width="1.5" d="M8.25 8.25V6a2.25 2.25 0 012.25-2.25h3a2.25 2.25 0 110 4.5H3.75v8.25a3.75 3.75 0 003.75 3.75h9a3.75 3.75 0 003.75-3.75V8.25H17.5"></path>
 						</svg>
-						@if($cart && count($cart) > 0)
+						{{-- @if($cart && count($cart) > 0)
 							<span class="absolute scale-75 -top-2 left-5 rounded-full bg-red-500 p-0.5 px-2 text-sm text-red-50">{{ count($cart) }}</span>
-						@endif
+						@endif --}}
+						<span class="absolute scale-75 -top-2 left-5 rounded-full bg-red-500 p-0.5 px-2 text-sm text-red-50">{{ !empty($cart) ? count($cart) : '0'}}</span>
 					</div>
 				</a>		
 
