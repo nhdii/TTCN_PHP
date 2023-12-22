@@ -26,7 +26,7 @@ class ProfileUserController extends Controller
         }
         else{
             $user = Customer::where('email', $request->user()->email)->first();
-            $history_trans = Order::where('customer_id', $user->customer_id)->get();
+            $order_histories = Order::where('customer_id', $user->customer_id)->get();
             $detail_order = DetailOrder::all();
             $brand = Brand::all();
             $product = Product::all();
@@ -36,7 +36,7 @@ class ProfileUserController extends Controller
                 'name' => $user->fullName,
                 'gender' => $user->gender,
                 'member' => 'Thành viên',
-                'history_trans' => $history_trans,
+                'order_histories' => $order_histories,
                 'detail_orders' => $detail_order,
                 'brands' => $brand,
                 'products' => $product,

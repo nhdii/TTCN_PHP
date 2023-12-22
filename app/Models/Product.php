@@ -65,5 +65,9 @@ class Product extends Model
         return $this->hasMany(ProductAttribute::class, 'product_id');
     }
 
+    public function getProduct(){
+        return $this->belongsTo(Brand::class, 'brand_id', 'brand_id');
+    }
+
 
 }

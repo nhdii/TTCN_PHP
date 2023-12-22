@@ -65,7 +65,7 @@
                                     d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                             </svg>
                         </span>
-                        <span class="tracking-wide">Info</span>
+                        <span class="tracking-wide">About</span>
                         <a class='text-blue-500' href="{{route('edit-profile')}}">Edit</a>
                     </div>
                     <div class="text-gray-700">
@@ -88,9 +88,7 @@
                             </div>
                             <div class="grid grid-cols-2">
                                 <div class="px-4 py-2 font-semibold">Email</div>
-                                <div class="px-4 py-2">
-                                    <a class="text-blue-800" href="{{$user->email}}">{{$user->email}}</a>
-                                </div>
+                                <div class="px-4 py-2">{{$user->email}}</div>
                             </div>
                             <div class="grid grid-cols-2">
                                 <div class="px-4 py-2 font-semibold">Phone Number</div>
@@ -110,7 +108,7 @@
                                     d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                             </svg>
                         </span>
-                        <span class="tracking-wide text-lg">List of orders placed!</span>
+                        <span class="tracking-wide text-lg">Show Full Orders Placed!</span>
                     </div>
                     <div class="text-gray-700">
                         <div class="relative overflow-x-auto">
@@ -121,13 +119,13 @@
                                             STT
                                         </th>
                                         <th scope="col" class="text-center px-6 py-3">
-                                            Ngày đặt hàng
+                                            Order Date
                                         </th>
                                         <th scope="col" class="text-center px-6 py-3">
-                                            Ngày giao hàng
+                                            Delivery Date
                                         </th>
                                         <th scope="col" class="text-center px-6 py-3">
-                                            Trạng thái
+                                            Status
                                         </th>
                                     </tr>
                                 </thead>
@@ -135,7 +133,7 @@
                                     @php
                                         $stt = 1;
                                     @endphp
-                                    @foreach ($history_trans as $item)
+                                    @foreach ($order_histories as $item)
                                         <tr class="bg-white">
                                             <td class="text-center px-6 py-4">
                                                 {{ $stt++ }}

@@ -40,14 +40,16 @@ Route::prefix('admin')->middleware('admin')->group(function () {
 });
 
 //Route của trang Home
-Route::get('/', [ProductController::class, 'homeIndex'])->name('index');
-Route::get('/show/{product_id}', [ProductController::class, 'showHome'])->name('show');
+Route::get('/', [ProductController::class, 'showNikeHome'])->name('index');
+Route::get('/show/{product_id}', [ProductController::class, 'showDetailProduct'])->name('show');
 Route::get('/feature', [ProductController::class, 'showFeature'])->name('feature');
 Route::get('/men_products', [ProductController::class, 'showMenProducts'])->name('men_products');
 Route::get('/women_products', [ProductController::class, 'showWoMenProducts'])->name('women_products');
 Route::get('/kid_products', [ProductController::class, 'showKidProducts'])->name('kid_products');
 Route::get('/home/by_brand/{brand_id}', [ProductController::class, 'showProductsByBrand'])->name('home.by_brand');
 Route::post('/vnpay_payment', [PaymentController::class, 'vnpay_payment']);
+Route::get('/search', [ProductController::class, 'search'])->name('search');
+
 
 
 //Kiểm tra login nếu true: vào, false: thoát về home

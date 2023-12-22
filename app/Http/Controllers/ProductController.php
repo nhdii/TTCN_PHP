@@ -54,7 +54,7 @@ class ProductController extends Controller
     }
 
     //Hiển thị sản phẩm thuộc Nike ra giao diện khách hàng
-    public function homeIndex() {
+    public function showNikeHome() {
         $brandName = 'Nike';
     
         $data = Product::query()
@@ -64,9 +64,12 @@ class ProductController extends Controller
             
         $brands = Brand::all();  // Truy vấn tất cả các thương hiệu
 
+        $newProduct = Product::query()->orderBy('created_at', 'desc')->take(9)->get();;
+
         return view('index', [
             'products' => $data,
-            'brands' => $brands,  // Truyền biến $brands vào view
+            'brands' => $brands,  
+            'newProduct' => $newProduct,
         ]);
     }
 
@@ -84,6 +87,7 @@ class ProductController extends Controller
         ]);
     }
 
+    //Function hiển thị tất cả các product có giới tính là Men trong trang Men
     public function showMenProducts()
     {
         $gender = 'Men';
@@ -100,6 +104,7 @@ class ProductController extends Controller
         ]);
     }
 
+    //Function hiển thị tất cả các product có giới tính là Women trong trang Women
     public function showWomenProducts()
     {
         $gender = 'Women';
@@ -132,6 +137,7 @@ class ProductController extends Controller
         ]);
     }
 
+    //Function hiển thị tất cả các product theo brand
     public function showProductsByBrand($brand_id)
     {
         $brand = Brand::findOrFail($brand_id);
@@ -185,7 +191,7 @@ class ProductController extends Controller
     }
 
     // Display Detail Product in homePage
-    public function showHome($product_id)
+    public function showDetailProduct($product_id)
     {
         $product = Product::with('getBrand', 'getCategory', 'getProductAttributes')->find($product_id);
 
@@ -239,5 +245,19 @@ class ProductController extends Controller
             return redirect()->route('products.index')->with('success', 'Product Deleted Successfull!');
         }
         return redirect()->route('products.index')->with('error', 'Deleted Error!');
+    }
+
+    //function search
+    public function search(Request $request)
+    {
+        $keywords = $request->input('keywords');
+
+        // Xử lý tìm kiếm dựa trên keywords, ví dụ:
+        $results = Product::where('product_name', 'like', '%' . $keywords . '%')->orWhereHas('getProduct', function ($innerQuery) use ($keywords) {
+            $innerQuery->where('brand_name', 'like', '%' . $keywords . '%');
+        })
+        ->paginate(9);
+
+        return view('search_results', ['results' => $results, 'keywords' => $keywords]);
     }
 }

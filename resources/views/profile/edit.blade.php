@@ -99,8 +99,9 @@
                                     <div class="grid grid-cols-2">
                                         <div class="px-4 py-3 font-semibold">Gender</div>
                                         <select name="gender" class="px-3 w-full h-10 border border-gray-400 rounded-lg">
-                                            <option value="1">Nam</option>
-                                            <option value="0">Nữ</option>
+                                            <option value="Male" {{ $gender === 'Male' ? 'selected' : '' }}>Male</option>
+                                            <option value="Female" {{ $gender === 'Female' ? 'selected' : '' }}>Female</option>
+                                            <option value="None" {{ $gender === 'None' ? 'selected' : '' }}>None</option>
                                         </select>
                                     </div>
                                     <div class="grid grid-cols-2">

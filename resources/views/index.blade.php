@@ -248,10 +248,65 @@
       </div>
     @endforeach
   </div>
-  {{-- <div class="mt-6 px-2 flex justify-center items-center">
-    {!! $products->links('layouts.pagination') !!}
-  </div> --}}
+
 </div>
+
+{{-- carousel product --}}
+<div class="mt-6 p-4 md:p-12">
+  <div class="pl-6 grid place-items-left">
+    <h6 class="font-bold text-[25px]">NEW</h6>
+  </div>  
+  <div class="flex items-center justify-center w-full h-full py-24 sm:py-8 px-4">
+    <div class="w-full relative flex items-center justify-center">
+      <button aria-label="slide backward" class="absolute z-30 left-0 ml-10 focus:outline-none focus:bg-gray-400 focus:ring-2 focus:ring-offset-2 focus:ring-gray-400 cursor-pointer" id="prev">
+        <svg class="dark:text-gray-900" width="16" height="22" viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M7 1L1 7L7 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </button>
+      <div class="w-full h-full mx-auto overflow-x-hidden overflow-y-hidden">      
+        <div id="slider" class="h-full flex lg:gap-8 md:gap-6 gap-14 items-center justify-start transition ease-out duration-700">
+          @foreach($newProduct as $new)
+            <div class="flex flex-shrink-0 relative w-full sm:w-auto">
+              <a href="{{ route('show', $new->product_id)}}">
+                <img class="h-[480px] object-cover object-center w-full" src="/storage/images/product-images/{{$new->product_id}}/{{$new->image}}" alt="sitting area"/>
+              </a>
+              <div class="bg-gray-800 bg-opacity-30 absolute w-full p-6">
+                <h2 class="lg:text-sm leading-4 text-base lg:leading-5 text-black dark:text-gray-900">{{ $new->product_name }}</h2>
+                <div class="flex h-full items-end pb-6">
+                  <h3 class="text-sm lg:text-xl font-semibold leading-5 lg:leading-6 text-white dark:text-gray-900">{{ $new->getBrand->brand_name }}</h3>
+                </div>
+              </div>
+            </div>
+          @endforeach
+        </div>
+      </div>
+      <button aria-label="slide forward" class="absolute z-30 right-0 mr-10 focus:outline-none focus:bg-gray-400 focus:ring-2 focus:ring-offset-2 focus:ring-gray-400" id="next">
+        <svg class="dark:text-gray-900" width="16" height="22" viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M1 1L7 7L1 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+    let defaultTransform = 0;
+    function goNext() {
+      defaultTransform = defaultTransform - 398;
+      var slider = document.getElementById("slider");
+      if (Math.abs(defaultTransform) >= slider.scrollWidth / 1.7)
+        defaultTransform = 0;
+      slider.style.transform = "translateX(" + defaultTransform + "px)";
+    }
+    next.addEventListener("click", goNext);
+    function goPrev() {
+      var slider = document.getElementById("slider");
+      if (Math.abs(defaultTransform) === 0) defaultTransform = 0;
+      else defaultTransform = defaultTransform + 398;
+      slider.style.transform = "translateX(" + defaultTransform + "px)";
+    }
+    prev.addEventListener("click", goPrev);
+</script>
 
 @include('layouts.footer')
 
