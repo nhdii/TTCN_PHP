@@ -27,7 +27,7 @@
                 <!-- Profile Card -->
                 <div class="bg-white p-3">
                     <div class="image overflow-hidden  border-b-4 border-green-400">
-                        <img class="h-auto w-full mx-auto" src="https://images.rawpixel.com/image_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIzLTAxL3JtNjA5LXNvbGlkaWNvbi13LTAwMi1wLnBuZw.png" alt="">
+                        <img class="h-auto w-full mx-auto" src="{{ asset('storage/images/user_avt/' . $user->customer_id . '/' . $user->avatar) }}" alt="">
                     </div>
                     <h1 class="text-gray-900 font-bold text-xl leading-8 my-1">{{$name}}</h1>
                     <ul class="bg-gray-100 text-gray-600 hover:text-gray-700 hover:shadow py-2 px-3 mt-3 divide-y rounded shadow-sm">

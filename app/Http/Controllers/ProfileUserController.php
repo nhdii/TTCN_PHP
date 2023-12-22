@@ -31,6 +31,7 @@ class ProfileUserController extends Controller
             $brand = Brand::all();
             $product = Product::all();
             $category = Category::all();
+
             return view('profile.profile', [
                 'user' => $user,
                 'name' => $user->fullName,
@@ -71,7 +72,15 @@ class ProfileUserController extends Controller
             $customer->address = $request->address;
             $customer->phone = $request->phone;
             $customer->birthDay = $request->birthDay;
-            $customer->gender = $request->input('gender');
+            $customer->gender = $request->gender;
+            if ($request->hasFile('avatar')) {
+                $image = $request->file('avatar');
+                $userId = $customer->customer_id;
+                $imageName = 'avatar' . '.' . $image->getClientOriginalExtension();
+                $image->storeAs("public/images/user_avt/$userId", $imageName);
+                $customer->avatar = $imageName;
+            }
+
             $customer->save();
 
             $user = User::find(\auth()->id());

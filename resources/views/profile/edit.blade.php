@@ -30,7 +30,7 @@
                 <div class="bg-white p-3">
                     <div class="image overflow-hidden  border-b-4 border-green-400">
                         <img class="h-auto w-full mx-auto"
-                            src="https://images.rawpixel.com/image_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIzLTAxL3JtNjA5LXNvbGlkaWNvbi13LTAwMi1wLnBuZw.png"
+                            src="{{ asset('storage/images/user_avt/' . $user->customer_id . '/' . $user->avatar) }}"
                             alt="">
                     </div>
                     <h1 class="text-gray-900 font-bold text-xl leading-8 my-1">{{$name}}</h1>
@@ -79,7 +79,7 @@
                         </span>
                         <span class="tracking-wide">Thông tin</span>
                     </div>
-                    <form action="{{route('update-profile')}}" method="post">
+                    <form action="{{route('update-profile')}}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="text-gray-700">
                             <div class="grid md:grid-cols-2 text-lg">
@@ -119,6 +119,13 @@
                                         <input type="text" name="phone" pattern="[0-9]{10}" class="px-3 w-full h-10 border border-gray-400 rounded-lg" value="{{$user->phone}}">
                                     </div>
                                 @endif
+                                <div class="grid grid-cols-2">
+                                    <div class="px-4 py-3 font-semibold">Avatar</div>
+                                    <input value="{{ old('avatar', $user->avatar) }}" name="avatar" type="file" class="w-full h-10 border border-gray-400 cursor-pointer rounded-lg bg-transparent outline-none transition file:mr-5 file:border-collapse file:cursor-pointer file:border-0 file:border-r file:border-solid file:border-stroke file:bg-whiter file:py-1 file:hover:bg-primary file:hover:bg-opacity-10 focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter">
+                                    @if($errors->has('avatar'))
+                                        <span class="text-red-500">{{ $errors->first('avatar') }}</span>
+                                    @endif
+                                </div>
                                 
                             </div>
                         </div>
