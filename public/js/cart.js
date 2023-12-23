@@ -1,68 +1,69 @@
-// Inside your existing script tag or a separate JavaScript file
-
-$(document).ready(function() {
-    $('.increase-quantity').on('click', function(e) {
+$(document).ready(function () {
+    // Sự kiện khi nhấn nút giảm
+    $(document).on('submit', '.decreaseForm', function (e) {
         e.preventDefault();
-        var productId = $(this).data('product-id');
-        updateQuantity(productId, 'increase');
+
+        updateCart($(this).data('action'), $(this).serialize());
     });
 
-    $('.decrease-quantity').on('click', function(e) {
+    // Sự kiện khi nhấn nút tăng
+    $(document).on('submit', '.increaseForm', function (e) {
         e.preventDefault();
-        var productId = $(this).data('product-id');
-        updateQuantity(productId, 'decrease');
+
+        updateCart($(this).data('action'), $(this).serialize());
     });
 
-    $('.remove-item').on('click', function(e) {
-        e.preventDefault();
-        var productId = $(this).data('product-id');
-        removeItemFromCart(productId);
-    });
+    function updateCart(action, formData) {
+        $.ajax({
+            type: 'POST',
+            url: action,
+            data: formData,
+            success: function (response) {
+                // Cập nhật số lượng sản phẩm
+                $('#quantityInput-'+ response.product_id).val(response.quantity);
 
-    function updateQuantity(productId, action) {
-        var cart = getCartFromLocalStorage();
-        var cartKey = productId;
+                // hiển thị tổng tiền của mỗi sản phẩm
+                $('#productTotal-' + response.product_id).text(response.productTotal);
 
-        if (cart.hasOwnProperty(cartKey)) {
-            if (action === 'increase') {
-                cart[cartKey]['quantity']++;
-            } else if (action === 'decrease' && cart[cartKey]['quantity'] > 1) {
-                cart[cartKey]['quantity']--;
+                // cập nhật totalAmount
+                $('#totalAmount').text(response.totalAmount);                
+            },
+            error: function (error) {
+                console.log(error);
             }
-
-            // Update your cart UI using the updated quantity
-            updateCartUI(cart);
-            // Save the updated cart to local storage
-            saveCartToLocalStorage(cart);
-        }
+        });
     }
 
-    function removeItemFromCart(productId) {
-        var cart = getCartFromLocalStorage();
-        var cartKey = productId;
+});
 
-        if (cart.hasOwnProperty(cartKey)) {
-            delete cart[cartKey];
+$(document).ready(function () {
+    // Sự kiện khi nhấn nút xóa
+    $(document).on('submit', '.removeForm', function (e) {
+        e.preventDefault();
 
-            // Update your cart UI after removing the item
-            updateCartUI(cart);
-            // Save the updated cart to local storage
-            saveCartToLocalStorage(cart);
-        }
-    }
+        removeItem($(this).data('action'), $(this).serialize());
+    });
 
-    function updateCartUI(cart) {
-        // Update your cart UI using the cart data
-        // For example, update the quantity and total amount in the cart summary
-        console.log(cart);
-    }
+    function removeItem(action, formData) {
+        $.ajax({
+            type: 'POST',
+            url: action,
+            data: formData,
+            success: function (response) {
+                console.log(response);
+                // Xóa sản phẩm khỏi giao diện
+                var productId = response.product_id;
+                $('#cartItem-' + productId).remove();
+                
+                // Cập nhật totalAmount
+                $('#totalAmount').text(response.totalAmount);
 
-    function getCartFromLocalStorage() {
-        var cart = localStorage.getItem('cart');
-        return cart ? JSON.parse(cart) : {};
-    }
-
-    function saveCartToLocalStorage(cart) {
-        localStorage.setItem('cart', JSON.stringify(cart));
+                // Hiển thị thông báo thành công 
+                alert(response.message);
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
     }
 });

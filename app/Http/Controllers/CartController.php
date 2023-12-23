@@ -81,6 +81,34 @@ class CartController extends Controller
     }
 
 
+    // public function increaseQuantity(Request $request)
+    // {
+    //     $cart = Session::get('cart');
+    //     $product_id = $request->input('product_id');
+
+    //     if (isset($cart[$product_id])) {
+    //         $cart[$product_id]['quantity']++;
+    //     }
+
+    //     Session::put('cart', $cart);
+
+    //     return redirect()->route('cartIndex');
+    // }
+
+    // public function decreaseQuantity(Request $request)
+    // {
+    //     $cart = Session::get('cart');
+    //     $product_id = $request->input('product_id');
+
+    //     if (isset($cart[$product_id]) && $cart[$product_id]['quantity'] > 1) {
+    //         $cart[$product_id]['quantity']--;
+    //     }
+
+    //     Session::put('cart', $cart);
+
+    //     return redirect()->route('cartIndex');
+    // }
+
     public function increaseQuantity(Request $request)
     {
         $cart = Session::get('cart');
@@ -92,7 +120,14 @@ class CartController extends Controller
 
         Session::put('cart', $cart);
 
-        return redirect()->route('cartIndex');
+        $response = [
+            'product_id' => $product_id,
+            'quantity' => $cart[$product_id]['quantity'],
+            'totalAmount' => $this->calculateTotalAmount($cart),
+            'productTotal' => number_format($cart[$product_id]['price'] * $cart[$product_id]['quantity'], 0, ',', '.') . ' VNĐ',
+        ];
+    
+        return response()->json($response);
     }
 
     public function decreaseQuantity(Request $request)
@@ -106,8 +141,44 @@ class CartController extends Controller
 
         Session::put('cart', $cart);
 
-        return redirect()->route('cartIndex');
+        $response = [
+            'product_id' => $product_id,
+            'quantity' => $cart[$product_id]['quantity'],
+            'totalAmount' => $this->calculateTotalAmount($cart),
+            'productTotal' => number_format($cart[$product_id]['price'] * $cart[$product_id]['quantity'], 0, ',', '.') . ' VNĐ',
+        ];
+    
+        return response()->json($response);
+    }           
+
+
+    private function calculateTotalAmount($cart)
+    {
+        $totalAmount = 0;
+
+        foreach ($cart as $cartItem) {
+            $totalAmount += $cartItem['price'] * $cartItem['quantity'];
+        }
+
+        return number_format($totalAmount, 0, ',', '.') . ' VNĐ';
     }
+
+    // public function removeItemFromCart(Request $request)
+    // {
+    //     $cart = Session::get('cart');
+    //     $product_id = $request->input('product_id');
+
+    //     if (isset($cart[$product_id])) {
+    //         unset($cart[$product_id]);
+    //         session()->put('cart', $cart);
+    //     }
+
+    //     if (empty($cart)) {
+    //         session()->forget('cart');
+    //     }
+
+    //     return redirect()->route('cartIndex')->with('success', 'Remove products from cart successfully');
+    // }
 
     public function removeItemFromCart(Request $request)
     {
@@ -123,8 +194,16 @@ class CartController extends Controller
             session()->forget('cart');
         }
 
-        return redirect()->route('cartIndex')->with('success', 'Remove products from cart successfully');
+        $response = [
+            'success' => true,
+            'message' => 'Remove products from cart successfully',
+            'totalAmount' => $this->calculateTotalAmount($cart),
+            'product_id' => $product_id,
+        ];
+
+        return response()->json($response);
     }
+
 
     public function handlePaymentCallback(Request $request)
     {

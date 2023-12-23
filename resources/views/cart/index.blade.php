@@ -8,6 +8,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
     <title>Your Cart</title>
 </head>
 <body class="bg-gray-100">
@@ -32,7 +33,7 @@
                     <h3 class="font-semibold text-center text-gray-600 text-sm uppercase md:w-1/5 hidden md:block text-center">Total</h3>
                 </div>
                 @foreach ($cart as $item => $each)
-                    <div class="flex flex-col md:flex-row items-center hover:bg-gray-100 -mx-4 md:mx-0 px-4 py-5">
+                    <div id="cartItem-{{$item}}" class="flex flex-col md:flex-row items-center hover:bg-gray-100 -mx-4 md:mx-0 px-4 py-5">
                         <div class="w-full md:w-2/5 md:flex">
                             <div class="w-full md:w-1/4">
                                 <a href="{{ route('show', $each['product_id']) }}">
@@ -44,35 +45,38 @@
                                 <span class="font-bold text-lg">{{ $each['name'] }}</span>
                                 <span class="font-bold text-sm">{{ $each['gender'] }}'s Shoes</span>
                                 <span class="font-bold text-sm">Size: {{ $each['size'] }}</span>    
-                                <form method="post" action="{{ route('removeItemFromCart') }}">
+                                <form id="removeForm" class="removeForm" method="post" data-action="{{ route('removeItemFromCart') }}">
                                     @csrf
                                     <input name="product_id" type="hidden" value="{{ $item }}">
-                                    <button class="font-semibold text-red-500 text-sm">Remove</button>
+                                    <button id="removeBtn" class="font-semibold text-red-500 text-sm">Remove</button>
                                 </form>                                                                                         
                             </div>
                         </div>
+
                         <div class="flex justify-center md:w-1/5">
-                            <form method="post" action="{{ route('decreaseQuantity')}}">
+                            <form id="decreaseForm" class="decreaseForm" data-action="{{ route('decreaseQuantity') }}">
                                 @csrf
                                 <input name="product_id" type="hidden" value="{{ $item }}">
-                                <button>
-                                    <svg class="fill-current text-gray-600 w-3" viewBox="0 0 448 512"><path d="M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"/>
+                                <button id="decreaseBtn">
+                                    <svg class="fill-current text-gray-600 w-3" viewBox="0 0 448 512">
+                                        <path d="M272 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h240c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"/>
                                     </svg>
                                 </button>
                             </form>
-                            <input class="mx-2 border text-center w-8" type="text" value="{{ $each['quantity'] }}" disabled>
-                            <form method="post" action="{{ route('increaseQuantity')}}">
+                            <input id="quantityInput-{{$item}}" class="mx-2 border text-center w-8" type="text" value="{{ $each['quantity'] }}" disabled>
+                            <form id="increaseForm" class="increaseForm" data-action="{{ route('increaseQuantity') }}">
                                 @csrf
                                 <input name="product_id" type="hidden" value="{{ $item }}">
-                                <button>
+                                <button id="increaseBtn">
                                     <svg class="fill-current text-gray-600 w-3" viewBox="0 0 448 512">
                                         <path d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"/>
                                     </svg>
                                 </button>
                             </form>
                         </div>
+
                         <span class="text-center md:w-1/5 font-semibold text-sm">{{ number_format($each['price'], 0, ',', '.')  . ' VNĐ' }}</span>
-                        <span class="text-center md:w-1/5 font-semibold text-sm">{{ number_format($each['price'] * $each['quantity'], 0, ',', '.')  . ' VNĐ' }}</span>
+                        <span id="productTotal-{{$item}}" class="text-center md:w-1/5 font-semibold text-sm">{{ number_format($each['price'] * $each['quantity'], 0, ',', '.')  . ' VNĐ' }}</span>
                         @php $totalAmount += $each['price'] * $each['quantity']  @endphp
                     </div>
                 @endforeach
@@ -96,11 +100,11 @@
                 <div class="border-t mt-8">
                     <div class="flex font-semibold justify-between py-6 text-sm uppercase">
                         <span>Total</span>
-                        <span>{{ !empty($cart) ? number_format($totalAmount, 0, ',', '.') : '0'}} VNĐ</span>
+                        <span id="totalAmount">{{ !empty($cart) ? number_format($totalAmount, 0, ',', '.') : '0'}} VNĐ</span>
                     </div>
                     <form action="{{ url('/vnpay_payment') }}" method="POST">
                         @csrf
-                        <input type="hidden" name="total_vnpay" value="{{!empty($cart) ? $totalAmount : '0'}}">
+                        <input type="hidden" name="total_vnpay" id="totalAmount" value="{{!empty($cart) ? $totalAmount : '0'}}">
                         <button name="redirect" class="bg-indigo-500 font-semibold hover:bg-indigo-600 py-3 text-sm text-white uppercase w-full" type="submit">Check out</button>
                     </form>                
                 </div>
@@ -108,4 +112,51 @@
         </div>
     </div>
 </body>
+
+<script src="{{ asset('js/cart.js') }}"></script>
+
+{{-- <script>
+    $(document).ready(function () {
+        // Sự kiện khi nhấn nút giảm
+        $(document).on('submit', '.decreaseForm', function (e) {
+            e.preventDefault();
+
+            updateCart($(this).data('action'), $(this).serialize());
+        });
+
+        // Sự kiện khi nhấn nút tăng
+        $(document).on('submit', '.increaseForm', function (e) {
+            e.preventDefault();
+
+            updateCart($(this).data('action'), $(this).serialize());
+        });
+
+        function updateCart(action, formData) {
+            $.ajax({
+                type: 'POST',
+                url: action,
+                data: formData,
+                success: function (response) {
+                    // Cập nhật giỏ hàng và tổng tiền
+                    console.log(response);
+                    updateCartUI(response);
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        }
+
+        function updateCartUI(response) {
+            // Cập nhật số lượng sản phẩm
+            $('#quantityInput-'+ response.product_id).val(response.quantity);
+
+            // hiển thị tổng tiền của mỗi sản phẩm
+            $('#productTotal-' + response.product_id).text(response.productTotal);
+
+            // cập nhật totalAmount
+            $('#totalAmount').text(response.totalAmount);
+        }
+    });
+</script> --}}
 </html>

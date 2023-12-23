@@ -157,6 +157,34 @@ class ProductController extends Controller
         ]);
     }
 
+    public function filterProducts(Request $request)
+    {
+        $brandFilter = $request->input('brand');
+        $genderFilter = $request->input('gender');
+        $categoryFilter = $request->input('category');
+
+        $query = Product::query();
+
+        if ($brandFilter) {
+            $query->whereHas('getBrand', function ($query) use ($brandFilter) {
+                $query->where('brand_id', $brandFilter);
+            });
+        }
+
+        if ($genderFilter) {
+            $query->where('gender', $genderFilter);
+        }
+
+        if ($categoryFilter) {
+            $query->where('category_id', $categoryFilter);
+        }
+
+        $filteredProducts = $query->paginate(8);
+
+        return view('partials.filtered-products', ['products' => $filteredProducts])->render();
+    }
+
+
     public function create()
     {
         $brands = Brand::all(); 

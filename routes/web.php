@@ -13,17 +13,6 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProfileUserController;
 use App\Http\Controllers\PaymentController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
-
 Route::prefix('admin')->middleware('admin')->group(function () {
     Route::get('/', function () {
         return view('admin.index');
@@ -49,6 +38,7 @@ Route::get('/kid_products', [ProductController::class, 'showKidProducts'])->name
 Route::get('/home/by_brand/{brand_id}', [ProductController::class, 'showProductsByBrand'])->name('home.by_brand');
 Route::post('/vnpay_payment', [PaymentController::class, 'vnpay_payment']);
 Route::get('/search', [ProductController::class, 'search'])->name('search');
+Route::get('/filter-products', [ProductController::class, 'filterProducts'])->name('filter-products');
 
 
 
