@@ -115,48 +115,4 @@
 
 <script src="{{ asset('js/cart.js') }}"></script>
 
-{{-- <script>
-    $(document).ready(function () {
-        // Sự kiện khi nhấn nút giảm
-        $(document).on('submit', '.decreaseForm', function (e) {
-            e.preventDefault();
-
-            updateCart($(this).data('action'), $(this).serialize());
-        });
-
-        // Sự kiện khi nhấn nút tăng
-        $(document).on('submit', '.increaseForm', function (e) {
-            e.preventDefault();
-
-            updateCart($(this).data('action'), $(this).serialize());
-        });
-
-        function updateCart(action, formData) {
-            $.ajax({
-                type: 'POST',
-                url: action,
-                data: formData,
-                success: function (response) {
-                    // Cập nhật giỏ hàng và tổng tiền
-                    console.log(response);
-                    updateCartUI(response);
-                },
-                error: function (error) {
-                    console.log(error);
-                }
-            });
-        }
-
-        function updateCartUI(response) {
-            // Cập nhật số lượng sản phẩm
-            $('#quantityInput-'+ response.product_id).val(response.quantity);
-
-            // hiển thị tổng tiền của mỗi sản phẩm
-            $('#productTotal-' + response.product_id).text(response.productTotal);
-
-            // cập nhật totalAmount
-            $('#totalAmount').text(response.totalAmount);
-        }
-    });
-</script> --}}
 </html>

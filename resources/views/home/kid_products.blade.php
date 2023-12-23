@@ -82,9 +82,36 @@
 
 @include('layouts.footer')
 
-<script src="{{ asset('js/filter.js') }}"></script>
+{{-- <script src="{{ asset('js/filter.js') }}"></script> --}}
 
 <script>
+  //Bộ lọc
+  $(document).ready(function () {
+    $('#applyFilters').on('click', function () {
+        var brandFilter = $('#brandFilter').val();
+        var genderFilter = $('#genderFilter').val();
+        var categoryFilter = $('#categoryFilter').val();
+
+        $.ajax({
+            type: 'GET',
+            url: '{{ route("filter-products") }}',
+            data: {
+                brand: brandFilter,
+                gender: genderFilter,
+                category: categoryFilter,
+            },
+            success: function (data) {
+                console.log(data); // Log the response data
+                $('#product').html(data);
+                
+            },
+            error: function (xhr, status, error) {
+                console.error(xhr.responseText);
+            }
+        });
+    });
+  });
+
   document.addEventListener('DOMContentLoaded', function() {
       const urlParams = new URLSearchParams(window.location.search);
       const pageParam = urlParams.get('page');

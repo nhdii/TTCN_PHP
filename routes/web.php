@@ -41,7 +41,6 @@ Route::get('/search', [ProductController::class, 'search'])->name('search');
 Route::get('/filter-products', [ProductController::class, 'filterProducts'])->name('filter-products');
 
 
-
 //Kiểm tra login nếu true: vào, false: thoát về home
 Route::middleware('checkLogin')->group(function(){
     Route::get('profile', [ProfileUserController::class, 'showProfile'])->name('show-profile');
