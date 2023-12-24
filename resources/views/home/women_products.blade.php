@@ -44,10 +44,7 @@
     <div class="hidden">
       <label for="genderFilter" class="block text-lg font-medium text-gray-600">Gender</label>
       <select id="genderFilter" class="mt-1 p-2 border rounded-md w-full">
-          <option value="">All Genders</option>
-          <option value="Men">Men</option>
           <option value="Women">Women</option>
-          <option value="Kid">Kid</option>
       </select>
     </div>
     
@@ -68,7 +65,7 @@
           <a href="{{ route('show', $product->product_id)}}">
             <p class="font-bold text-lg mt-2">{{ $product->product_name }}</p>
           </a>
-          <p class="text-lg mt-2">{{ $product->gender }}</p>
+          <p class="text-lg mt-2">{{ $product->gender }}'s shoes</p>
           <p class="text-lg mt-2">{{ number_format($product->default_price, 0, ',', '.') }} VNĐ</p>
         </div>
       </div>

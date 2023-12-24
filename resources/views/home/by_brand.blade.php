@@ -11,29 +11,46 @@
     <link rel="stylesheet" href="https://unpkg.com/simplebar@5.3.4/dist/simplebar.min.css" />
     <script src="https://unpkg.com/simplebar@5.3.4/dist/simplebar.min.js"></script>
 
-    <title>Men's Shoes</title>
+    <title>Brands </title>
 </head>
 <body>
 @include('layouts.nav')
  
 <div class="flex flex-col lg:flex-row">
-    <!-- Bộ lọc chiếm 1/4 màn hình trên màn hình lớn (lg) -->
     <div class="lg:w-1/4 p-4 md:p-12 simplebar lg:flex-shrink-0" data-simplebar>
         <h6 class="font-bold text-[25px] mb-4">Filter</h6>
     
         <!-- Filter theo categories -->
-        <div class="mb-6">
-            <label for="categoryFilter" class="block text-sm font-medium text-gray-600">Category</label>
-            <select id="categoryFilter" name="categoryFilter" class="mt-1 p-2 border rounded-md w-full">
-                <!-- Populate categories dynamically from your database -->
-                @foreach($categories as $category)
-                    <option value="{{ $category->category_name }}">{{ $category->category_name }}</option>
+        <div class="hidden">
+            <label for="brandFilter" class="block text-lg font-medium text-gray-600">Brand</label>
+            <select id="brandFilter" class="mt-1 p-2 border rounded-md w-full">
+                @foreach($brands as $brand)
+                    <option value="{{ $brand->brand_id }}">{{ $brand->brand_name }}</option>
                 @endforeach
             </select>
         </div>
-    
-        <!-- Nút để kích hoạt bộ lọc -->
-        <button type="button" class="bg-blue-500 text-white px-4 py-2 rounded-md">Apply Filters</button>
+      
+        <div>
+            <label for="genderFilter" class="block text-lg font-medium text-gray-600">Gender</label>
+            <select id="genderFilter" class="mt-1 p-2 border rounded-md w-full">
+                <option value="">All Genders</option>
+                <option value="Men">Men</option>
+                <option value="Women">Women</option>
+                <option value="Kid">Kid</option>
+            </select>
+        </div>
+        
+        <div>
+            <label for="categoryFilter" class="block text-lg font-medium text-gray-600">Category</label>
+            <select id="categoryFilter" class="mt-1 p-2 border rounded-md w-full">
+                <option value="">All Categories</option>
+                @foreach($categories as $category)
+                    <option value="{{ $category->category_id }}">{{ $category->category_name }}</option>
+                @endforeach
+            </select>
+        </div>
+        
+        <button id="applyFilters" class="bg-blue-500 text-white px-4 py-2 rounded-md mt-4 hover:bg-blue-600 hover:border-blue-600 hover:text-gray-100 hover:scale-105">Apply Filters</button>
     </div>
     
     <!-- Hiển thị sản phẩm chiếm 3/4 màn hình trên màn hình lớn (lg) -->
@@ -66,6 +83,33 @@
 @include('layouts.footer')
 
 <script>
+
+    //bộ lọc
+    $(document).ready(function () {
+        $('#applyFilters').on('click', function () {
+            var brandFilter = $('#brandFilter').val();
+            var genderFilter = $('#genderFilter').val();
+            var categoryFilter = $('#categoryFilter').val();
+
+            $.ajax({
+                type: 'GET',
+                url: '{{ route("filter-products") }}',
+                data: {
+                    brand: brandFilter,
+                    gender: genderFilter,
+                    category: categoryFilter,
+                },
+                success: function (data) {
+                    console.log(data); // Log the response data
+                    $('#product').html(data);
+                    
+                },
+                error: function (xhr, status, error) {
+                    console.error(xhr.responseText);
+                }
+            });
+        });
+    });
   document.addEventListener('DOMContentLoaded', function() {
       const urlParams = new URLSearchParams(window.location.search);
       const pageParam = urlParams.get('page');
@@ -75,9 +119,7 @@
       }
   });
 
-  document.addEventListener('DOMContentLoaded', function () {
-        new SimpleBar(document.querySelector('.simplebar'));
-    });
+
 </script>
 
 </body>

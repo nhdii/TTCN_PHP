@@ -33,7 +33,7 @@ class ProductAttributeController extends Controller
                 $query->where($column, $operator, $keywords);
             }
         }
-        $data = $query->paginate(5);
+        $data = $query->paginate(20);
         return view('admin.product_attributes.index' , [
             'product_attributes' => $data,
             'keywords' => $lastKeyword,
@@ -51,7 +51,7 @@ class ProductAttributeController extends Controller
         $types = Type::all();
 
         //list size product
-        $sizes = ['EU 35.5', 'EU 36', 'EU 36.5', 'EU 37', 'EU 37.5', 'EU 38', 'EU 38.5', 
+        $sizes = ['EU 30', 'EU 32', 'EU 33', 'EU 34', 'EU 35.5', 'EU 36', 'EU 36.5', 'EU 37', 'EU 37.5', 'EU 38', 'EU 38.5', 
         'EU 39', 'EU 39.5', 'EU 40', 'EU 40.5', 'EU 41', 'EU 41.5', 'EU 42', 'EU 42.5', 'EU 43'];
 
         return view('admin.product_attributes.create', compact('sizes', 'products', 'types'));

@@ -10,7 +10,6 @@
             <form action="" method="GET" class="flex items-center space-x-4">
                 <label for="search_by" class="font-bold">Seach by:</label>
                 <select name="search_by" id="search_by" class="p-2 border rounded">
-                    <option value="attribute_name" @if($column == 'attribute_name') selected @endif>Attribute Name</option>
                     <option value="product_id" @if($column == 'product_id') selected @endif>Product</option>
                 </select>
                 <input type="text" name="keywords" value="{{ $keywords }}" placeholder="Nhập từ khóa" class="p-2 border rounded">

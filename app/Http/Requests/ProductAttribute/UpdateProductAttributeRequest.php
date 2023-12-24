@@ -35,7 +35,7 @@ class UpdateProductAttributeRequest extends FormRequest
             'attribute_value' => [
                 'bail',
                 'required',
-                'in:EU 35.5,EU 36,EU 36.5,EU 37,EU 37.5,EU 38,EU 38.5,EU 39,EU 39.5,EU 40,EU 40.5,EU 41,EU 41.5,EU 42,EU 42.5,EU 43',
+                'in:EU 30,EU 32,EU 33,EU 34,EU 35.5,EU 36,EU 36.5,EU 37,EU 37.5,EU 38,EU 38.5,EU 39,EU 39.5,EU 40,EU 40.5,EU 41,EU 41.5,EU 42,EU 42.5,EU 43',
             ],
                         
         ];

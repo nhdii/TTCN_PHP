@@ -63,7 +63,7 @@ class StoreProductRequest extends FormRequest
             ],
             'gender' => [
                 'required',
-                'in:Men,Women,Kid Boy, Kid Girl',
+                'in:Men,Women,Kid Boy,Kid Girl',
             ],
 
         ];

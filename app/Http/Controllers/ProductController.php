@@ -44,7 +44,7 @@ class ProductController extends Controller
             }
         }
 
-        $data = $query->paginate(5);
+        $data = $query->paginate(15);
 
         return view('admin.products.index' , [
             'products' => $data,
@@ -142,6 +142,8 @@ class ProductController extends Controller
     {
         $brand = Brand::findOrFail($brand_id);
 
+        $brands = Brand::all();
+
         $categories = Category::all();
 
         $data = Product::query()
@@ -152,6 +154,7 @@ class ProductController extends Controller
         return view('home.by_brand', [
             'products' => $data,
             'brand' => $brand,
+            'brands' => $brands,
             'categories' => $categories,
 
         ]);
