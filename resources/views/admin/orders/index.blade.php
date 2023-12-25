@@ -2,6 +2,25 @@
 @section('content')
 @include('layouts.notifySuccess')
 <div class="relative flex flex-col w-full min-w-0 mb-0 break-words bg-white border-0 border-transparent border-solid shadow-soft-xl rounded-2xl bg-clip-border">
+    <div class="mb-2 mt-5 flex">
+        <div class="ml-4 mr-2">
+            <form action="" method="GET" class="flex items-center space-x-4">
+                <label for="search_by" class="font-bold">Tìm kiếm theo:</label>
+                <select name="search_by" id="search_by" class="p-2 border rounded">
+                    <option value="order_date" @if($column == 'order_date') selected @endif>Order Date</option>
+                    <option value="status" @if($column == 'status') selected @endif>Status</option>
+                </select>
+                <input type="text" name="keywords" value="{{ $keywords }}" placeholder="Enter Keyword" class="p-2 border rounded">
+                <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded duration-300 ease-in-out cursor-pointer">
+                    Search
+                </button>
+            </form>
+        </div>
+        <a href="{{ route('customers.index') }}" class="mr-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded cursor-pointer duration-300 ease-in-out">
+            Reset
+        </a>  
+
+    </div>
     <div class="p-6 pb-0 mb-0 bg-white rounded-t-2xl">
         <h6 class="font-bold text-xl">ORDER</h6>
     </div>
@@ -36,12 +55,8 @@
                             <p class="mb-0 font-semibold leading-tight text-xss">{{ $item->status }}</p>
                         </td>
                         <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                            <a href="{{ route('products.edit', $item->order_id) }}" class="font-semibold leading-tight text-xss text-slate-400">
-                                <i class="fas fa-edit"></i>
-                            </a>
-                            |
                             <a href="{{ route('detail_orders.show', $item->order_id) }}" class="font-semibold leading-tight text-xss text-slate-400">
-                                <i class="fas fa-info-circle"></i> 
+                                <i class="fas fa-info-circle text-lg"></i> 
                             </a> 
                         </td>
                     </tr>

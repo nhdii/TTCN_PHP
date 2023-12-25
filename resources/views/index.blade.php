@@ -271,10 +271,7 @@
                 <img class="h-[480px] object-cover object-center w-full" src="/storage/images/product-images/{{$new->product_id}}/{{$new->image}}" alt="sitting area"/>
               </a>
               <div class="bg-gray-800 bg-opacity-30 absolute w-full p-6">
-                <h2 class="lg:text-sm leading-4 text-base lg:leading-5 text-black dark:text-gray-900">{{ $new->product_name }}</h2>
-                <div class="flex h-full items-end pb-6">
-                  <h3 class="text-sm lg:text-xl font-semibold leading-5 lg:leading-6 text-white dark:text-gray-900">{{ $new->getBrand->brand_name }}</h3>
-                </div>
+                <h2 class="text-sm lg:text-xl font-semibold leading-5 lg:leading-6 text-white dark:text-gray-900">{{ $new->product_name }}</h2>
               </div>
             </div>
           @endforeach

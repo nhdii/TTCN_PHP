@@ -13,7 +13,8 @@ class OrderController extends Controller
     public function index(Request $request)
     {
         $searchColumns = [
-            'order_id' => 'like',
+            'status' => 'like',
+            'order_date' => 'like',
         ];
         $column = $request->get('search_by');
         $keywords = $request->get('keywords');

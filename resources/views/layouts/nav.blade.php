@@ -70,7 +70,7 @@
 						{{-- @if($cart && count($cart) > 0)
 							<span class="absolute scale-75 -top-2 left-5 rounded-full bg-red-500 p-0.5 px-2 text-[15px] text-red-50">{{ count($cart) }}</span>
 						@endif --}}
-						<span class="absolute scale-75 -top-2 left-6 rounded-full bg-red-500 p-0.5 px-2 text-[14px] text-red-50">{{ !empty($cart) ? count($cart) : '0'}}</span>
+						<span class="absolute scale-75 -top-2 left-6 rounded-full bg-red-500 p-0.5 px-2 text-[14px] text-red-50">{{ Session::has('cart') ? array_sum(array_column(Session::get('cart'), 'quantity')) : 0 }}</span>
 					</div>
 				</a>		
 

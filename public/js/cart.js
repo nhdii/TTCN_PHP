@@ -19,6 +19,7 @@ $(document).ready(function () {
             url: action,
             data: formData,
             success: function (response) {
+                console.log(response);
                 // Cập nhật số lượng sản phẩm
                 $('#quantityInput-'+ response.product_id).val(response.quantity);
 

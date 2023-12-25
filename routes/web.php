@@ -48,15 +48,15 @@ Route::middleware('checkLogin')->group(function(){
     Route::post('profile/edit', [ProfileUserController::class, 'update'])->name('update-profile');
     Route::get('logout', [AuthManagerController::class, 'logout'])->name('logout');
 
-    // cart route
-    Route::get('/cart', [CartController::class, 'index'])->name('cartIndex');
-    Route::post('/cart/addToCart', [CartController::class, 'addToCart'])->name('addToCart');
-    Route::post('/cart/increase', [CartController::class, 'increaseQuantity'])->name('increaseQuantity');
-    Route::post('/cart/decrease', [CartController::class, 'decreaseQuantity'])->name('decreaseQuantity');
-    Route::post('/cart/remove', [CartController::class, 'removeItemFromCart'])->name('removeItemFromCart');
-    Route::get('/cart/callback', [CartController::class, 'handlePaymentCallback'])->name('handlePaymentCallback');
-
 });
+
+// cart route
+Route::get('/cart', [CartController::class, 'index'])->name('cartIndex');
+Route::post('/cart/addToCart', [CartController::class, 'addToCart'])->name('addToCart');
+Route::post('/cart/increase', [CartController::class, 'increaseQuantity'])->name('increaseQuantity');
+Route::post('/cart/decrease', [CartController::class, 'decreaseQuantity'])->name('decreaseQuantity');
+Route::post('/cart/remove', [CartController::class, 'removeItemFromCart'])->name('removeItemFromCart');
+Route::get('/cart/callback', [CartController::class, 'handlePaymentCallback'])->name('handlePaymentCallback');
 
 //Route đăng ký đăng nhập
 Route::get('register', [AuthManagerController::class, 'showRegistration'])->name('show-registration');

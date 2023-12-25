@@ -215,8 +215,8 @@ class CartController extends Controller
 
             $newOrder = new Order();
             $newOrder->customer_id = $customer->customer_id;
-            $newOrder->order_date = Carbon::now();
-            $newOrder->delivery_date = Carbon::now();
+            $newOrder->order_date = now();
+            $newOrder->delivery_date = now();
             $newOrder->status = 'Completely payment';
             $newOrder->save();
 
