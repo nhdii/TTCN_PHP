@@ -44,7 +44,7 @@ class CartController extends Controller
         if (!$product) {
             return abort(404);
         }
-        
+
         // Kiểm tra xem giỏ hàng đã tồn tại chưa, nếu chưa thì tạo mới
         if(!Session::has('cart')) {
             Session::put('cart', []);
@@ -80,42 +80,20 @@ class CartController extends Controller
         return redirect()->route('show', $product_id)->with('success', 'Add to cart success');
     }
 
-
-    // public function increaseQuantity(Request $request)
-    // {
-    //     $cart = Session::get('cart');
-    //     $product_id = $request->input('product_id');
-
-    //     if (isset($cart[$product_id])) {
-    //         $cart[$product_id]['quantity']++;
-    //     }
-
-    //     Session::put('cart', $cart);
-
-    //     return redirect()->route('cartIndex');
-    // }
-
-    // public function decreaseQuantity(Request $request)
-    // {
-    //     $cart = Session::get('cart');
-    //     $product_id = $request->input('product_id');
-
-    //     if (isset($cart[$product_id]) && $cart[$product_id]['quantity'] > 1) {
-    //         $cart[$product_id]['quantity']--;
-    //     }
-
-    //     Session::put('cart', $cart);
-
-    //     return redirect()->route('cartIndex');
-    // }
-
     public function increaseQuantity(Request $request)
     {
         $cart = Session::get('cart');
         $product_id = $request->input('product_id');
 
         if (isset($cart[$product_id])) {
-            $cart[$product_id]['quantity']++;
+            $product = Product::find($cart[$product_id]['product_id']);
+    
+            // Check if the requested quantity exceeds the available stock
+            if ($cart[$product_id]['quantity'] < $product->default_stock_quantity) {
+                $cart[$product_id]['quantity']++;
+            } else {
+                return response()->json(['error' => 'Exceeded available stock']);
+            }
         }
 
         Session::put('cart', $cart);
@@ -162,23 +140,6 @@ class CartController extends Controller
 
         return number_format($totalAmount, 0, ',', '.') . ' VNĐ';
     }
-
-    // public function removeItemFromCart(Request $request)
-    // {
-    //     $cart = Session::get('cart');
-    //     $product_id = $request->input('product_id');
-
-    //     if (isset($cart[$product_id])) {
-    //         unset($cart[$product_id]);
-    //         session()->put('cart', $cart);
-    //     }
-
-    //     if (empty($cart)) {
-    //         session()->forget('cart');
-    //     }
-
-    //     return redirect()->route('cartIndex')->with('success', 'Remove products from cart successfully');
-    // }
 
     public function removeItemFromCart(Request $request)
     {
@@ -227,6 +188,11 @@ class CartController extends Controller
                 $attribute_id = $cartItem['attribute_id'];
                 $quantity = $cartItem['quantity'];
                 $price = $cartItem['price'];
+
+                // Update the stock quantity after a successful purchase
+                $product = Product::find($product_id);
+                $product->default_stock_quantity -= $quantity;
+                $product->save();
             
                 $newDetailOrder = new DetailOrder([
                     'order_id' => $order_id, // Sử dụng order_id vừa tạo
@@ -256,5 +222,7 @@ class CartController extends Controller
             return view('cart.failure');
         }
     }
+
+    
     
 }

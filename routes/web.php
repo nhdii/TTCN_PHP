@@ -12,6 +12,7 @@ use App\Http\Controllers\AuthManagerController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProfileUserController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\SearchController;
 
 Route::prefix('admin')->middleware('admin')->group(function () {
     Route::get('/', function () {
@@ -36,9 +37,10 @@ Route::get('/men_products', [ProductController::class, 'showMenProducts'])->name
 Route::get('/women_products', [ProductController::class, 'showWoMenProducts'])->name('women_products');
 Route::get('/kid_products', [ProductController::class, 'showKidProducts'])->name('kid_products');
 Route::get('/home/by_brand/{brand_id}', [ProductController::class, 'showProductsByBrand'])->name('home.by_brand');
-Route::post('/vnpay_payment', [PaymentController::class, 'vnpay_payment']);
-Route::get('/search', [ProductController::class, 'search'])->name('search');
+Route::get('/search', [SearchController::class, 'search'])->name('search');
 Route::get('/filter-products', [ProductController::class, 'filterProducts'])->name('filter-products');
+
+Route::get('/search-suggestions', [SearchController::class, 'searchSuggestions']);
 
 
 //Kiểm tra login nếu true: vào, false: thoát về home
@@ -47,6 +49,7 @@ Route::middleware('checkLogin')->group(function(){
     Route::get('profile/edit', [ProfileUserController::class, 'edit'])->name('edit-profile');
     Route::post('profile/edit', [ProfileUserController::class, 'update'])->name('update-profile');
     Route::get('logout', [AuthManagerController::class, 'logout'])->name('logout');
+    Route::post('/vnpay_payment', [PaymentController::class, 'vnpay_payment']);
 
 });
 

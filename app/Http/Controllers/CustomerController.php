@@ -16,7 +16,7 @@ class CustomerController extends Controller
     public function index(Request $request)
     {
         $searchColumns = [
-            'customer_id' => 'like',
+            'gender' => 'like',
             'fullname' => 'like',
             'address' => 'like'
         ];

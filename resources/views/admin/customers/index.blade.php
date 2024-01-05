@@ -10,8 +10,8 @@
                 <label for="search_by" class="font-bold">Tìm kiếm theo:</label>
                 <select name="search_by" id="search_by" class="p-2 border rounded">
                     <option value="fullname" @if($column == 'fullname') selected @endif>Name</option>
-                    <option value="customer_id" @if($column == 'customer_id') selected @endif>Customer ID</option>
-                    <option value="phone" @if($column == 'phone') selected @endif>Phone Number</option>
+                    <option value="gender" @if($column == 'gender') selected @endif>Gender</option>
+                    <option value="address" @if($column == 'address') selected @endif>Address</option>
                 </select>
                 <input type="text" name="keywords" value="{{ $keywords }}" placeholder="Enter Keyword" class="p-2 border rounded">
                 <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded duration-300 ease-in-out cursor-pointer">

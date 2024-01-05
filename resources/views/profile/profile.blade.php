@@ -119,13 +119,19 @@
                                             STT
                                         </th>
                                         <th scope="col" class="text-center px-6 py-3">
+                                            Product Name
+                                        </th>
+                                        <th scope="col" class="text-center px-6 py-3">
+                                            Quantity
+                                        </th>
+                                        <th scope="col" class="text-center px-6 py-3">
+                                            Price
+                                        </th>
+                                        <th scope="col" class="text-center px-6 py-3">
                                             Order Date
                                         </th>
                                         <th scope="col" class="text-center px-6 py-3">
                                             Delivery Date
-                                        </th>
-                                        <th scope="col" class="text-center px-6 py-3">
-                                            Status
                                         </th>
                                     </tr>
                                 </thead>
@@ -134,20 +140,30 @@
                                         $stt = 1;
                                     @endphp
                                     @foreach ($order_histories as $item)
-                                        <tr class="bg-white">
-                                            <td class="text-center px-6 py-4">
-                                                {{ $stt++ }}
-                                            </td>
-                                            <td class="text-center px-6 py-4">
-                                                {{ $item->order_date }}
-                                            </td>
-                                            <td class="text-center px-6 py-4">
-                                                {{ $item->delivery_date }}
-                                            </td>
-                                            <td class="text-center px-6 py-4">
-                                                {{ $item->status }}
-                                            </td>
-                                        </tr>
+                                        @foreach ($detail_orders as $dt)
+                                            @if ($item->order_id == $dt->order_id)
+                                                <tr class="bg-white">
+                                                    <td class="text-center px-6 py-4">
+                                                        {{ $stt++ }}
+                                                    </td>
+                                                    <td class="px-6 py-4">
+                                                        {{ $dt->getProduct->product_name }}
+                                                    </td>
+                                                    <td class="text-center px-6 py-4">
+                                                        {{ $dt->quantity }}
+                                                    </td>
+                                                    <td class="text-center px-6 py-4">
+                                                        {{ $dt->price }}
+                                                    </td>
+                                                    <td class="text-center px-6 py-4">
+                                                        {{ $item->order_date }}
+                                                    </td>
+                                                    <td class="text-center px-6 py-4">
+                                                        {{ $item->delivery_date }}
+                                                    </td>
+                                                </tr>
+                                            @endif
+                                        @endforeach
                                     @endforeach
                                 </tbody>
                             </table>

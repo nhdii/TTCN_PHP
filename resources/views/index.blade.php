@@ -268,7 +268,7 @@
           @foreach($newProduct as $new)
             <div class="flex flex-shrink-0 relative w-full sm:w-auto">
               <a href="{{ route('show', $new->product_id)}}">
-                <img class="h-[480px] object-cover object-center w-full" src="/storage/images/product-images/{{$new->product_id}}/{{$new->image}}" alt="sitting area"/>
+                <img class="h-[440px] object-cover object-center w-full" src="/storage/images/product-images/{{$new->product_id}}/{{$new->image}}" alt="sitting area"/>
               </a>
               <div class="bg-gray-800 bg-opacity-30 absolute w-full p-6">
                 <h2 class="text-sm lg:text-xl font-semibold leading-5 lg:leading-6 text-white dark:text-gray-900">{{ $new->product_name }}</h2>
@@ -306,17 +306,6 @@
 </script>
 
 @include('layouts.footer')
-
-{{-- <script>
-  document.addEventListener('DOMContentLoaded', function() {
-      const urlParams = new URLSearchParams(window.location.search);
-      const pageParam = urlParams.get('page');
-      if (pageParam && parseInt(pageParam) >= 1) {
-          window.location.hash = 'product';
-          document.getElementById('product').scrollIntoView();
-      }
-  });
-</script> --}}
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/flowbite.min.js"></script>
 </body>

@@ -55,7 +55,15 @@
                                     </button>
                                 </div>
                             @endforeach
-                        </div>                 
+                        </div>           
+                        
+                        @if ($product->default_stock_quantity > 0)
+                            <p class="inline-block px-2 mb-4 text-lg font-bold text-green-700">
+                                {{ $product->default_stock_quantity }} available
+                            </p>
+                        @endif
+                        
+
                         <div class="flex flex-wrap items-center -mx-4 mt-4">
                             <div class="w-full px-4 mb-4 lg:w-1/2 lg:mb-0">
                                 <a href="{{ route('index') }}#product" class="flex items-center justify-center w-full p-4 text-blue-500 border border-blue-500 rounded-md hover:bg-blue-600 hover:border-blue-600 hover:text-gray-100">
@@ -63,9 +71,18 @@
                                 </a>
                             </div>
                             <div class="w-full px-4 mb-4 lg:mb-0 lg:w-1/2">
-                                <button type="submit" id="addToCartBtn" class="flex items-center justify-center w-full p-4 text-blue-500 border border-blue-500 rounded-md hover:bg-blue-600 hover:border-blue-600 hover:text-gray-100">
+                                {{-- <button type="submit" id="addToCartBtn" class="flex items-center justify-center w-full p-4 text-blue-500 border border-blue-500 rounded-md hover:bg-blue-600 hover:border-blue-600 hover:text-gray-100">
                                     Add to Cart
-                                </button>
+                                </button> --}}
+                                @if ($product->default_stock_quantity > 0)
+                                    <!-- Hiển thị nút "Add to Cart" khi còn tồn kho -->
+                                    <button type="submit" id="addToCartBtn" class="flex items-center justify-center w-full p-4 text-blue-500 border border-blue-500 rounded-md hover:bg-blue-600 hover:border-blue-600 hover:text-gray-100">
+                                        Add to Cart
+                                    </button>
+                                @else
+                                    <!-- Ẩn nút "Add to Cart" khi hết tồn kho -->
+                                    <p class="inline-block px-2 mb-4 text-lg font-bold text-red-400">SOLD OUT</p> 
+                                @endif
                             </div>
                         </div>
                     </form>         

@@ -23,6 +23,7 @@ class ProductController extends Controller
         $searchColumns = [
             'product_name' => 'like',
             'gender' => 'like',
+            'default_price' => 'like'
             // 'size' => 'like',
         ];
         $column = $request->get('search_by');
@@ -278,17 +279,6 @@ class ProductController extends Controller
         return redirect()->route('products.index')->with('error', 'Deleted Error!');
     }
 
-    //function search
-    public function search(Request $request)
-    {
-        $keywords = $request->input('keywords');
+    
 
-        // Xử lý tìm kiếm dựa trên keywords, ví dụ:
-        $results = Product::where('product_name', 'like', '%' . $keywords . '%')->orWhereHas('getProduct', function ($innerQuery) use ($keywords) {
-            $innerQuery->where('brand_name', 'like', '%' . $keywords . '%');
-        })
-        ->paginate(9);
-
-        return view('search_results', ['results' => $results, 'keywords' => $keywords]);
-    }
 }

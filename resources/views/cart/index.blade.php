@@ -18,8 +18,8 @@
     <div class="container mx-auto mt-10">
         <div class="flex flex-col md:flex-row shadow-md my-10">
             <div class="w-full md:w-3/4 bg-white px-4 md:px-10 py-10">
-                <div class="flex flex-col md:flex-row justify-center border-b pb-8">
-                    <h1 class="font-semibold text-2xl mb-4 md:mb-0">Your Cart ({{ count($cart) }} Item{{ count($cart) > 1 ? 's' : '' }})</h1>
+                <div class="flex flex-col md:flex-row border-b pb-8">
+                    <h2 class="font-semibold text-2xl mb-4 md:mb-0">Bag</h2>
                 </div>
                 @if(session()->has('cart'))
                 @php
@@ -48,7 +48,12 @@
                                 <form id="removeForm" class="removeForm" method="post" data-action="{{ route('removeItemFromCart') }}">
                                     @csrf
                                     <input name="product_id" type="hidden" value="{{ $item }}">
-                                    <button id="removeBtn" class="font-semibold text-red-500 text-sm">Remove</button>
+                                    <button id="removeBtn" class="font-semibold text-sm">
+                                        <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" role="img" width="24px" height="24px" fill="none">
+                                            <path stroke="currentColor" stroke-miterlimit="10" stroke-width="1.5" d="M14.25 7.5v12m-4.5-12v12M5.25 6v13.5c0 1.24 1.01 2.25 2.25 2.25h9c1.24 0 2.25-1.01 2.25-2.25V5.25h2.75m-2.75 0H21m-12-3h5.25c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5H3"></path>
+                                        </svg>
+                                    </button>
+                                    
                                 </form>                                                                                         
                             </div>
                         </div>
@@ -85,7 +90,7 @@
                     Continue Shopping
                 </a>
                 @else
-                <h1 class="font-semibold text-2xl text-center mt-8">Your Cart is Empty</h1>
+                <h1 class="font-semibold text-2xl text-center mt-8">There are no items in your bag.</h1>
                 <a href="{{ route('index')}}#product" class="flex font-semibold text-indigo-600 text-sm mt-32">
                     <svg class="fill-current mr-2 text-indigo-600 w-4" viewBox="0 0 448 512"><path d="M134.059 296H436c6.627 0 12-5.373 12-12v-56c0-6.627-5.373-12-12-12H134.059v-46.059c0-21.382-25.851-32.09-40.971-16.971L7.029 239.029c-9.373 9.373-9.373 24.569 0 33.941l86.059 86.059c15.119 15.119 40.971 4.411 40.971-16.971V296z"/></svg>
                     Continue Shopping
@@ -93,7 +98,7 @@
                 @endif
             </div>
             <div id="summary" class="w-full md:w-1/4 px-4 md:px-8 py-10">
-                <h1 class="font-semibold text-2xl border-b pb-8">Cart Summary</h1>
+                <h1 class="font-semibold text-2xl border-b pb-8">Summary</h1>
                 <div class="flex flex-col md:flex-row justify-between mt-10 mb-5">
                     <span class="font-semibold text-sm uppercase">Quantity Items: {{ Session::has('cart') ? array_sum(array_column(Session::get('cart'), 'quantity')) : 0 }}</span>
                 </div>
@@ -105,7 +110,7 @@
                     <form action="{{ url('/vnpay_payment') }}" method="POST">
                         @csrf
                         <input type="hidden" name="total_vnpay" id="totalAmount" value="{{!empty($cart) ? $totalAmount : '0'}}">
-                        <button name="redirect" class="bg-indigo-500 font-semibold hover:bg-indigo-600 py-3 text-sm text-white uppercase w-full" type="submit">Check out</button>
+                        <button name="redirect" class="bg-black font-semibold rounded-full hover:bg-gray-800 py-3 text-sm text-white uppercase w-full" type="submit">Check out</button>
                     </form>                
                 </div>
             </div>
