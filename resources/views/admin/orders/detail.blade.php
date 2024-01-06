@@ -41,16 +41,16 @@
                                 {{ $order->order_id }}
                             </dd>
                             <dt class="text-xss font-medium text-gray-500">
-                                Product ID
+                                Product Name
                             </dt>
                             <dd class="mt-1 text-xss text-gray-900 sm:mt-0 sm:col-span-2">
                                 {{ $detail_order->getProduct->product_name }}
                             </dd>
                             <dt class="text-xss font-medium text-gray-500">
-                                Customer ID
+                                Customer Name
                             </dt>
                             <dd class="mt-1 text-xss text-gray-900 sm:mt-0 sm:col-span-2">
-                                {{ $order->getCustomerName->fullName }}
+                                {{ $order->getCustomer->fullName }}
                             </dd>
                             <dt class="text-xss font-medium text-gray-500">
                                 Order Date

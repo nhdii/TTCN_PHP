@@ -47,10 +47,13 @@ class ProductController extends Controller
 
         $data = $query->paginate(15);
 
+        $startIndex = ($data->currentPage() - 1) * $data->perPage() + 1;
+
         return view('admin.products.index' , [
             'products' => $data,
             'keywords' => $lastKeyword,
             'column' => $column,
+            'startIndex' => $startIndex,  // Pass the starting index to the view
         ]);
     }
 

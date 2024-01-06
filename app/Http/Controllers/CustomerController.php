@@ -34,11 +34,17 @@ class CustomerController extends Controller
                 $query->where($column, $operator, $keywords);
             }
         }
+
         $data = $query->paginate(5);
+
+        $startIndex = ($data->currentPage() - 1) * $data->perPage() + 1;
+
         return view('admin.customers.index' , [
             'customers' => $data,
             'keywords' => $lastKeyword,
             'column' => $column,
+            'startIndex' => $startIndex,  // Pass the starting index to the view
+
         ]);
     }
 

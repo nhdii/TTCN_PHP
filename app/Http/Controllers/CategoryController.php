@@ -33,10 +33,15 @@ class CategoryController extends Controller
             }
         }
         $data = $query->paginate(5);
+
+        $startIndex = ($data->currentPage() - 1) * $data->perPage() + 1;
+
         return view('admin.categories.index' , [
             'categories' => $data,
             'keywords' => $lastKeyword,
             'column' => $column,
+            'startIndex' => $startIndex,  // Pass the starting index to the view
+
         ]);
     }
 

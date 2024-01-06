@@ -34,10 +34,14 @@ class ProductAttributeController extends Controller
             }
         }
         $data = $query->paginate(20);
+
+        $startIndex = ($data->currentPage() - 1) * $data->perPage() + 1;
+
         return view('admin.product_attributes.index' , [
             'product_attributes' => $data,
             'keywords' => $lastKeyword,
             'column' => $column,
+            'startIndex' => $startIndex,  // Pass the starting index to the view
         ]);
     }
 

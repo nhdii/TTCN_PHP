@@ -30,11 +30,15 @@ class OrderController extends Controller
                 $query->where($column, $operator, $keywords);
             }
         }
-        $data = $query->paginate(5);
+        $data = $query->paginate(10);
+
+        $startIndex = ($data->currentPage() - 1) * $data->perPage() + 1;
+
         return view('admin.orders.index' , [
             'orders' => $data,
             'keywords' => $lastKeyword,
             'column' => $column,
+            'startIndex' => $startIndex,  // Pass the starting index to the view
         ]);
     }
 

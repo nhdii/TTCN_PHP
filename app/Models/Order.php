@@ -22,7 +22,7 @@ class Order extends Model
         'status'
     ];
 
-    public function getCustomerName(){
+    public function getCustomer(){
         return $this->belongsTo(Customer::class, 'customer_id');
     }
 }

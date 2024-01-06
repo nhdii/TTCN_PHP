@@ -23,10 +23,6 @@
             Reset
         </a>
 
-        {{-- <a href="{{ route('brands.export') }}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded cursor-pointer duration-300 ease-in-out">
-            Export <i class="fas fa-file-excel fa-lg ml-2"></i>
-        </a>  --}}
-
     </div>
     <div class="relative flex flex-col w-full min-w-0 mb-0 break-words bg-white border-0 border-transparent border-solid shadow-soft-xl rounded-2xl bg-clip-border">
         <div class="p-6 pb-0 mb-0 bg-white rounded-t-2xl">
@@ -37,7 +33,7 @@
                 <table class="items-center w-full mb-0 align-top border-gray-200 text-slate-500">
                     <thead class="align-bottom">
                     <tr>
-                        <th data-column="brand_id" class="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">No</th>
+                        <th data-column="brand_id" class="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">ID</th>
                         <th data-column="brand_name" class="px-6 py-3 pl-2 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Brand Name</th>
                         <th class="px-6 py-3 pl-2 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70"></th>
 
@@ -47,7 +43,7 @@
                     @foreach($brands as $index => $br)
                     <tr>
                         <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                            <p class="mb-0 ml-4 font-semibold leading-tight text-x1">{{ $index + 1 }}</p>
+                            <p class="mb-0 ml-4 font-semibold leading-tight text-x1">{{ $startIndex + $index }}</p>
                         </td>
                         <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
                             <p class="mb-0 font-semibold leading-tight text-x1">{{ $br->brand_name }}</p>

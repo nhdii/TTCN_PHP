@@ -16,7 +16,7 @@
                 </button>
             </form>
         </div>
-        <a href="{{ route('customers.index') }}" class="mr-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded cursor-pointer duration-300 ease-in-out">
+        <a href="{{ route('orders.index') }}" class="mr-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded cursor-pointer duration-300 ease-in-out">
             Reset
         </a>  
 
@@ -29,30 +29,30 @@
             <table class="items-center w-full mb-0 align-top border-gray-200 text-slate-500">
                 <thead class="align-bottom">
                     <tr>
-                        <th class="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Order ID</th>
-                        <th class="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Customer ID</th>
+                        <th class="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">ID</th>
+                        <th class="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Customer Name</th>
                         <th class="px-6 py-3 pl-2 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Order Date</th>
                         <th class="px-6 py-3 pl-2 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Delivery Date</th>
                         <th class="px-6 py-3 pl-2 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Status</th>
                     </tr>
                     </thead>
                 <tbody>
-                    @foreach ($orders as $item)
+                    @foreach ($orders as $index=> $item)
                     <tr>
                         <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                            <p class="mb-0 font-semibold leading-tight text-xss">{{ $item->order_id }}</p>
+                            <p class="mb-0 ml-4 font-semibold leading-tight text-xss">{{ $startIndex + $index }}</p>
                         </td>
                         <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                            <p class="mb-0 font-semibold leading-tight text-xss">{{ $item->customer_id }}</p>
+                            <p class="mb-0 ml-4 font-semibold leading-tight text-xsss">{{ $item->getCustomer->fullName }}</p>
                         </td>
                         <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                            <p class="mb-0 font-semibold leading-tight text-xss">{{ $item->order_date }}</p>
+                            <p class="mb-0 ml-4 font-semibold leading-tight text-xsss">{{ $item->order_date }}</p>
                         </td>
                         <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                            <p class="mb-0 font-semibold leading-tight text-xss">{{ $item->delivery_date }}</p>
+                            <p class="mb-0 ml-4 font-semibold leading-tight text-xsss">{{ $item->delivery_date }}</p>
                         </td>
                         <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                            <p class="mb-0 font-semibold leading-tight text-xss">{{ $item->status }}</p>
+                            <p class="mb-0 ml-4 font-semibold leading-tight text-xsss">{{ $item->status }}</p>
                         </td>
                         <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
                             <a href="{{ route('detail_orders.show', $item->order_id) }}" class="font-semibold leading-tight text-xss text-slate-400">
