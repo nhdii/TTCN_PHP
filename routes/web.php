@@ -29,6 +29,10 @@ Route::prefix('admin')->middleware('admin')->group(function () {
 
 });
 
+Route::patch('/admin/orders/approve/{order}', [OrderController::class, 'approve'])->name('orders.approve');
+Route::patch('/admin/orders/update-delivery-date/{order}', [OrderController::class, 'updateDeliveryDate'])->name('orders.update-delivery-date');
+
+
 //Route của trang Home
 Route::get('/', [ProductController::class, 'showNikeHome'])->name('index');
 Route::get('/show/{product_id}', [ProductController::class, 'showDetailProduct'])->name('show');

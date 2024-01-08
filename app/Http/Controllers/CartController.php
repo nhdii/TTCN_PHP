@@ -176,9 +176,9 @@ class CartController extends Controller
 
             $newOrder = new Order();
             $newOrder->customer_id = $customer->customer_id;
-            $newOrder->order_date = now();
-            $newOrder->delivery_date = now();
-            $newOrder->status = 'Completely payment';
+            $newOrder->order_date = Carbon::now();
+            $newOrder->delivery_date = null;
+            $newOrder->status = Order::STATUS_PENDING; // Set the status to Pending
             $newOrder->save();
 
             $order_id = $newOrder->order_id;
@@ -200,6 +200,7 @@ class CartController extends Controller
                     'attribute_id' => $attribute_id,
                     'quantity' => $quantity,
                     'price' => $price,
+                    'product_name' => $product->product_name,
                     'notes' => '',
                 ]);
 

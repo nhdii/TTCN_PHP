@@ -11,6 +11,9 @@ class Order extends Model
 {
     use HasFactory, Uuid;
 
+    const STATUS_PENDING = 'PENDING';
+    const STATUS_APPROVED = 'APPROVED';
+
     protected $table = 'orders';
 
     protected $primaryKey = 'order_id';
@@ -24,5 +27,10 @@ class Order extends Model
 
     public function getCustomer(){
         return $this->belongsTo(Customer::class, 'customer_id');
+    }
+
+    public function details()
+    {
+        return $this->hasMany(DetailOrder::class, 'order_id');
     }
 }

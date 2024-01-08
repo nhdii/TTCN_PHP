@@ -7,6 +7,11 @@ use App\Http\Requests\Order\StoreOrderRequest;
 use App\Http\Requests\Order\UpdateOrderRequest;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule; 
+use Illuminate\Support\Facades\Session;
+use App\Models\Customer;
+use Illuminate\Support\Facades\Mail;
+
 
 class OrderController extends Controller
 {
@@ -30,6 +35,9 @@ class OrderController extends Controller
                 $query->where($column, $operator, $keywords);
             }
         }
+
+        $query->orderBy('order_date', 'desc');
+
         $data = $query->paginate(10);
 
         $startIndex = ($data->currentPage() - 1) * $data->perPage() + 1;
@@ -41,6 +49,53 @@ class OrderController extends Controller
             'startIndex' => $startIndex,  // Pass the starting index to the view
         ]);
     }
+
+    public function approve(Order $order)
+    {
+        if ($order->status === Order::STATUS_PENDING && $order->delivery_date !== null) {
+            $order->status = Order::STATUS_APPROVED;
+            $order->save();
+
+            $customer = Customer::find($order->customer_id);
+
+            $this->sendOrderConfirmationEmail($order, $customer);
+    
+            return redirect()->route('orders.index')->with('success', 'Order Approved Successfully!');
+        }
+    
+        return redirect()->route('orders.index')->with('error', 'Unable to approve order. Ensure delivery date is set!');
+    }
+
+    public function updateDeliveryDate(Request $request, Order $order)
+    {
+        $request->validate([
+            'delivery_date' => [
+                'required',
+                'date',
+                'after:' . $order->order_date,            
+            ],
+        ], [
+            'delivery_date.after' => 'Delivery Date must be after Order Date.',
+        ]);
+
+    
+        $order->delivery_date = $request->input('delivery_date');
+        $order->save();
+
+        return redirect()->route('orders.index')->with('success', 'Delivery Date updated successfully!');
+    }
+
+    private function sendOrderConfirmationEmail(Order $order, Customer $customer)
+    {
+        $email_user = $customer->email;
+        $name_user = $customer->fullName;
+        
+        Mail::send('emails.order_confirmation', compact('order', 'customer', 'email_user', 'name_user'), function ($email) use ($email_user, $name_user) {
+            $email->subject('Order Confirmation');
+            $email->to($email_user, $name_user);
+        });
+    }
+
 
     /**
      * Show the form for creating a new resource.

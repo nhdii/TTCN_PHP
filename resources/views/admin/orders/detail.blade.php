@@ -53,16 +53,28 @@
                                 {{ $order->getCustomer->fullName }}
                             </dd>
                             <dt class="text-xss font-medium text-gray-500">
+                                Address
+                            </dt>
+                            <dd class="mt-1 text-xss text-gray-900 sm:mt-0 sm:col-span-2">
+                                {{ $order->getCustomer->address }}
+                            </dd>
+                            <dt class="text-xss font-medium text-gray-500">
+                                Phone Number
+                            </dt>
+                            <dd class="mt-1 text-xss text-gray-900 sm:mt-0 sm:col-span-2">
+                                {{ $order->getCustomer->phone }}
+                            </dd>
+                            <dt class="text-xss font-medium text-gray-500">
                                 Order Date
                             </dt>
                             <dd class="mt-1 text-xss text-gray-900 sm:mt-0 sm:col-span-2">
-                                {{ $order->order_date }}
+                                {{ \Carbon\Carbon::parse($order->order_date)->format('m-d-Y') }}
                             </dd>
                             <dt class="text-xss font-medium text-gray-500">
                                 Order Delivery
                             </dt>
                             <dd class="mt-1 text-xss text-gray-900 sm:mt-0 sm:col-span-2">
-                                {{ $order->delivery_date }}
+                                {{\Carbon\Carbon::parse($order->delivery_date)->format('m-d-Y') }}
                             </dd>
                             <dt class="text-xss font-medium text-gray-500">
                                 Status

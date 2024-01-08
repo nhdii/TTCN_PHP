@@ -1,6 +1,7 @@
 @extends('layouts.master')
 @section('content')
 @include('layouts.notifySuccess')
+@include('layouts.notifyError')
 <div class="relative flex flex-col w-full min-w-0 mb-0 break-words bg-white border-0 border-transparent border-solid shadow-soft-xl rounded-2xl bg-clip-border">
     <div class="mb-2 mt-5 flex">
         <div class="ml-4 mr-2">
@@ -46,13 +47,29 @@
                             <p class="mb-0 ml-4 font-semibold leading-tight text-xsss">{{ $item->getCustomer->fullName }}</p>
                         </td>
                         <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                            <p class="mb-0 ml-4 font-semibold leading-tight text-xsss">{{ $item->order_date }}</p>
+                            <p class="mb-0 font-semibold leading-tight text-xsss">{{ \Carbon\Carbon::parse($item->order_date)->format('m/d/Y') }}</p>
                         </td>
                         <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                            <p class="mb-0 ml-4 font-semibold leading-tight text-xsss">{{ $item->delivery_date }}</p>
+                            <form action="{{ route('orders.update-delivery-date', $item->order_id) }}" method="POST">
+                                @csrf
+                                @method('PATCH')
+                                <input type="date" name="delivery_date" value="{{ $item->delivery_date }}" required>
+                                <button type="submit" class="font-semibold leading-tight text-xss text-slate-400">
+                                </button>
+                            </form>
                         </td>
                         <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                            <p class="mb-0 ml-4 font-semibold leading-tight text-xsss">{{ $item->status }}</p>
+                            @if($item->status === \App\Models\Order::STATUS_PENDING)
+                                <form action="{{ route('orders.approve', $item->order_id) }}" method="POST">
+                                    @csrf
+                                    @method('PATCH')
+                                    <button type="submit" class="font-bold leading-tight text-xss text-slate-400 text-red-500" style="color: red;">
+                                        PENDING
+                                    </button>
+                                </form>
+                            @else
+                                <p class="mb-0 font-semibold leading-tight text-xsss" style="color: rgb(25, 174, 25);">{{ $item->status }}</p>
+                            @endif
                         </td>
                         <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
                             <a href="{{ route('detail_orders.show', $item->order_id) }}" class="font-semibold leading-tight text-xss text-slate-400">
@@ -63,6 +80,9 @@
                     @endforeach
                 </tbody>
             </table>
+            <div class="mt-2 px-2">
+                {{ $orders->links() }}
+            </div>
         </div>
     </div>
 </div>
